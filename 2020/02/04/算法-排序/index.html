@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>排序 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">排序</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 4, 2020&nbsp;&nbsp;23:40:07</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="sort-排序（c-标准库里的排序函数）"><a href="#sort-排序（c-标准库里的排序函数）" class="headerlink" title="sort 排序（c++标准库里的排序函数）"></a>sort 排序（c++标准库里的排序函数）</h1><p>I）sort函数包含在头文件为#include<algorithm>的c++标准库中<br>II）sort函数有三个参数：<br>（1）第一个是要排序的数组的起始地址。<br>（2）第二个是结束的地址（最后一位要排序的地址）<br>（3）第三个参数是排序的方法，可以是从大到小也可是从小到大，还可以不写第三个参数，此时默认的排序方法是从小到大排序。<br>sort函数使用模板:<br>sort(start,end,排序方法)</p>
+<p>默认从小到大的排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">  using namespace std;</span><br><span class="line">  int main()</span><br><span class="line">  &#123;</span><br><span class="line">     int a[10]&#x3D;&#123;9,6,3,8,5,2,7,4,1,0&#125;;</span><br><span class="line"></span><br><span class="line">	 sort(a,a+10);</span><br><span class="line">   	for(int i&#x3D;0;i&lt;10;i++)&#123; </span><br><span class="line">  	 cout&lt;&lt;a[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">  	 &#125; </span><br><span class="line">  	 return 0;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>从大到小排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">  using namespace std;</span><br><span class="line">  bool complare(int a,int b)</span><br><span class="line">  &#123;</span><br><span class="line">    return a&gt;b;</span><br><span class="line">  &#125;</span><br><span class="line">  int main()</span><br><span class="line">  &#123;</span><br><span class="line">     int a[10]&#x3D;&#123;9,6,3,8,5,2,7,4,1,0&#125;;</span><br><span class="line"></span><br><span class="line">	 sort(a,a+10,complare);</span><br><span class="line">   	for(int i&#x3D;0;i&lt;10;i++)&#123; </span><br><span class="line">  	 cout&lt;&lt;a[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">  	 &#125; </span><br><span class="line">  	 return 0;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>还有一种从大到小排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int a[10]&#x3D;&#123;2,3,5,4,6,1,8,9,0,7&#125;;</span><br><span class="line">	sort(a,a+10,greater&lt;int&gt;());</span><br><span class="line">	for(int i&#x3D;0;i&lt;10;i++)&#123;</span><br><span class="line">		cout&lt;&lt;a[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="选择排序-selectSort"><a href="#选择排序-selectSort" class="headerlink" title="选择排序 selectSort"></a>选择排序 selectSort</h1><ul>
+<li>基本思想：每一趟从待排序的数据元素中选出最小(或最大)的一个元素，顺序放在待排序的数列的最前，直到全部待排序的数据元素排完。</li>
+</ul>
+<p>例：<br>输出n个整数，将n个整数按从小到大的顺序输出<br>输入样例：<br>8<br>49 38 65 97 76 13 27 49<br>输出样例：<br>13 27 38 49 49 65 76 97</p>
+<p>程序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int a[10000]; &#x2F;&#x2F;存放数据的数组</span><br><span class="line">int main()</span><br><span class="line">&#123;	</span><br><span class="line">	int temp,n,j,i;</span><br><span class="line">	cin&gt;&gt;n; &#x2F;&#x2F;一共有n个数</span><br><span class="line">	&#x2F;&#x2F;读入数据</span><br><span class="line">	for(i&#x3D;0;i&lt;n;i++)&#123;   </span><br><span class="line">		cin&gt;&gt;a[i];	</span><br><span class="line">	&#125;</span><br><span class="line">	for(i&#x3D;0;i&lt;n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		int k&#x3D;i;&#x2F;&#x2F;指向数组中需要排序的位置</span><br><span class="line">		&#x2F;&#x2F;依次往后遍历，找最小的数字</span><br><span class="line">		for(j&#x3D;i+1;j&lt;n;j++)&#123;</span><br><span class="line">			if(a[j]&lt;a[k])  &#123;</span><br><span class="line">				k&#x3D;j; &#x2F;&#x2F;将最小的数的下标赋给k</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	if(k!&#x3D;i)</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;temp&#x3D;a[i];</span><br><span class="line">		&#x2F;&#x2F;a[i]&#x3D;a[k];</span><br><span class="line">		&#x2F;&#x2F;a[k]&#x3D;temp;</span><br><span class="line">		swap(a[i],a[k]);&#x2F;&#x2F;将从a[i]开始最小的数的与a[i]交换</span><br><span class="line">	&#125;</span><br><span class="line">      &#125;</span><br><span class="line">	&#x2F;&#x2F;按从小到大的顺序输出</span><br><span class="line">	for(i&#x3D;0;i&lt;n;i++)&#123;</span><br><span class="line">		cout&lt;&lt;a[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><ul>
+<li>（从小到大排序）排序过程中，大数慢慢地往后，最大的数首先固定下来，最后固定最小的数<br>一种写法：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n,i,j;</span><br><span class="line">	int temp,a[1000];</span><br><span class="line">	cin&gt;&gt;n;&#x2F;&#x2F;一共有多少个数</span><br><span class="line">	for(i&#x3D;0;i&lt;n;i++)</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">	for(i&#x3D;n-1;i&gt;&#x3D;1;i--)&#x2F;&#x2F;进行n-1轮冒泡 </span><br><span class="line">	&#123;</span><br><span class="line">		for(j&#x3D;0;j&lt;i;j++)&#x2F;&#x2F;每轮进行i次的比较 </span><br><span class="line">		&#123;</span><br><span class="line">			if(a[j]&gt;a[j+1])</span><br><span class="line">				swap(a[j],a[j+1]);</span><br><span class="line">		&#125;</span><br><span class="line">	 &#125;</span><br><span class="line">	 for(i&#x3D;0;i&lt;n;i++)</span><br><span class="line">	 	cout&lt;&lt;a[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">	return 0; </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+另一种写法：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n,i,j;</span><br><span class="line">	int temp,a[1000];</span><br><span class="line">	cin&gt;&gt;n;&#x2F;&#x2F;一共有多少个数</span><br><span class="line">	for(i&#x3D;1;i&lt;n;i++)</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">	for(i&#x3D;1;i&lt;&#x3D;n-1;i++)&#x2F;&#x2F;进行n-1轮冒泡 </span><br><span class="line">	&#123;</span><br><span class="line">		for(j&#x3D;1;j&lt;&#x3D;n-i;j++)&#x2F;&#x2F;每轮进行i次的比较 </span><br><span class="line">		&#123;</span><br><span class="line">			if(a[j]&gt;a[j+1])</span><br><span class="line">				swap(a[j],a[j+1]);</span><br><span class="line">		&#125;</span><br><span class="line">	 &#125;</span><br><span class="line">	 for(i&#x3D;0;i&lt;n;i++)</span><br><span class="line">	 	cout&lt;&lt;a[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">	return 0; </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+冒泡排序改进，可以少几趟排序<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">bool ok;</span><br><span class="line">for(i&#x3D;n-1;i&gt;&#x3D;1;i--)</span><br><span class="line">&#123;</span><br><span class="line">	ok&#x3D;true;</span><br><span class="line">	&#123;</span><br><span class="line">		for(j&#x3D;0;j&lt;i;j++)&#x2F;&#x2F;Ã¿ÂÖ½øÐÐi´ÎµÄ±È½Ï </span><br><span class="line">		&#123;</span><br><span class="line">			if(a[j]&gt;a[j+1])</span><br><span class="line">				swap(a[j],a[j+1]);</span><br><span class="line">				ok&#x3D;false;</span><br><span class="line">		&#125;</span><br><span class="line">	 &#125;</span><br><span class="line">	 if(ok&#x3D;&#x3D;true)   break;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="插入排序insetSort"><a href="#插入排序insetSort" class="headerlink" title="插入排序insetSort"></a>插入排序insetSort</h1>当读入一个元素时，在已经排序好的序列中，搜寻它的正确位置，再放入读入的元素。并且，在插入这个元素之前，应当先将它后面的所有元素后移一位，以保证插入位置的原元素不被覆盖。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int MAXN&#x3D;1001;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n,i,j,k;</span><br><span class="line">	float temp,a[MAXN];</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	for(i&#x3D;0;i&lt;n;i++)</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">	</span><br><span class="line">	for(i&#x3D;0;i&lt;n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for(j&#x3D;i-1;j&gt;&#x3D;0;j--)</span><br><span class="line">			if(a[j]&lt;a[i]) break;</span><br><span class="line">		if(j!&#x3D;i-1)</span><br><span class="line">		&#123;</span><br><span class="line">			temp&#x3D;a[i];&#x2F;&#x2F;临时储存要往前插入的数 </span><br><span class="line">			for(k&#x3D;i-1;k&gt;j;k--)</span><br><span class="line">				a[k+1]&#x3D;a[k];</span><br><span class="line">					</span><br><span class="line">			a[k+1]&#x3D;temp;&#x2F;&#x2F;这里实际上k+1&#x3D;j+1</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	for(i&#x3D;0;i&lt;n;i++)</span><br><span class="line">		cout&lt;&lt;a[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>☝上面的写法太复杂，暂时不想看上面的，看下面的就好</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">void insertSort()&#123;</span><br><span class="line">	&#x2F;&#x2F;数组下标为1-n</span><br><span class="line">	for(int i &#x3D; 2; i &lt; n; i++)&#123; </span><br><span class="line">		int temp &#x3D;a[i];</span><br><span class="line">		int j &#x3D;i;</span><br><span class="line">		while(j &gt; 1 &amp;&amp;temp &lt; a[j-1])&#123; &#x2F;&#x2F;只要temp小于前一个元素a[j-1]</span><br><span class="line">			a[j] &#x3D; a[j-1];&#x2F;&#x2F;把a[j-1]后移一位至a[j]</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		a[j] &#x3D; temp; &#x2F;&#x2F;插入位置为j</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h1><ul>
+<li>若待排序的值在一个明显有限的范围内（整型）时，可设置有限个有序桶，待排序的值装入对应的桶中，桶号就是待排序的值，顺序输出各桶的值，将得到有序数列。</li>
+</ul>
+<p>例：输入n个0~100之间的整数，由小到大的顺序输出</p>
+<p>程序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt; &#x2F;&#x2F;memset在这个头文件中 </span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int b[101],n,i,j,k;</span><br><span class="line">	memset(b,0,sizeof(b));</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	for(i&#x3D;1;i&lt;&#x3D;n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;k;</span><br><span class="line">		b[k]++;&#x2F;&#x2F;若输入的数是该桶的序号，桶中+1 </span><br><span class="line">	&#125;</span><br><span class="line">	for(i&#x3D;0;i&lt;&#x3D;100;i++)</span><br><span class="line">		while(b[i]&gt;0)&#x2F;&#x2F;只有有输入的数是该桶的序号，桶中的数才不为0</span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;i&lt;&lt;&quot; &quot;; </span><br><span class="line">			b[i]--;&#x2F;&#x2F;相同的个数，要重复输出。</span><br><span class="line">		&#125;</span><br><span class="line">&#x2F;*		改为下面的代码，就不会有重复的数输出，具有去重的作用 </span><br><span class="line">		if(b[i]&gt;0)</span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;i&lt;&lt;&quot; &quot;; </span><br><span class="line">		&#125;</span><br><span class="line">*&#x2F;	</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="快速排序（没有多少东西，背下来就好😂）"><a href="#快速排序（没有多少东西，背下来就好😂）" class="headerlink" title="快速排序（没有多少东西，背下来就好😂）"></a>快速排序（没有多少东西，背下来就好😂）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">void qsort(int,int);</span><br><span class="line">int a[101];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n,i;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	for(i&#x3D;1;i&lt;&#x3D;n;i++) </span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">	qsort(1,n);</span><br><span class="line">	for(i&#x3D;1;i&lt;&#x3D;n;i++)</span><br><span class="line">	 cout&lt;&lt;a[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line">void qsort(int l,int r)</span><br><span class="line">&#123;</span><br><span class="line">	int i,j,mid,p;</span><br><span class="line">	i&#x3D;l,j&#x3D;r;</span><br><span class="line">	mid&#x3D;a[(l+r)&#x2F;2];</span><br><span class="line">	do</span><br><span class="line">		&#123;</span><br><span class="line">			while(a[i]&lt;mid)  i++;</span><br><span class="line">			while(a[j]&gt;mid)  j--;</span><br><span class="line">			if(i&lt;&#x3D;j)</span><br><span class="line">				&#123;</span><br><span class="line">					p&#x3D;a[i];a[i]&#x3D;a[j];a[j]&#x3D;p;</span><br><span class="line">					i++;j--;</span><br><span class="line">				&#125;</span><br><span class="line">		&#125;while(i&lt;&#x3D;j);</span><br><span class="line">	if(l&lt;j) qsort(l,j);</span><br><span class="line">	if(i&lt;r) qsort(i,r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主要的东西在这里</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void qsort(int l,int r)</span><br><span class="line">&#123;</span><br><span class="line">	int i,j,mid,p;</span><br><span class="line">	i&#x3D;l,j&#x3D;r;</span><br><span class="line">	mid&#x3D;a[(l+r)&#x2F;2];&#x2F;&#x2F;将当前序列在中间位置的数定义为分割数</span><br><span class="line">	do</span><br><span class="line">		&#123;</span><br><span class="line">			while(a[i]&lt;mid)  i++;&#x2F;&#x2F;在左半部分寻找比中间数大的数</span><br><span class="line">			while(a[j]&gt;mid)  j--;&#x2F;&#x2F;在右半部分寻找比中间数小的数</span><br><span class="line">			if(i&lt;&#x3D;j)</span><br><span class="line">				&#123;	&#x2F;&#x2F;若找到一组与排序目标不一致的数对，就交换他们</span><br><span class="line">					p&#x3D;a[i];a[i]&#x3D;a[j];a[j]&#x3D;p;</span><br><span class="line">					i++;j--;</span><br><span class="line">				&#125;</span><br><span class="line">		&#125;while(i&lt;&#x3D;j);</span><br><span class="line">	if(l&lt;j) qsort(l,j);&#x2F;&#x2F;若未到两个数的边界，则递归搜索左右区间</span><br><span class="line">	if(i&lt;r) qsort(i,r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样也成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">void qsort(int s[], int l, int r);</span><br><span class="line">int a[101];</span><br><span class="line">int main() &#123;</span><br><span class="line">	int n,i;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	for(i&#x3D;1; i&lt;&#x3D;n; i++)</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">	qsort(a,1,n);</span><br><span class="line">	for(i&#x3D;1; i&lt;&#x3D;n; i++)</span><br><span class="line">		cout&lt;&lt;a[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line">void qsort(int s[], int l, int r)</span><br><span class="line">&#123;</span><br><span class="line">	if (l &lt; r)</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;swap(s[l], s[(l + r) &#x2F; 2]); &#x2F;&#x2F;如果以中间的数为基准,将中间的这个数和第一个数交换	</span><br><span class="line">		int i &#x3D; l, j &#x3D; r, x &#x3D; s[l];</span><br><span class="line">		while (i &lt; j)</span><br><span class="line">		&#123;</span><br><span class="line">			while(i &lt; j &amp;&amp; s[j] &gt;&#x3D; x) &#x2F;&#x2F;从右向左找第一个小于x的数</span><br><span class="line">				j--;</span><br><span class="line">			if(i &lt; j)</span><br><span class="line">				s[i++] &#x3D; s[j];</span><br><span class="line">			while(i &lt; j &amp;&amp; s[i] &lt; x) &#x2F;&#x2F; 从左向右找第一个大于等于x的数</span><br><span class="line">				i++;</span><br><span class="line">			if(i &lt; j)</span><br><span class="line">				s[j--] &#x3D; s[i];</span><br><span class="line">		&#125;</span><br><span class="line">		s[i] &#x3D; x;</span><br><span class="line">		qsort(s, l, i - 1); &#x2F;&#x2F; 递归调用</span><br><span class="line">		qsort(s, i + 1, r);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><ul>
+<li>分为子序列，使每个子序列段间，再使子序列有序，最后合并子序列<br><img src="https://img-blog.csdnimg.cn/20200205122500126.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int a[101];</span><br><span class="line">int r[101];</span><br><span class="line">void msort(int,int);</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n,i;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	for(i&#x3D;1;i&lt;&#x3D;n;i++) </span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">	msort(1,n);</span><br><span class="line">	for(i&#x3D;1;i&lt;&#x3D;n;i++)</span><br><span class="line">	 cout&lt;&lt;a[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line">void msort(int s,int t)</span><br><span class="line">&#123;</span><br><span class="line">	if(s&#x3D;&#x3D;t) return ;</span><br><span class="line">	int mid&#x3D;(s+t)&#x2F;2;</span><br><span class="line">	msort(s,mid);</span><br><span class="line">	msort(mid+1,t);</span><br><span class="line">	int i&#x3D;s,j&#x3D;mid+1,k&#x3D;s;</span><br><span class="line">	</span><br><span class="line">	while(i&lt;&#x3D;mid&amp;&amp;j&lt;&#x3D;t)</span><br><span class="line">	&#123;</span><br><span class="line">		if(a[i]&lt;&#x3D;a[j])</span><br><span class="line">		&#123;</span><br><span class="line">			r[k]&#x3D;a[i]; k++; i++;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			r[k]&#x3D;a[j]; k++; j++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	while(i&lt;&#x3D;mid)</span><br><span class="line">	&#123;</span><br><span class="line">		r[k]&#x3D;a[i]; k++; i++;</span><br><span class="line">	&#125;</span><br><span class="line">	while(j&lt;&#x3D;t)</span><br><span class="line">	&#123;</span><br><span class="line">		r[k]&#x3D;a[j]; k++; j++;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i&#x3D;s;i&lt;&#x3D;t;i++)   a[i]&#x3D;r[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+主要是下面：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">void msort(int s,int t)</span><br><span class="line">&#123;</span><br><span class="line">	int r[101];</span><br><span class="line">	if(s&#x3D;&#x3D;t) return ;</span><br><span class="line">	int mid&#x3D;(s+t)&#x2F;2;</span><br><span class="line">	msort(s,mid);</span><br><span class="line">	msort(mid+1,t);</span><br><span class="line">	int i&#x3D;s,j&#x3D;mid+1,k&#x3D;s;</span><br><span class="line">	</span><br><span class="line">	while(i&lt;&#x3D;mid&amp;&amp;j&lt;&#x3D;t)</span><br><span class="line">	&#123;</span><br><span class="line">		if(a[i]&lt;&#x3D;a[j])</span><br><span class="line">		&#123;</span><br><span class="line">			r[k]&#x3D;a[i]; k++; i++;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			r[k]&#x3D;a[j]; k++; j++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	while(i&lt;&#x3D;mid)</span><br><span class="line">	&#123;</span><br><span class="line">		r[k]&#x3D;a[i]; k++; i++;</span><br><span class="line">	&#125;</span><br><span class="line">	while(j&lt;&#x3D;t)</span><br><span class="line">	&#123;</span><br><span class="line">		r[k]&#x3D;a[j]; k++; j++;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i&#x3D;s;i&lt;&#x3D;t;i++)   a[i]&#x3D;r[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%AE%97%E6%B3%95/"># 算法</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/07/%E5%A4%A7%E6%95%B0%E7%B1%BB%E5%92%8C%E5%A4%A7%E6%B5%AE%E7%82%B9%E7%B1%BB/">大数类和大浮点类</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/04/%E5%9B%9E%E6%96%87%E7%B4%A0%E6%95%B0/">回文素数</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

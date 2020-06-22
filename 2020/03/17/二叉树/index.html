@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>二叉树 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">二叉树</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">March 17, 2020&nbsp;&nbsp;10:24:57</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h1><h2 id="链表储存"><a href="#链表储存" class="headerlink" title="链表储存"></a>链表储存</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">typedef struct TreeNode *BinTree;</span><br><span class="line">typedef BinTree Position;</span><br><span class="line">struct TreeNode&#123;</span><br><span class="line">	DateType Data;</span><br><span class="line">	BinTree Left;</span><br><span class="line">	BinTree Right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我首先建立了一个二叉树</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct node&#123;</span><br><span class="line">	string data;</span><br><span class="line">	int left,right;</span><br><span class="line">&#125;tree[2222];</span><br></pre></td></tr></table></figure>
+<h2 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h2><p><strong>根节点–&gt;左子树–&gt;右子树</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void preorder(BinTree BT )&#123;</span><br><span class="line">if(BT)&#123;</span><br><span class="line">printf(&quot;%d&quot;,BT--&gt;Data);</span><br><span class="line">preorder(BT--&gt;Left );</span><br><span class="line">preorder(BT--&gt;Right );</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="用integer-模拟指针"><a href="#用integer-模拟指针" class="headerlink" title="用integer 模拟指针"></a>用integer 模拟指针</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void preorder(int index )&#123;</span><br><span class="line">	cout&lt;&lt;tree[index].data;</span><br><span class="line">	 preorder(tree[index].left);</span><br><span class="line">	 preorder(tree[index].right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><p><strong>左子树–&gt;根节点–&gt;右子树</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void inorder(BinTree BT )&#123;</span><br><span class="line">if(BT)&#123;</span><br><span class="line">inorder(BT--&gt;Left );</span><br><span class="line">printf(&quot;%d&quot;,BT--&gt;Data);</span><br><span class="line">inorder(BT--&gt;Right );</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="用integer-模拟指针-1"><a href="#用integer-模拟指针-1" class="headerlink" title="用integer 模拟指针"></a>用integer 模拟指针</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void inorder(int index)&#123;</span><br><span class="line">	 preorder(tree[index].left);</span><br><span class="line"> cout&lt;&lt;tree[index].data;</span><br><span class="line">	 preorder(tree[index].right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h2><p><strong>左子树–&gt;右子树–&gt;根节点</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void postorder(BinTree BT )&#123;</span><br><span class="line">if(BT)&#123;</span><br><span class="line">postorder(BT--&gt;Left );b</span><br><span class="line">postorder(BT--&gt;Right );</span><br><span class="line">printf(&quot;%d&quot;,BT--&gt;Data);</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="用integer-模拟指针-2"><a href="#用integer-模拟指针-2" class="headerlink" title="用integer 模拟指针"></a>用integer 模拟指针</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void postorder(int index)&#123;</span><br><span class="line">	postorder(tree[index].left);</span><br><span class="line">	postorder(tree[index].right);</span><br><span class="line">cout&lt;&lt;tree[index].data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="层次遍历"><a href="#层次遍历" class="headerlink" title="层次遍历"></a>层次遍历</h2><p>从根节点入队：</p>
+<ul>
+<li>从队列中取出一个元素</li>
+<li>访问该元素所在节点</li>
+<li>若该元素所指节点的左，右孩子结点非空，则将其左，右孩子的的指针入队<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void LayerOrder(node* root)&#123;</span><br><span class="line">	queue&lt;node*&gt; q;</span><br><span class="line">	q.push(root);</span><br><span class="line">	while(!q.empty())&#123;</span><br><span class="line">		node *now &#x3D;q.front();</span><br><span class="line">		q.pop();</span><br><span class="line">		printf(&quot;%d&quot;,now-&gt;data);</span><br><span class="line">		if(now-&gt;l!&#x3D;null)  q.push(now-&gt;l);</span><br><span class="line">		if(now-&gt;r!&#x3D;null)  q.push(now-&gt;r);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="由中序序列和后序序列求先序序列"><a href="#由中序序列和后序序列求先序序列" class="headerlink" title="由中序序列和后序序列求先序序列"></a>由中序序列和后序序列求先序序列</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn &#x3D;10; </span><br><span class="line">struct node&#123;</span><br><span class="line">	char data;</span><br><span class="line">	node* lchild;</span><br><span class="line">	node* rchild;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">char in[maxn],post[maxn];</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;用递归的方式放在二叉树里</span><br><span class="line"> node* create(int postl,int postr,int inl,int inr)&#123;</span><br><span class="line"> 	if(postl&gt;postr)&#123;</span><br><span class="line"> 		return NULL;</span><br><span class="line">	 &#125;</span><br><span class="line">	 node* root &#x3D; new node;</span><br><span class="line">	 root-&gt;data &#x3D; post[postr];</span><br><span class="line">	 int k;</span><br><span class="line">	 for(k&#x3D;inl;k&lt;&#x3D;inr;k++)&#123;</span><br><span class="line">	 	if(in[k]&#x3D;&#x3D;post[postr])&#123;</span><br><span class="line">	 		break;</span><br><span class="line">		 &#125;</span><br><span class="line">	 &#125;</span><br><span class="line">	 int numleft&#x3D;k-inl;</span><br><span class="line">	 root-&gt;lchild&#x3D;create(postl,postl+numleft-1,inl,k-1);</span><br><span class="line">	 root-&gt;rchild&#x3D;create(postl+numleft,postr-1,k+1,inr);</span><br><span class="line">	 return root;</span><br><span class="line"> &#125;</span><br><span class="line">&#x2F;&#x2F;二叉树的先序遍历</span><br><span class="line">void PreOrderTraverse(node* root)</span><br><span class="line">&#123;</span><br><span class="line">    if(root&#x3D;&#x3D;NULL)</span><br><span class="line">       return;</span><br><span class="line">    printf(&quot;%c&quot;,root-&gt;data);</span><br><span class="line">    PreOrderTraverse(root-&gt;lchild);</span><br><span class="line">    PreOrderTraverse(root-&gt;rchild);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	string str1,str2;</span><br><span class="line">	cin&gt;&gt;str1&gt;&gt;str2;</span><br><span class="line">	int len&#x3D;str1.length();</span><br><span class="line">	for(int i&#x3D;0;i&lt;len;i++)&#123;</span><br><span class="line">		in[i]&#x3D;str1[i];</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i&#x3D;0;i&lt;len;i++)&#123;</span><br><span class="line">		post[i]&#x3D;str2[i];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	node* root &#x3D; create(0,len-1,0,len-1);</span><br><span class="line">	PreOrderTraverse(root);</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/03/17/%E5%8D%95%E8%B0%83%E5%BA%8F%E5%88%97/">单调序列</a>
+            
+            
+            <a class="next" rel="next" href="/2020/03/12/%E9%80%86%E5%BA%8F%E5%AF%B9/">逆序对</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

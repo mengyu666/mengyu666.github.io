@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>二分查找 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">二分查找</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 23, 2020&nbsp;&nbsp;17:56:57</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><a href="https://raomengyu.top/2020/03/18/%E6%B4%9B%E8%B0%B7P1182%E6%95%B0%E5%88%97%E5%88%86%E6%AE%B5%20Section%20II-%E4%BA%8C%E5%88%86%E6%B3%95%E7%9A%84%E5%BA%94%E7%94%A8/" target="_blank" rel="noopener">应用</a></p>
+<h1 id="一"><a href="#一" class="headerlink" title="一"></a>一</h1><p>当N个数排好顺序时，用二分查找算法速度大大加快<br>有三个指示变量<br>分别指向数据的高端，中段和低端</p>
+<h1 id="二"><a href="#二" class="headerlink" title="二"></a>二</h1><p>STL提供在排好序的数组上进行二分查找的算法</p>
+<h2 id="binary-search"><a href="#binary-search" class="headerlink" title="binary_search"></a>binary_search</h2><ul>
+<li>在从小到大排好序的基本类型数组上进行二分查找<br>binary_search(数组名+n1,数组名+n2,值)；<br>查找区间的下标范围为[n1,n2) ,在该区间查找“等于”值的元素，返回值为true（1）或false（0）</li>
+</ul>
+<p><em>“等于”的含义：a等于b  &lt;=&gt;  a&lt;b和a&gt;b都不成立</em></p>
+<ul>
+<li>在用自定义排序规则排好序的，元素为任意T类型的数组中进行查找<br>binary_search(数组名+n1,数组名+n2,值，排序规则结构名())；<br>查找区间的下标范围为[n1,n2) ,在该区间查找“等于”值的元素，返回值为true（1）或false（0）</li>
+</ul>
+<p><strong>查找时的排序规则，必须和排序时的规则一致</strong><br><em>“等于”的含义：a等于b &lt;=&gt; a必须在b前面和b必须在a前面都不成立</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">int a[]&#x3D;&#123;12,45,3,98,21,7&#125;;</span><br><span class="line">sort(a,6,Rule());&#x2F;&#x2F;按照个位数从小到大排 3 7 12 21 45 98</span><br><span class="line">cout&lt;&lt;binary_searcch(a,a+6,8,Rule())&lt;&lt;endl;&#x2F;&#x2F;1说明找到了</span><br><span class="line">&#x2F;*98 必须在8前面和8必须在98前面都不成立</span><br><span class="line">所以98“等于”8</span><br><span class="line">*&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="binarySearch-看序列中是否存在满足某条件的元素"><a href="#binarySearch-看序列中是否存在满足某条件的元素" class="headerlink" title="binarySearch-看序列中是否存在满足某条件的元素"></a>binarySearch-看序列中是否存在满足某条件的元素</h2><h3 id="递归写法"><a href="#递归写法" class="headerlink" title="递归写法"></a>递归写法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;x 要查找的数</span><br><span class="line">	void binarySearch (int x,int top,int bot)</span><br><span class="line">	&#123;</span><br><span class="line">		int mid;</span><br><span class="line">		if(left&lt;&#x3D;right)</span><br><span class="line">		&#123;</span><br><span class="line">		mid &#x3D; (left + right)&#x2F;2;&#x2F;&#x2F;求中间数的位置</span><br><span class="line">		if(x&#x3D;&#x3D;a[mid])  cout&lt;&lt;&quot;找到了&lt;&lt;endl;</span><br><span class="line">		else&#123;    &#x2F;&#x2F;判断是在前半部分查找还是在后半部分查找</span><br><span class="line">			if(x&lt;a[mid])  search(x, mid+1; right);  &#x2F;&#x2F;在后半部分查找</span><br><span class="line">			else search(x, left, mid-1);  &#x2F;&#x2F;在前半部分查找</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="非递归写法"><a href="#非递归写法" class="headerlink" title="非递归写法"></a>非递归写法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;A[] 要搜索的数组; left &#x3D;0; right &#x3D;n-1; x:要搜索的数</span><br><span class="line">int binarySearch (int A[], int left, int right, int x)&#123;  </span><br><span class="line">	int mid;</span><br><span class="line">	while(left&lt;&#x3D;right)&#123; &#x2F;&#x2F;如果left&gt;right 没法形成搜索的闭区间</span><br><span class="line">		mid &#x3D; (left + right)&#x2F;2; &#x2F;&#x2F;取中点</span><br><span class="line">		if(A[mid] &#x3D;&#x3D; x) return mid; &#x2F;&#x2F;找到x 返回下标</span><br><span class="line">		else if(A[mid] &gt; x)&#123;</span><br><span class="line">			right &#x3D; mid -1; &#x2F;&#x2F;搜索[ left, mid -1 ]</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			left &#x3D; mid +1;  &#x2F;&#x2F;搜索[ mid+1, right ]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return -1; &#x2F;&#x2F;查找失败</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="lower-bound-求序列中第一个大于等于x元素的位置"><a href="#lower-bound-求序列中第一个大于等于x元素的位置" class="headerlink" title="lower_bound-求序列中第一个大于等于x元素的位置"></a>lower_bound-求序列中第一个大于等于x元素的位置</h2><p>如果<strong>递增序列</strong>A中的元素可能重复，对于要查找的元素x，求序列中第一个大于等于x元素的位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;一定能找到这个位置，因为是求序列中第一个大于等于x元素的位置</span><br><span class="line">int lower_bound(int A[], int left, int right)&#123;  </span><br><span class="line">	int mid;</span><br><span class="line">	while(left&lt;right)&#123; &#x2F;&#x2F;left &#x3D;&#x3D;right 相当于找到了唯一的位置</span><br><span class="line">		mid &#x3D; (left + right) &#x2F; 2;</span><br><span class="line">		if(A[mid] &gt;&#x3D; x)&#123; &#x2F;&#x2F;说明第一个大于等于x元素的位置一定在mid处或mid的左侧 </span><br><span class="line">			right &#x3D; mid;</span><br><span class="line">		&#125;else&#123; &#x2F;&#x2F; A[mid] &lt; x明第一个大于等于x的元素的位置一定在mid的右侧 </span><br><span class="line">			left &#x3D; mid +1;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return left;&#x2F;&#x2F;或者 return right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：数组的范围是[0, n-1]  但这里一开始的查找范围要是[0, n].如果要查找的元素比所有的元素都要大，那它的位置就在n</p>
+<h2 id="upper-bound-求元素中第一个大于x的元素的位置"><a href="#upper-bound-求元素中第一个大于x的元素的位置" class="headerlink" title="upper_bound-求元素中第一个大于x的元素的位置"></a>upper_bound-求元素中第一个大于x的元素的位置</h2><p>求元素中第一个大于x的元素的位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int upper_bound(int A[], int left, int right)&#123;</span><br><span class="line">	int mid;</span><br><span class="line">	while(left&lt;right)&#123;</span><br><span class="line">		mid &#x3D; (left + right) &#x2F; 2;</span><br><span class="line">		if(A[mid] &gt; x)&#123; &#x2F;&#x2F;说明第一个大于x元素的位置一定在mid处或mid的左侧 </span><br><span class="line">			right &#x3D; mid;</span><br><span class="line">		&#125;else&#123; &#x2F;&#x2F; A[mid] &lt;&#x3D; x &#x2F;&#x2F;说明第一个大于x的元素的位置一定在mid的右侧 </span><br><span class="line">			left &#x3D; mid +1;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解决“寻找有序序列中第一个满足某条件的元素位置”的模板"><a href="#解决“寻找有序序列中第一个满足某条件的元素位置”的模板" class="headerlink" title="解决“寻找有序序列中第一个满足某条件的元素位置”的模板"></a>解决“寻找有序序列中第一个满足某条件的元素位置”的模板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[left, right] 要满足所有可能的取值</span><br><span class="line">int solve(int A[], int left, int right)&#123;</span><br><span class="line">	int mid;</span><br><span class="line">	while(left&lt;right)&#123; &#x2F;&#x2F;left &#x3D;&#x3D;right 相当于找到了唯一的位置</span><br><span class="line">		mid &#x3D; (left + right) &#x2F; 2;</span><br><span class="line">		if(条件成立)&#123; &#x2F;&#x2F;说明第一个满足条件的元素的位置&lt;&#x3D;mid</span><br><span class="line">			right &#x3D; mid;</span><br><span class="line">		&#125;else&#123; &#x2F;&#x2F; 条件不成立，则第一个满足该条件的元素的位置&gt;mid</span><br><span class="line">			left &#x3D; mid +1;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return left;  &#x2F;&#x2F;返回夹出来的位置</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>如果想寻找最后一个满足“条件C”的位置，则可以先求第一个满足“条件！C”的情况，然后将这个位置减去1即可</strong></p>
+<h1 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h1><p>给定三个正整数a, b, m 求a^b%m</p>
+<p>思想：</p>
+<ul>
+<li>如果b是奇数，那么a^b = a*a^b-1</li>
+<li>如果b是偶数，那么a^b = a^(b/2)*a^(b/2)</li>
+</ul>
+<h2 id="递归写法-1"><a href="#递归写法-1" class="headerlink" title="递归写法"></a>递归写法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">LL binaryPow(LL a, LL b, LL m)&#123;</span><br><span class="line">	if(b &#x3D;&#x3D; 0) return 1;</span><br><span class="line">	if(b &amp; 1) return a*binaryPow(a, b - 1, m)%m;</span><br><span class="line">	else&#123;</span><br><span class="line">		LL mul &#x3D; binaryPow(a, b&#x2F;2, m);</span><br><span class="line">		return mul * mul % m;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：<br>若a&gt;m ,可以先a = a%m<br>若m==1，最后的值等于0</p>
+<h2 id="迭代写法"><a href="#迭代写法" class="headerlink" title="迭代写法"></a>迭代写法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef long long LL;</span><br><span class="line">LL binaryPow(LL a, LL b, LL m)&#123;</span><br><span class="line">	LL ans &#x3D; 1;</span><br><span class="line">	while(b &gt; 0)&#123;</span><br><span class="line">		if(b%1)&#123; &#x2F;&#x2F;如果b的二进制末尾为1 </span><br><span class="line">			ans &#x3D; ans * a % m;</span><br><span class="line">		&#125;</span><br><span class="line">		a &#x3D; a * a % m;</span><br><span class="line">		b &gt;&gt;&#x3D; 1; &#x2F;&#x2F;将b的二进制右移 </span><br><span class="line">	&#125;</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%95%B0%E5%AD%A6/"># 数学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/05/25/Chapter1-2-Logic/">Chapter1-2</a>
+            
+            
+            <a class="next" rel="next" href="/2020/05/23/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95-%E6%95%B0%E5%AD%A6/">扩展欧几里得算法</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

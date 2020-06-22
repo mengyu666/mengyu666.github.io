@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>装箱问题-贪心 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">装箱问题-贪心</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 26, 2020&nbsp;&nbsp;22:18:02</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://img-blog.csdnimg.cn/20200226221927937.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>第一组表示有4 个3<em>3 的产品和一个6</em>6 的产品，此时4 个3<em>3 的产品占用一个箱子，另外一个6</em>6 的产品占用1 个箱子，所以箱子数是2；第二组表示有7 个1<em>1 的产品，5 个2</em>2的产品和1 个3<em>3 的产品，我们可以把他们统统放在一个箱子中，所以输出是1。分析六个型号的产品占用箱子的具体情况如下：6</em>6 的产品每个会占用一个完整的箱子，并且没有空余空间；5<em>5 的产品每个占用一个新的箱子，并且留下11 个可以盛放1</em>1的产品的空余空间；4<em>4 的产品每个占用一个新的箱子，并且留下5 个可以盛放2</em>2 的产品的空余空间；3<em>3 的产品情况比较复杂，首先3</em>3 的产品不能放在原来盛有5<em>5 或者4</em>4 的箱子中，那么必须为3<em>3 的产品另开新的箱子，新开的箱子数目等于3</em>3 的产品的数目除以4 向上取整；同时我们需要讨论为3<em>3 的产品新开箱子时，剩余的空间可以盛放多少2</em>2 和1<em>1 的产品（这里如果有空间可以盛放2</em>2 的产品，我们就将它计入2<em>2 的空余空间，等到2</em>2 的产品全部装完，如果还有2<em>2 的空间剩余，再将它们转换成1</em>1 的剩余空间）。我们可以分情况讨论为3<em>3 的产品打开的新箱子中剩余的空位，共为四种情况：第一种，3</em>3 的产品的数目正好是4 的倍数，所以没有空余空间；第二种，3<em>3 的产品数目是4 的倍数加1，这时还剩5 个2</em>2 的空位和7 个1<em>1 的空位；第三种，3</em>3 的产品数目是4 的倍数加2，这时还剩3 个2<em>2 的空位和6 个1</em>1 的空位；第四种，3<em>3 的产品数目是4 的倍数加3，这时还剩1 个2</em>2 的空位和5 个1<em>1 的空位；处理完3</em>3 的产品，就可以比较一下剩余的2<em>2的空位和2</em>2 产品的数目，如果产品数目多，就将2<em>2 的空位全部填满，再为2</em>2 的产品打开新箱子，同时计算新箱子中1<em>1 的空位，如果剩余空位多，就将2</em>2 的产品全部填入2<em>2的空位，再将剩余的2</em>2 的空位转换成1<em>1 的空位；最后处理1</em>1 的产品，比较一下1<em>1的空位与1</em>1 的产品数目，如果空位多，将1<em>1 的产品全部填入空位，否则，先将1</em>1 的空位填满，然后再为1*1 的产品打开新的箱子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,a,b,c,d,e,f,x,y;&#x2F;&#x2F;x：空出1*1位置的个数</span><br><span class="line">                      	  &#x2F;&#x2F;y:空出2*2位置的个数</span><br><span class="line">    int u[4]&#x3D;&#123;0,5,3,1&#125;;&#x2F;&#x2F;悄悄地手算一下，看看我3*3的箱子放入的个数不同，剩下够2*2箱子的位置有多少</span><br><span class="line"> </span><br><span class="line">    while(scanf(&quot;%d%d%d%d%d%d&quot;,&amp;a,&amp;b,&amp;c,&amp;d,&amp;e,&amp;f)!&#x3D;EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        if(a&#x3D;&#x3D;0&amp;&amp;b&#x3D;&#x3D;0&amp;c&#x3D;&#x3D;0&amp;d&#x3D;&#x3D;0&amp;e&#x3D;&#x3D;0&amp;f&#x3D;&#x3D;0)</span><br><span class="line">            break;</span><br><span class="line">        n&#x3D;f+e+d+(c+3)&#x2F;4;&#x2F;&#x2F;首先需要箱子的个数</span><br><span class="line">        y&#x3D;5*d+u[c%4];&#x2F;&#x2F;空出2*2位置的个数</span><br><span class="line">        if(b&gt;y)&#x2F;&#x2F;2*2的位置不够用喽</span><br><span class="line">            n+&#x3D;ceil(1.0*(b-y)&#x2F;9);&#x2F;&#x2F;开辟新6*6箱子，供2*2的箱子用(记住：要向上取整）</span><br><span class="line">        x&#x3D;36*n-36*f-25*e-16*d-9*c-4*b;&#x2F;&#x2F;空出1*1位置的个数</span><br><span class="line">        if(a&gt;x)</span><br><span class="line">            n+&#x3D;ceil(1.0*(a-x)&#x2F;36);&#x2F;&#x2F;开辟新6*6箱子，供1*1的箱子用(记住：要向上取整）</span><br><span class="line">        printf(&quot;%d\n&quot;,n);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>review:2.28</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/C-oj/"># C++oj</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/27/%E8%BF%87%E6%A1%A5%E9%97%AE%E9%A2%98%E5%92%8C%E8%BF%87%E6%B2%B3%E9%97%AE%E9%A2%98/">过桥问题和过河问题</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/26/%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA%E9%97%AE%E9%A2%98/">导弹拦截问题-贪心-最长不下降数列问题</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

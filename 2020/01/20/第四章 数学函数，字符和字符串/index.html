@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>第四章 数学函数，字符和字符串 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">第四章 数学函数，字符和字符串</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 20, 2020&nbsp;&nbsp;10:47:33</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="常用数学函数"><a href="#常用数学函数" class="headerlink" title="常用数学函数"></a>常用数学函数</h1><h2 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Math.sin(randians)<span class="comment">//返回以弧度为单位的角度的三角正弦函数值</span></span><br><span class="line">Math.cos(randians)<span class="comment">//返回以弧度为单位的角度的三角余弦函数值</span></span><br><span class="line">Math.tan(randians)<span class="comment">//返回以弧度为单位的角度的三角正切函数值</span></span><br><span class="line">Math.toRadians(degree)</span><br><span class="line">Math.toDegrees(radians)</span><br><span class="line">Math.asin(a)<span class="comment">//返回以弧度为单位的角度的反三角正弦函数值</span></span><br><span class="line">Math.acos(a)<span class="comment">//返回以弧度为单位的角度的反三角余弦函数值</span></span><br><span class="line">Math.atan(a)<span class="comment">//返回以弧度为单位的角度的反三角正切函数值</span></span><br></pre></td></tr></table></figure>
+<h2 id="指数函数"><a href="#指数函数" class="headerlink" title="指数函数"></a>指数函数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Math.exp(x)<span class="comment">//返回e的x次方</span></span><br><span class="line">Math.log(x)</span><br><span class="line">Math.log10(x)</span><br><span class="line">Math.pow(a,b)</span><br><span class="line">Math.sqrt(x)</span><br></pre></td></tr></table></figure>
+<h2 id="取整方法"><a href="#取整方法" class="headerlink" title="取整方法"></a>取整方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Math.ceil(x)<span class="comment">//向上取整,返回double类型的数</span></span><br><span class="line">Math.floor(x)<span class="comment">//向下取整，返回double类型的数</span></span><br><span class="line">Math.rint(x)<span class="comment">//四舍五入，如果x与两个偶数的距离相等，偶数的整数作为double类型返回</span></span><br><span class="line">Math.round(x)</span><br><span class="line"><span class="comment">//如果x是float类型，返回（int）Math.floor（x+0.5)</span></span><br><span class="line"><span class="comment">//如果x是double类型，返回（long）Math.floor（x+0.5)</span></span><br></pre></td></tr></table></figure>
+<h2 id="min-max-abs-的用法"><a href="#min-max-abs-的用法" class="headerlink" title="min max abs 的用法"></a>min max abs 的用法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Math.max(a,b)<span class="comment">//返回a,b中最大的值</span></span><br><span class="line">Math.min(a,b)<span class="comment">//返回a,b中最小的值</span></span><br><span class="line">Math.abs(a)</span><br></pre></td></tr></table></figure>
+<p><strong>a,b为int,long,float,double类型</strong></p>
+<h2 id="random的用法"><a href="#random的用法" class="headerlink" title="random的用法"></a>random的用法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Math.random()<span class="comment">//返回double类型  [0.0,1.0）</span></span><br><span class="line">a+Math.random()*b<span class="comment">//返回double类型  [a,a+b）</span></span><br><span class="line">(<span class="keyword">int</span>)Math.random()*b<span class="comment">//返回double类型  [0.0,b-1]</span></span><br></pre></td></tr></table></figure>
+<p>Math类在程序中使用，但是并没有导入，因为它在java.long包中。在一个Java程序中，java.long包中所有的类都是隐式导入的。</p>
+<h1 id="字符数据类型和操作"><a href="#字符数据类型和操作" class="headerlink" title="字符数据类型和操作"></a>字符数据类型和操作</h1><h2 id="Unicode-和ASCII-编码"><a href="#Unicode-和ASCII-编码" class="headerlink" title="Unicode 和ASCII 编码"></a>Unicode 和ASCII 编码</h2><h3 id="一-Unicode"><a href="#一-Unicode" class="headerlink" title="一.Unicode"></a>一.Unicode</h3><h4 id="1-Unicode标准定义了三种字符编码方式"><a href="#1-Unicode标准定义了三种字符编码方式" class="headerlink" title="1.Unicode标准定义了三种字符编码方式"></a>1.Unicode标准定义了三种字符编码方式</h4><p>UTF-8</p>
+<ul>
+<li>与ASCII编码表一样</li>
+<li>用8bits来表示一个字符，总共能表示256个字符</li>
+<li>是互联网标准中默认的编码形式，如超文本标记语言</li>
+</ul>
+<p>UTF-16</p>
+<ul>
+<li>用16bits来表示一个字符，总共能表示65536个字符</li>
+<li>可以表示大多数的亚洲语言</li>
+</ul>
+<p>UTF-32</p>
+<ul>
+<li><p>用32bits来表示一个字符</p>
+<h4 id="2-Unicode代码点（码位）（Unicode-Code-Point）"><a href="#2-Unicode代码点（码位）（Unicode-Code-Point）" class="headerlink" title="2.Unicode代码点（码位）（Unicode Code Point）"></a>2.Unicode代码点（码位）（Unicode Code Point）</h4><p>在Unicode代码标准中，每个字符被赋予一个值，这个值叫做代码点。<br>代码点的表示方法：<em>U+一个十六进制的值</em><br>如 <code>char cha =‘U+0041’；</code><br><strong>Unicode 代码点的范围[U+0000-U+10FFFF]</strong><br>Unicode标准最多用21bits来表示一个字符<br>在Java中，一个代码点用32bits表示</p>
+</li>
+<li><p>低21bits表示一个代码点</p>
+</li>
+<li><p>高11置0</p>
+<h4 id="3-Unicode-平面"><a href="#3-Unicode-平面" class="headerlink" title="3.Unicode 平面"></a>3.Unicode 平面</h4><p>Unicode的编码范围为U+0000 ~ U+10FFFF，一共包含216∗17=1114112216∗17=1114112个码位。<br>整个编码空间划分为17个平面（plane），每个平面包含216=65536216=65536个码位（codepoint）。<br>其中0号空间叫做基本多文种平面（Basic Multilingual Plane, BMP），其他平面叫做补充平面（supplementary planes）。<br><em>Java字符类型只能表示在BMP平面的字符</em></p>
+<h4 id="4-Unicode-代码单元-Unicode-Code-Unit"><a href="#4-Unicode-代码单元-Unicode-Code-Unit" class="headerlink" title="4.Unicode 代码单元(Unicode Code Unit)"></a>4.Unicode 代码单元(Unicode Code Unit)</h4><p>代码单元是由UTF-X形式来定义的</p>
+</li>
+<li><p>在UTF-8中，一个代码单元是8bits </p>
+</li>
+<li><p>在Java中，字符类型用UTF-16来表示一个字符，因此一个char就表示一个代码单元。由用UTF-X的何种形式决定，一个Unicode 代码点能表示一到多个Unicode 代码单元。</p>
+<h4 id="5-补充字符"><a href="#5-补充字符" class="headerlink" title="5.补充字符"></a>5.补充字符</h4><p>Java用16bits来表示一个字符类型，因此他只能表示BMP中的字符。<br>一个16bits最多只能表示65536个字符，超过此范围的字符被称为补充字符，即1到16平面。</p>
+<h6 id="替代"><a href="#替代" class="headerlink" title="替代"></a>替代</h6><p><img src="https://img-blog.csdnimg.cn/20200120115143229.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200120115209239.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><p>一个转义字符被当成一个字符<br>\\ 反斜杠 \<br>\b 退格键<br>\t 间隔 (‘\u0009’)<br>\n 换行 (‘\u000A’)<br>\r 回车 (‘\u000D’)<br>\f 换页符<br>\e Escape<br>\‘’ 双引号</p>
+<h2 id="字符型数据与数值型数据之间的转换"><a href="#字符型数据与数值型数据之间的转换" class="headerlink" title="字符型数据与数值型数据之间的转换"></a>字符型数据与数值型数据之间的转换</h2><p>char类型可转换为任意一种数据类型，而整数类型转换为char类型时，只能用该数据的低16位。</p>
+</li>
+<li><p>要将一个浮点数转换为char类型，首先要将浮点数转换为int类型，再将这个整数类型转换为char类型。</p>
+</li>
+<li><p>当一个char类型数据被转化为整数类型时，这个字符的Unicode就被转化为某一个指定的数据类型。</p>
+</li>
+<li><p>如果转换结果适用于目标变量，就可以使用隐形转换方式；反之，要使用显性转换方式。</p>
+</li>
+<li><p>[0000-FFFF]之间任何一个十六进制正整数都可以隐式转换为char型数据。</p>
+</li>
+<li><p>所有的数值操作符都可以用于char类型中：<br>如果字符+字符（或数字）   结果是数字</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i =<span class="string">'2'</span>+<span class="string">'3'</span>;<span class="comment">//     (int)'3'=50     (int)'3'=51</span></span><br><span class="line">System.out.println(i);<span class="comment">//101</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i =<span class="number">2</span>+<span class="string">'3'</span>;</span><br><span class="line">System.out.println(i);<span class="comment">//53      (int)'3'=51</span></span><br></pre></td></tr></table></figure>
+
+<p>  如果字符+字符串   结果是字符与该字符串相连</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str=<span class="string">"You are handsome"</span>;</span><br><span class="line"><span class="keyword">char</span> a=<span class="string">'a'</span>;</span><br><span class="line">System.out.println(str+a);<span class="comment">//You are handsome a</span></span><br></pre></td></tr></table></figure>
+<h2 id="字符的比较"><a href="#字符的比较" class="headerlink" title="字符的比较"></a>字符的比较</h2><p>两个字符可以用操作关系符进行比较。这是通过比较两个字符的Unicode值实现的。<br>| 字符 |十进制编码  |Unicode值  |<br>|–|-|–|<br>| ‘0’-‘9’ |48-57 |\u+0030-\u0039|<br>|’A’-‘Z’|65-90|\u+0041-\u005A|<br>|’a’-‘z’  |97-122 |\u+0061-\u007A|</p>
+<h3 id="Character-中的方法"><a href="#Character-中的方法" class="headerlink" title="Character 中的方法"></a>Character 中的方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Character.isDigit(<span class="keyword">char</span>)</span><br><span class="line">Character.isLetter(<span class="keyword">char</span>)</span><br><span class="line">Character.isLetterOrDigit(<span class="keyword">char</span>)</span><br><span class="line">Character.isLowerCase(<span class="keyword">char</span>)</span><br><span class="line">Character.isUpperCase(<span class="keyword">char</span>)</span><br><span class="line">Character.toLowerCase(<span class="keyword">char</span>)</span><br><span class="line">Character.toUpperCace(<span class="keyword">char</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="String-类型"><a href="#String-类型" class="headerlink" title="String 类型"></a>String 类型</h2><p>String是Java库中预定义的一个类<br>String类型不是基本类型，而是引用类型（reference type）<br>==任何Java类都可以作为引用类型来声明一个变量==<br>使用引用类型声明的变量叫做引用变量，它引用一个对象。</p>
+<h3 id="String对象的简单方法-是实例方法）"><a href="#String对象的简单方法-是实例方法）" class="headerlink" title="String对象的简单方法(是实例方法）"></a>String对象的简单方法(是实例方法）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">length（）</span><br><span class="line">charAt(index)str1.contast(str2)</span><br><span class="line">String str1=str2.toUpperCase()</span><br><span class="line">String str1=str2.toLowerCase()</span><br><span class="line">String str1=str2.trim()</span><br></pre></td></tr></table></figure>
+<p><em>实例方法与静态方法</em><br>      一个方法可以有参数{charAt(index) index是参数}；也可以没有参数{length()}</p>
+<ul>
+<li>实例方法：要使用对象来调用  </li>
+<li>语法  :reference_Varuable.methodname(argument)  如上面String的一些方法</li>
+<li>静态方法：不使用对象来调用</li>
+<li>语法：Classname.methodname(argumrnt) 如Math.pow(2,3)</li>
+</ul>
+<h4 id="获取字符串长度"><a href="#获取字符串长度" class="headerlink" title="获取字符串长度"></a>获取字符串长度</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Sting str=<span class="string">""</span>;</span><br><span class="line"><span class="keyword">int</span> length=str.length();<span class="comment">//0</span></span><br><span class="line">----------------------------------------------------------------</span><br><span class="line">Strign str1=<span class="string">" "</span>;</span><br><span class="line"><span class="keyword">int</span> length1=str1.length();<span class="comment">//1</span></span><br><span class="line">----------------------------------------------------------------</span><br><span class="line">String str2=<span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">int</span> length2=str2.length()<span class="comment">//error</span></span><br><span class="line">----------------------------------------------------------------</span><br><span class="line"><span class="keyword">int</span> length2“、<span class="string">"ABCD"</span>.length()<span class="comment">//4</span></span><br></pre></td></tr></table></figure>
+<h4 id="从字符串中获取字符"><a href="#从字符串中获取字符" class="headerlink" title="从字符串中获取字符"></a>从字符串中获取字符</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str=<span class="string">"ABCD"</span>;</span><br><span class="line"><span class="keyword">char</span> cha=str.charAT(<span class="number">0</span>);<span class="comment">//A</span></span><br></pre></td></tr></table></figure>
+<h4 id="连接字符串"><a href="#连接字符串" class="headerlink" title="连接字符串"></a>连接字符串</h4><p>三种方法：</p>
+<ul>
+<li>用“+”连接<br><em>至少有一个操作数是字符串类型,不是字符串类型的操作数会被转换为字符串类型</em></li>
+<li>用str1.concat(str2)来连接<br><em>所有的操作数必须是字符串类型</em></li>
+<li>用“+=”连接</li>
+</ul>
+<p>后面略了</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Java/"># Java</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/01/21/%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%87%BA/">格式化控制台输出</a>
+            
+            
+            <a class="next" rel="next" href="/2020/01/12/Java%20%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A11/">Java 基本程序设计1</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

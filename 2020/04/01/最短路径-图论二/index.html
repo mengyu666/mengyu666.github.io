@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>最短路径-图论二 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">最短路径-图论二</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 1, 2020&nbsp;&nbsp;15:30:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Dijkstra算法（迪杰特斯拉算法）"><a href="#Dijkstra算法（迪杰特斯拉算法）" class="headerlink" title="Dijkstra算法（迪杰特斯拉算法）"></a>Dijkstra算法（迪杰特斯拉算法）</h1><pre><code>解决单源最短路问题</code></pre><p><strong>单源最短路问题</strong>：给定图G和起点s,通过算法得到s到达其他每个顶点的最短距离<br><font color=red face="华文彩云">Dijkstra算法只适合边权都为非负数的情况，如果边权为负数，可能算法得到的结果会出错！可以用SPFA算法</font><br>算法思路：</p>
+<ul>
+<li>设置几个S存放已被访问的点，然后执行n次下面的两个步骤</li>
+<li>每次从集合V-S中（即未被标记的点）中选择与起点s的最短距离最小的一个顶点（记为u），访问并加入集合S（即令其被标记）</li>
+<li>之后，令顶点u为中介点，优化起点s与所有从u能到达的顶点v之间的最短距离</li>
+</ul>
+<h2 id="两种代码实现"><a href="#两种代码实现" class="headerlink" title="两种代码实现"></a>两种代码实现</h2><p><strong>邻接矩阵法可需要枚举所有顶点来查看v是否由u到达，邻接表可得到u能到达的顶点v</strong><br>定义：<br>MAXN（最大定点数）<br>INF=0x3fffffff（一个很大的数）</p>
+<h3 id="邻接矩阵实现法"><a href="#邻接矩阵实现法" class="headerlink" title="邻接矩阵实现法"></a>邻接矩阵实现法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">int n, G[MAXN][MAXN]; &#x2F;&#x2F;创建邻接矩阵G</span><br><span class="line">int d[MAXN]; &#x2F;&#x2F;起点到达各点的最短路径长度</span><br><span class="line">bool vis[MAXN] &#x3D; &#123; false &#125;;</span><br><span class="line"></span><br><span class="line">void Dijkstra(int s) &#123;</span><br><span class="line">	fill(d, d + MAXN, INF); &#x2F;&#x2F;不能用memset</span><br><span class="line">	d[s] &#x3D; 0;&#x2F;&#x2F;起点s到达自身的距离为0</span><br><span class="line">	for (int i &#x3D; 0; i &lt; n; i++) &#123;</span><br><span class="line">		int u &#x3D; -1, MIN &#x3D; INF;</span><br><span class="line">		for (int j &#x3D; 0; j &lt; i; j++) &#123;  &#x2F;&#x2F;找到还未访问的顶点中到达起点距离最小的</span><br><span class="line">			if (!vis[j] &amp;&amp; d[j] &lt; MIN) &#123;</span><br><span class="line">				u &#x3D; j;&#x2F;&#x2F;记录最小的距离的顶点号码</span><br><span class="line">				MIN &#x3D; d[j]; &#x2F;&#x2F;记录最小的距离</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (u &#x3D; -1) return; &#x2F;&#x2F;找不到，说明剩下的顶点与起点s不连通</span><br><span class="line">		vis[u] &#x3D; true;&#x2F;&#x2F;标记u已经被访问过</span><br><span class="line">		for (int v &#x3D; 0; v &lt; n; v++) &#123;  &#x2F;&#x2F;优化d[v]</span><br><span class="line">			&#x2F;&#x2F;满足v未被访问过且u能到达v且以u为中介点可以使d[v]更优</span><br><span class="line">			if (!vis[v] &amp;&amp; G[u][v] !&#x3D; INF &amp;&amp; d[u] + G[u][v] &lt; d[v]) &#123;</span><br><span class="line">				d[v] &#x3D; d[u] + G[u][v];&#x2F;&#x2F;更新d[v]</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="邻接表实现法"><a href="#邻接表实现法" class="headerlink" title="邻接表实现法"></a>邻接表实现法</h3><p>适宜于点数不大的情况（MAXV&lt;=1000)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">struct Node&#123;</span><br><span class="line">	int v,dis; &#x2F;&#x2F;v为边的目标顶点，dis 为边权 </span><br><span class="line">&#125;;</span><br><span class="line">int n;&#x2F;&#x2F;顶点数 </span><br><span class="line">vector&lt;Node&gt;Adj[MAXN]; &#x2F;&#x2F;用邻接表实现的图G;Adj[u]存放从顶点u出发可以到达的所有顶点 </span><br><span class="line">int d[MAXN]; &#x2F;&#x2F;起点到达各点的最短路径长度</span><br><span class="line">bool vis[MAXN]&#x3D; &#123;false&#125;; &#x2F;&#x2F;标记数组，标记是否被访问过</span><br><span class="line"></span><br><span class="line">void Dijkstra(int s) &#123;</span><br><span class="line">	fill(d, d + MAXN, INF);</span><br><span class="line">	d[s] &#x3D; 0;</span><br><span class="line">	for (int i &#x3D; 0; i &lt; n; i++) &#123;</span><br><span class="line">		int u &#x3D; -1, MIN &#x3D; INF;</span><br><span class="line">		for (int j &#x3D; 0; j &lt; i; j++) &#123;</span><br><span class="line">			if (!vis[j] &amp;&amp; d[j] &lt; MIN) &#123;</span><br><span class="line">				u &#x3D; j;</span><br><span class="line">				MIN &#x3D; d[j];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (u &#x3D; -1) return;</span><br><span class="line">		vis[u] &#x3D; true;</span><br><span class="line">		&#x2F;&#x2F;以下高能</span><br><span class="line">		for (int j &#x3D; 0; j &lt; Adj[u].size(); j++) &#123;</span><br><span class="line">			int v &#x3D; Adj[u][j].v;</span><br><span class="line">			if (!vis[v] &amp;&amp; d[u] + Adj[u][j].dis &lt; d[v]) &#123;</span><br><span class="line">				d[v] &#x3D; d[u] + Adj[u][j].dis;&#x2F;&#x2F;优化d[v]</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>复杂度O（V^2)</strong><br>可以用优先队列（优化寻找d[u]的过程）降低复杂度到O（VlogV+a）<br><font color=red face="华文彩云">注意:</font><br>上述只适用于有向边，如果是无向边，就把无向边当作两条指向相反的有向边</p>
+<ul>
+<li>对于邻接矩阵: 一条u与v之间的无向边在输入时可以分别对G[u][v]与G[v][u]赋予相同的边权</li>
+<li>对于邻接表: 只需要在u的邻接表Adj[u]末尾添加v,在v的邻接表Adj[u]末尾添加u</li>
+</ul>
+<h2 id="Dijkstra算法进阶"><a href="#Dijkstra算法进阶" class="headerlink" title="Dijkstra算法进阶"></a>Dijkstra算法进阶</h2><p>有两个及以上的限制条件</p>
+<ul>
+<li>距离最短</li>
+<li>以下的几种条件<h3 id="双边权"><a href="#双边权" class="headerlink" title="双边权"></a>双边权</h3>如：给每条边再增加一个边权(如花费),然后要求在满足最短路径的同时满足路径上的花费之和最小<br>新增两个数组：</li>
+<li>c[MAXN] //从起点s到达顶点u的最少花费为c[u](初始化时：c[s]=0,其余的等于INF）</li>
+<li>cost[MAXN][MAXN] //cost[u][v] 表示u-&gt;的花费<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for (int v &#x3D; 0; v &lt; n; v++) &#123;  </span><br><span class="line">	if (!vis[v] &amp;&amp; G[u][v] !&#x3D; INF) &#123;</span><br><span class="line">		if(d[u] + G[u][v] &lt; d[v]) &#123; &#x2F;&#x2F;以u为中介点可以使d[v]最优</span><br><span class="line">			d[v] &#x3D; d[u] + G[u][v];</span><br><span class="line">			c[v] &#x3D; c[u] + cost[u][v];</span><br><span class="line">		&#x2F;&#x2F;最短距离相同时看是否能使c[v]更优</span><br><span class="line">		&#125; else if(d[u] + G[u][v] &#x3D;&#x3D; d[v]&amp;&amp;c[u] + cost[u][v]&lt;c[v]) &#123; </span><br><span class="line">			c[v] &#x3D; c[u] + cost[u][v];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="双点权"><a href="#双点权" class="headerlink" title="双点权"></a>双点权</h3>如：给每一个点增加一个点权（例如每个城市能搜集到的物资），然后在满足最短路径的还要满足路径上的点权之和最大<br>如：每个城市能搜集到的物资<br>新增数组：</li>
+<li>weight[MAXN] //每个城市所拥有的物资</li>
+<li>w[MAXN] //从起点s到达顶点u的收集到的最大物资为w[u](初始化时：w[s]=weight[s],其余的等于0）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for (int v &#x3D; 0; v &lt; n; v++) &#123;  </span><br><span class="line">	if (!vis[v] &amp;&amp; G[u][v] !&#x3D; INF) &#123;</span><br><span class="line">		if(d[u] + G[u][v] &lt; d[v]) &#123; &#x2F;&#x2F;以u为中介点可以使d[v]最优</span><br><span class="line">			d[v] &#x3D; d[u] + G[u][v];</span><br><span class="line">			w[v] &#x3D; w[u] + weight[v];</span><br><span class="line">		&#x2F;&#x2F;最短距离相同时看是否能使w[v]更优</span><br><span class="line">		&#125; else if(d[u] + G[u][v] &#x3D;&#x3D; d[v]&amp;&amp;w[u] + weight[v]&gt;w[v]) &#123; </span><br><span class="line">			w[v] &#x3D; w[u] + weight[v];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="直接问有多少条最短路径"><a href="#直接问有多少条最短路径" class="headerlink" title="直接问有多少条最短路径"></a>直接问有多少条最短路径</h3>新增数组：</li>
+<li>num[MAXN] //从起点s到达顶点u的最短路径条数为为num[u](初始化时：num[s]=1,其余的等于0）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for (int v &#x3D; 0; v &lt; n; v++) &#123;  </span><br><span class="line">	if (!vis[v] &amp;&amp; G[u][v] !&#x3D; INF) &#123;</span><br><span class="line">		if(d[u] + G[u][v] &lt; d[v]) &#123; &#x2F;&#x2F;以u为中介点可以使d[v]最优</span><br><span class="line">			d[v] &#x3D; d[u] + G[u][v];</span><br><span class="line">			num[v] &#x3D; num[u];</span><br><span class="line">		&#x2F;&#x2F;最短距离相同时累加num</span><br><span class="line">		&#125; else if(d[u] + G[u][v] &#x3D;&#x3D; d[v]) &#123; </span><br><span class="line">			num[v] +&#x3D; num[u];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+PS：若同时求最短路径条数和最短路径的最大点权和<br>新增数组：</li>
+<li>weight[MAXN] //每个城市所拥有的物资</li>
+<li>w[MAXN] //从起点s到达顶点u的收集到的最大物资为w[u](初始化时：w[s]=0,其余的等于INF）</li>
+<li>num[MAXN] //从起点s到达顶点u的最短路径条数为为num[u](初始化时：num[s]=1,其余的等于0）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">for (int v &#x3D; 0; v &lt; n; v++) &#123;  </span><br><span class="line">	if (!vis[v] &amp;&amp; G[u][v] !&#x3D; INF) &#123;</span><br><span class="line">		if(d[u] + G[u][v] &lt; d[v]) &#123; &#x2F;&#x2F;以u为中介点可以使d[v]最优</span><br><span class="line">			d[v] &#x3D; d[u] + G[u][v];</span><br><span class="line">			w[v] &#x3D; w[u] + weight[v];</span><br><span class="line">			num[v] &#x3D; num[u];	</span><br><span class="line">		&#x2F;&#x2F;找到一条相同长度的路径</span><br><span class="line">		&#125; else if(d[u] + G[u][v] &#x3D;&#x3D; d[v]) &#123; </span><br><span class="line">			&#x2F;&#x2F;以u为中介点可以使w[v]最大</span><br><span class="line">			if(w[u] + weight[v ]&gt; w[v])&#123; </span><br><span class="line">				w[v] &#x3D; w[u] + weight[v];</span><br><span class="line">			&#125;</span><br><span class="line">			&#x2F;&#x2F;最短距离相同时累加num</span><br><span class="line">			num[v] +&#x3D; num[u];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>上述所有的, 主函数中都要：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fill(G[0],G[0]+MAXN*MAXN,INF);</span><br></pre></td></tr></table></figure>
+<p><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805523835109376" target="_blank" rel="noopener">传送门（例题）</a></p>
+<p>略</p>
+<h1 id="Bellman-Ford算法和SPFA算法"><a href="#Bellman-Ford算法和SPFA算法" class="headerlink" title="Bellman-Ford算法和SPFA算法"></a>Bellman-Ford算法和SPFA算法</h1><p>略</p>
+<h1 id="Floyd算法"><a href="#Floyd算法" class="headerlink" title="Floyd算法"></a>Floyd算法</h1><p>用于解决全源最短路径的问题，对于给定的图G(V,E), 求任意两点u,v之间的最短距离<br>Floyd-Warshall算法不能解决带有“负权回路”（或者叫“负权环”）的图，因为带有“负权回路”的图没有最短路</p>
+<p>算法流程：</p>
+<ul>
+<li>枚举k（从1到顶点的最大数量）</li>
+<li>以顶点k作为中介点，枚举所有顶点i,j（从i-&gt;j的距离）<br>  如果dis[i][k]+dis[k][j]&lt;dis[i][j]成立<br>  赋值dis[i][j]=dis[i][k]+dis[k][j]</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void Floyd()&#123;</span><br><span class="line">for(int k &#x3D; 0; k &lt; n; k ++)&#123;</span><br><span class="line">	for(int i &#x3D; 0; i  &lt; n; i ++)&#123;</span><br><span class="line">		for(int j &#x3D; 0; j &lt; n; j ++）&#123;</span><br><span class="line">			if(dis[i][k]+dis[k][j]&lt;dis[i][j]&amp;&amp;dis[i][k]!&#x3D;INF&amp;&amp;dis[k][j]!&#x3D;INF)&#123;</span><br><span class="line">				dis[i][j]&#x3D;dis[i][k]+dis[k][j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%9B%BE%E8%AE%BA/"># 图论</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/04/01/fill()%20VS%20memset()/">fill() VS memset()</a>
+            
+            
+            <a class="next" rel="next" href="/2020/04/01/%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86-%E5%9B%BE%E8%AE%BA%E4%B8%80/">图的遍历-图论一</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

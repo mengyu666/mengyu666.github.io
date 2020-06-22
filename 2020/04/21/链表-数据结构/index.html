@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>链表 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">链表</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 21, 2020&nbsp;&nbsp;8:59:52</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="链表的概念"><a href="#链表的概念" class="headerlink" title="链表的概念"></a>链表的概念</h1><p>链表是由若干个结点组成，且结点在内存中的储存位置通常是不连续的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct node&#123;</span><br><span class="line">	typename data; &#x2F;&#x2F;数据域</span><br><span class="line">	node* next;&#x2F;&#x2F;指针域</span><br><span class="line"></span><br><span class="line">&#125;；</span><br></pre></td></tr></table></figure>
+<p>链表的分类：</p>
+<ul>
+<li>带头结点的链表：头结点(head)的数据域不存放东西，指针域指向第一个数据域有内容的结点（称为第一个结点）</li>
+<li>不带头结点的链表<br>最后一个结点的next指向NULL,即空地址，表示一条链表的结尾</li>
+</ul>
+<h1 id="分配内存空间"><a href="#分配内存空间" class="headerlink" title="分配内存空间"></a>分配内存空间</h1><h2 id="使用malloc函数"><a href="#使用malloc函数" class="headerlink" title="使用malloc函数"></a>使用malloc函数</h2><p>头文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include &lt;stdlib.h&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typename* p &#x3D; (typename*)malloc(sizeof(typename));</span><br></pre></td></tr></table></figure>
+<p>申请一个int型的变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int* p &#x3D; (int*)malloc(sizeof(int));</span><br></pre></td></tr></table></figure>
+<p>申请一个node型的变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node* p &#x3D; (node*)malloc(sizeof(node));</span><br></pre></td></tr></table></figure>
+<p>上面的例子通过指针p来访问，如果申请失败，则会返回空指针NULL</p>
+<h2 id="使用new运算符"><a href="#使用new运算符" class="headerlink" title="使用new运算符"></a>使用new运算符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typename* p &#x3D; new typename;</span><br></pre></td></tr></table></figure>
+<p>如果申请失败，则会抛出异常，而不是返回空指针NULL</p>
+<h2 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h2><p>指使用上述函数开辟内存空间在使用后没有进行释放，使其在程序结束前始终占用该内存空间而导致最后可能无内存可分配</p>
+<h2 id="使用free函数释放空间"><a href="#使用free函数释放空间" class="headerlink" title="使用free函数释放空间"></a>使用free函数释放空间</h2><p>对应malloc函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free(p);</span><br></pre></td></tr></table></figure>
+<p>作用：</p>
+<ul>
+<li>释放指针变量p所指向的内存空间</li>
+<li>将指针变量p指向空地址NULL<h2 id="delete运算符"><a href="#delete运算符" class="headerlink" title="delete运算符"></a>delete运算符</h2>对应new运算符<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete(p);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="链表的基本操作"><a href="#链表的基本操作" class="headerlink" title="链表的基本操作"></a>链表的基本操作</h1><h2 id="创建链表"><a href="#创建链表" class="headerlink" title="创建链表"></a>创建链表</h2><p>通过巴拉巴拉来获取若干个零散的结点，并把这些结点连接起来（把每个结点的next指针指向下一个结点的地址）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">&#x2F;&#x2F;链表结点</span><br><span class="line"> struct node&#123;</span><br><span class="line"> 	int data;</span><br><span class="line"> 	node* next;</span><br><span class="line"> &#125;;</span><br><span class="line">&#x2F;&#x2F; 创建链表</span><br><span class="line">node* create(int array[])&#123;</span><br><span class="line">	node* p, *pre, *head; &#x2F;&#x2F;p只是一个中间者，pre保存当前结点的前驱结点，head为头结点</span><br><span class="line">	head &#x3D; new node; &#x2F;&#x2F;头结点</span><br><span class="line">	head-&gt;next &#x3D; NULL; &#x2F;&#x2F;头结点的指针域指向NULL</span><br><span class="line">	pre &#x3D; head; &#x2F;&#x2F;pre为head</span><br><span class="line">	for( int i &#x3D; 0; i &lt; 5; i++)&#123; &#x2F;&#x2F;读入数据并且创造链表</span><br><span class="line">		p &#x3D; new node; &#x2F;&#x2F;新建结点</span><br><span class="line">		p-&gt;data &#x3D; array[i]; </span><br><span class="line">		p-&gt;next &#x3D; NULL; &#x2F;&#x2F;新结点的指针域为NULL</span><br><span class="line">		pre-&gt;next &#x3D; p; &#x2F;&#x2F;前驱结点的指针域设为当前新建结点的地址</span><br><span class="line">		pre &#x3D; p; &#x2F;&#x2F;把pre设为p，作为下个结点的前驱结点</span><br><span class="line">	&#125;</span><br><span class="line">	return head; &#x2F;&#x2F;返回头指针地址</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	int array[5] &#x3D; &#123;5,3,6,1,2&#125;; &#x2F;&#x2F;要存在链表中的数据</span><br><span class="line">	node* L &#x3D; creat(array); &#x2F;&#x2F;新建链表，返回的头指针赋给L</span><br><span class="line">	L &#x3D; L-&gt;next; &#x2F;&#x2F;L 指向下一个结点</span><br><span class="line">	while(L !&#x3D; NULL)&#123;</span><br><span class="line">		printf(&quot;%d&quot;,L-&gt;data);</span><br><span class="line">		L &#x3D; L-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;查找以head为头结点的该链表中有多少个数据x，并返回计数值</span><br><span class="line">int search(node* head, int x) &#123;</span><br><span class="line">	int count &#x3D; 0; &#x2F;&#x2F;计数器</span><br><span class="line">	node* p &#x3D; head-&gt;next; &#x2F;&#x2F;从第一个结点开始</span><br><span class="line">	while(p !&#x3D; NULL) &#123; &#x2F;&#x2F;只要没有到链表末尾</span><br><span class="line">		if(p-&gt;data &#x3D;&#x3D; x) &#123;</span><br><span class="line">			count++; &#x2F;&#x2F;满足条件，count++</span><br><span class="line">		&#125;</span><br><span class="line">		p &#x3D; p-&gt;next; &#x2F;&#x2F;指针移动到下一个结点</span><br><span class="line">	&#125;</span><br><span class="line">	return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h2><p>指在链表的给定位置的地方插入一个结点<br>如在第3个位置插入元素4：<br><img src="https://img-blog.csdnimg.cn/20200421095221592.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void insert(node* head, int index, int x)&#123;</span><br><span class="line">	node* p &#x3D; head; </span><br><span class="line">	&#x2F;&#x2F;到插入位置的前一个结点</span><br><span class="line">	for(int i &#x3D; 0; i &lt; index-1; i++)&#123;</span><br><span class="line">		p &#x3D; p-&gt;next;  </span><br><span class="line">	&#125;</span><br><span class="line">	noed* p &#x3D; new node; &#x2F;&#x2F;新建结点</span><br><span class="line">	q-&gt;data &#x3D; x; &#x2F;&#x2F;要插入放入数据</span><br><span class="line">	q-&gt;next &#x3D; p-&gt;next; &#x2F;&#x2F;新结点的下一个结点指向原先插入位置的结点</span><br><span class="line">	p-&gt;next &#x3D; q;  &#x2F;&#x2F;前一个位置的结点指向新结点</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>过程如图所示：<br><img src="https://img-blog.csdnimg.cn/20200421100006469.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h2><p>指删除链表中<strong>所有</strong>值为给定的数x</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">void del(node* head, int x)&#123;</span><br><span class="line">	node* p &#x3D; head-&gt;bext; &#x2F;&#x2F;p从第一个结点开始枚举</span><br><span class="line">	node* pre &#x3D; head; &#x2F;&#x2F;pre始终保存p的前驱结点的指针</span><br><span class="line">	while(p !&#x3D; NULL)&#123;</span><br><span class="line">		if(p-&gt;data &#x3D;&#x3D; x)&#123; &#x2F;&#x2F;p的数据域恰好是x，说明要删除该结点</span><br><span class="line">			pre-&gt;next &#x3D; p-&gt;next;</span><br><span class="line">			delete(p);</span><br><span class="line">			p &#x3D; pre-&gt;next;</span><br><span class="line">		&#125;else&#123; &#x2F;&#x2F;p的数据域不是x，把pre和p都向后移动一位</span><br><span class="line">			pre &#x3D; p;</span><br><span class="line">			p &#x3D; p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如删除链表中6：<br><img src="https://img-blog.csdnimg.cn/20200421113703561.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="静态链表"><a href="#静态链表" class="headerlink" title="静态链表"></a>静态链表</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct Node&#123;</span><br><span class="line">	typename data; &#x2F;&#x2F;数据域</span><br><span class="line">	int next; &#x2F;&#x2F;指针域</span><br><span class="line">&#125;node[size];</span><br></pre></td></tr></table></figure>
+<p>next存放下一个结点的地址(实际上就是数组下标）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node[x] &#x3D; -1 &#x2F;&#x2F;相当于动态链表中的NULL,表示没有后继结点</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"># 数据结构</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/04/21/%E5%88%86%E6%95%B0-%E6%95%B0%E5%AD%A6/">分数</a>
+            
+            
+            <a class="next" rel="next" href="/2020/04/18/%E6%B4%9B%E8%B0%B7P1029%E6%9C%80%E5%A4%A7%E5%85%AC%E5%9B%A0%E6%95%B0%E4%B8%8E%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0/">洛谷P1029最大公因数与最小公倍数</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

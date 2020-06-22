@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>二叉树 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">二叉树</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 11, 2020&nbsp;&nbsp;10:56:23</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="树与二叉树"><a href="#树与二叉树" class="headerlink" title="树与二叉树"></a>树与二叉树</h1><p>两种特殊的二叉树：</p>
+<ul>
+<li>满二叉树：每一层的节点个数都达到了当层能达到的最大节点数</li>
+<li>完全二叉树：除了最下面一层外，其余的各层的节点个数都达到了当层能达到的最大节点数，且最下面一层只从左到右连续存在若干节点，而这些连续结点的右边的结点全部不存在<h1 id="二叉树的储存结构与基本操作"><a href="#二叉树的储存结构与基本操作" class="headerlink" title="二叉树的储存结构与基本操作"></a>二叉树的储存结构与基本操作</h1>##二叉树的储存结构</li>
+<li>用二叉链表</li>
+<li>用数组</li>
+</ul>
+<p>下面介绍用二叉链表滴</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct node&#123;</span><br><span class="line">	typename data;</span><br><span class="line">	node* lchild;</span><br><span class="line">	node* rchild;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>新建结点(插入结点，权值为v)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">node* newNode(int v)&#123;</span><br><span class="line">	node *Node &#x3D;new node;</span><br><span class="line">	Node-&gt;data &#x3D;v; &#x2F;&#x2F;结点权值为v</span><br><span class="line">	Node-&gt;lchild &#x3D; Node-&gt;rchild NULL; &#x2F;&#x2F;初始状态下没有左右孩子</span><br><span class="line">	return Node;&#x2F;&#x2F;返回新建结点的地址</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>二叉树的查找</p>
+<ul>
+<li>在二叉树中找到所有数据域为给定数据域为A的结点，并将它们的数据域修改为给定的数据域B<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void search(node *root, int x, int newdata)&#123;</span><br><span class="line">	if(root&#x3D;NULL) &#123;  &#x2F;&#x2F;空树，是递归边界</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	if(root-&gt;data &#x3D;&#x3D; x)&#123; &#x2F;&#x2F;找到数据域为x的结点，把它的数据域修改为newdata</span><br><span class="line">		root-&gt;data &#x3D; newdata;</span><br><span class="line">	&#125;</span><br><span class="line">	search(root-&gt;lchild, x, newdata);  &#x2F;&#x2F;往左子树搜索</span><br><span class="line">	search(root-&gt;rchild, x, newdata); &#x2F;&#x2F;往右子树搜索</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>二叉树结点的插入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">void insert(node* &amp;root, int x) &#123;</span><br><span class="line">	if(root&#x3D;NULL) &#123;</span><br><span class="line">		root &#x3D; newNode(x);</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	if(root-&gt;data &#x3D;&#x3D; x) &#123;</span><br><span class="line">		root-&gt;data &#x3D; newdata;</span><br><span class="line">	&#125;</span><br><span class="line">	if(由二叉树的性质，x应该插在左子树) &#123;</span><br><span class="line">		insert(root-&gt;lchild, x,);</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		insert(root-&gt;rchild, x);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>二叉树的创建<br>就是二叉树结点插入的过程，下面的方法是把需要插入的数据储存在数组中，然后哦将它们使用insert函数一个个插入到二叉树中，并最终返回根节点的指针root</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">node* Create(int data[],int n) &#123;</span><br><span class="line">	node* root &#x3D;NULL;  &#x2F;&#x2F;新建空根结点root</span><br><span class="line">	for(int i&#x3D;0; i&lt;n; i++) &#123;  &#x2F;&#x2F;把数组data中的数据依次插入到二叉树中</span><br><span class="line">		insert(root,data[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	return root; &#x2F;&#x2F;返回根节点</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一点小玩意儿<br>*root =NULL; //结点的地址为NULL，即结点不存在<br>root =NULL; //结点内容为NULL,结点存在但没有内容</p>
+<p>完全二叉树的储存结构<br>对于一个有k个结点的完全二叉树</p>
+<ul>
+<li>数组大小: k+1</li>
+<li>对完全二叉树中的任意一个结点(编号为x),它的左孩子编号为2x，它的右孩子编号为2x+1</li>
+<li>数组中编号为1的位置存放根结点</li>
+<li>数组中元素存放的顺序恰好为该完全二叉树的层序遍历序列</li>
+</ul>
+<p>两个判断</p>
+<ul>
+<li>判断某个结点是否为叶结点: 该结点（编号为root）的左子结点标号（root*2）大于结点总个数n</li>
+<li>判断某个结点是否为空结点: 该结点（编号为root）大于结点总个数n</li>
+</ul>
+<h1 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h1><ul>
+<li>先序遍历</li>
+<li>中序遍历</li>
+<li>后序遍历</li>
+<li>层序遍历<h2 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h2>根节点-&gt;左子树-&gt;右子树<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void preorder(node* root)&#123;</span><br><span class="line">	if(root&#x3D;&#x3D;NULL)&#123;</span><br><span class="line">		return; &#x2F;&#x2F;到达空树，递归边界</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;%d&quot;,root-&gt;data); &#x2F;&#x2F;访问根节点root（例如输出其数据域）</span><br><span class="line">	preorder(root-&gt;lchild); &#x2F;&#x2F;访问左子树</span><br><span class="line">	preorder(root-&gt;rchild); &#x2F;&#x2F;访问右子树</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>性质：对一棵二叉树的先序遍历序列，序列的第一个一定是根节点</p>
+<h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><p>左子树-&gt;根节点-&gt;右子树</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void inorder(node* root)&#123;</span><br><span class="line">	if(root&#x3D;&#x3D;NULL)&#123;</span><br><span class="line">		return; &#x2F;&#x2F;到达空树，递归边界</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	inorder(root-&gt;lchild); &#x2F;&#x2F;访问左子树</span><br><span class="line">	printf(&quot;%d&quot;,root-&gt;data); &#x2F;&#x2F;访问根节点root（例如输出其数据域）</span><br><span class="line">	inorder(root-&gt;rchild); &#x2F;&#x2F;访问右子树</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>性质：对于中序遍历，只要知道哦根结点，就可以通过根结点在中序遍历序列中的位置分出左子树和右子树</p>
+<h2 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h2><p>左子树-&gt;右子树-&gt;根结点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void postorder(node* root)&#123;</span><br><span class="line">	if(root&#x3D;&#x3D;NULL)&#123;</span><br><span class="line">		return;</span><br><span class="line">	&#125;	</span><br><span class="line">	postorder(root-&gt;lchild);</span><br><span class="line">	postorder(root-&gt;rchild);</span><br><span class="line">	printf(&quot;%d&quot;,root-&gt;data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>性质：对于后序遍历的序列，子序列的最后一个肯定是根结点</p>
+<h2 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h2><p>之按照层次的顺序从根结点向下逐层进行遍历，且对同一层的结点从左往右遍历(相当于BFS进行搜索)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void LayerOrder(node* root)&#123;</span><br><span class="line">	queue&lt;node*&gt; q;  &#x2F;&#x2F;队列中存储的是地址</span><br><span class="line">	q.push(root);</span><br><span class="line">	while(!q.empty())&#123;</span><br><span class="line">		node *now &#x3D; q.front(); &#x2F;&#x2F;取出队首元素</span><br><span class="line">		q.pop();</span><br><span class="line">		printf(&quot;%d&quot;,now-&gt;data);</span><br><span class="line">		if(now-&gt;lchild!&#x3D;NULL) q.push(now-&gt;lchild); &#x2F;&#x2F;左子树非空</span><br><span class="line">		if(now-&gt;rchild!&#x3D;NULL) q.push(now-&gt;rchild); &#x2F;&#x2F;右子树非空</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>PS：队列中的储存的元素是node*型而不是node型，这样可以直接通过访问地址去修改原元素（因为如果用node型，队列中储存的知识原元素的一个副本，无法进行修改）</p>
+<p>如果题目中需要计算出每个结点所处于的层次，则修改为一下的代码<br>二叉树结点的定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct node&#123;</span><br><span class="line">	typename data;</span><br><span class="line">int layer; &#x2F;&#x2F;层次</span><br><span class="line">	node* lchild;</span><br><span class="line">	node* rchild;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void LayerOrder(node* root)&#123;</span><br><span class="line">	queue&lt;node*&gt; q;</span><br><span class="line">	root-&gt;layer &#x3D; 1;</span><br><span class="line">	q.push(root);</span><br><span class="line">	while(!q.empty())&#123;</span><br><span class="line">		node *now &#x3D; q.front();</span><br><span class="line">		q.pop();</span><br><span class="line">		printf(&quot;%d&quot;,now-&gt;data);</span><br><span class="line">		if(now-&gt;lchild! &#x3D; NULL) &#123;</span><br><span class="line">			now-&gt;lchild-&gt;layer &#x3D; now-&gt;layer + 1; &#x2F;&#x2F;左孩子的层号为当前层号+1</span><br><span class="line">			q.push(now-&gt;lchild);		</span><br><span class="line">		&#125;</span><br><span class="line">		if(now-&gt;rchild! &#x3D; NULL) &#123;			</span><br><span class="line">			now-&gt;rchild-&gt;layer &#x3D; now-&gt;layer + 1; &#x2F;&#x2F;右孩子的层号为当前层号+1</span><br><span class="line">			q.push(now-&gt;rchild);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="给定双序列，重建二叉树"><a href="#给定双序列，重建二叉树" class="headerlink" title="给定双序列，重建二叉树"></a>给定双序列，重建二叉树</h2><p>必须要求二叉树中的所有元素都不相同，且必须要提供中序序列</p>
+<h3 id="给定先序序列和中序序列"><a href="#给定先序序列和中序序列" class="headerlink" title="给定先序序列和中序序列"></a>给定先序序列和中序序列</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;当前先序序列区间[preL,preR]，中序序列区间[inL,inR]</span><br><span class="line">node* create(int preL, int preR, int inL, int inR)&#123;</span><br><span class="line">	if(preL&gt;preR)&#123; &#x2F;&#x2F;先序序列长度小于0，返回</span><br><span class="line">		return NULL;</span><br><span class="line">	&#125;</span><br><span class="line">	node* root &#x3D; new node; &#x2F;&#x2F;新建一个结点，用来存放当前二叉树的根结点</span><br><span class="line">	root-&gt;data &#x3D; pre[preL]; &#x2F;&#x2F;新结点的数据域为当前二叉树的根结点的值</span><br><span class="line">	int k;</span><br><span class="line">	for(k &#x3D; inL; k &lt;&#x3D; inR; k++)&#123;</span><br><span class="line">		if(in[k] &#x3D;&#x3D; pre[preL])&#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	int numLeft&#x3D; k - inL;</span><br><span class="line">	&#x2F;&#x2F;左子树的先序序列区间[preL + 1, preL + numLeft],中序序列区间[inL, k - 1]</span><br><span class="line">	&#x2F;&#x2F;返回左子树的根结点的地址，赋值给root的左指针</span><br><span class="line">	root-&gt;lchild &#x3D; create(preL + 1, preL + numLeft, inL, k - 1);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;右子树的先序序列区间[preL + numLeft + 1, preR],中序序列区间[k + 1, inR]</span><br><span class="line">	&#x2F;&#x2F;返回左子树的根结点的地址，赋值给root的右指针</span><br><span class="line">	root-&gt;rchild &#x3D; create(preL + numLeft + 1, preR, k + 1, inR);</span><br><span class="line">	</span><br><span class="line">	return root; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>PS：想调用上面的方法来建树</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node* root &#x3D; create(0, n - 1, 0, n-1); &#x2F;&#x2F;建树   结点个数：n</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="给定后序序列和中序序列"><a href="#给定后序序列和中序序列" class="headerlink" title="给定后序序列和中序序列"></a>给定后序序列和中序序列</h3><h3 id="给定层序序列和中序序列"><a href="#给定层序序列和中序序列" class="headerlink" title="给定层序序列和中序序列"></a>给定层序序列和中序序列</h3>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"># 数据结构</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/04/13/%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/">树的遍历</a>
+            
+            
+            <a class="next" rel="next" href="/2020/04/09/PrologTips/">PrologTips</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

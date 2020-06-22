@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>18岁生日 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">18岁生日</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 1, 2020&nbsp;&nbsp;16:27:43</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>Input<br>一个数T，后面T行每行有一个日期，格式是YYYY-MM-DD。如我的生日是1988-03-07。<br>Output<br>T行，每行一个数，表示此人从出生到18岁生日所经过的天数。如果这个人没有18岁生日，就输出-1。<br>Sample Input<br>1<br>1988-03-07<br>Sample Output<br>6574</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main() &#123;</span><br><span class="line"></span><br><span class="line">	int year,month,day,count&#x3D;0,sum&#x3D;0;</span><br><span class="line">	char x,z;</span><br><span class="line"></span><br><span class="line">	scanf(&quot;%d&quot;,&amp;count);</span><br><span class="line">	for(int j&#x3D;0;j&lt;count;j++)&#123;</span><br><span class="line">		cin&gt;&gt;year&gt;&gt;x&gt;&gt;month&gt;&gt;z&gt;&gt;day;</span><br><span class="line">		if(month&#x3D;&#x3D;2&amp;&amp;day&#x3D;&#x3D;29)  cout&lt;&lt;&quot;-1&quot;&lt;&lt;endl;</span><br><span class="line">		else &#123;</span><br><span class="line">			sum&#x3D;0;</span><br><span class="line">			if(month&gt;&#x3D;3)&#123;</span><br><span class="line">			for(int i&#x3D;year+1; i&lt;&#x3D;year+18; i++) &#123;</span><br><span class="line">&#x2F;&#x2F;					cout&lt;&lt;i&lt;&lt;endl;</span><br><span class="line">					if(i%100!&#x3D;0&amp;&amp;i%4&#x3D;&#x3D;0||i%400&#x3D;&#x3D;0) &#123;</span><br><span class="line">						sum+&#x3D;366;</span><br><span class="line">					&#125; else&#123;</span><br><span class="line">						sum+&#x3D;365;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;	</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				for(int i&#x3D;year; i&lt;year+18; i++) &#123;</span><br><span class="line">&#x2F;&#x2F;					cout&lt;&lt;i&lt;&lt;endl;</span><br><span class="line">					if(i%100!&#x3D;0&amp;&amp;i%4&#x3D;&#x3D;0||i%400&#x3D;&#x3D;0) &#123;</span><br><span class="line">						sum+&#x3D;366;</span><br><span class="line">					&#125; else &#123;</span><br><span class="line">						sum+&#x3D;365;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			</span><br><span class="line">			&#125;</span><br><span class="line">				cout&lt;&lt;sum&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>2月29日出生的人没有18岁生日，输出-1。
+再考虑不是2月29日出生的情况，当年生日到第二年生日所经过的天数，不是365天，就是366天。之所以有时候会经过366天，是因为闰年的2月多出了一天。
+如果此人生日是在3月份及以后，那么如果第二年是闰年，他会经过366天到第二年生日（因为经过了第二年2月29日），否则就是经过365天；如果此人生日在3月份之前，那么如果当前年是闰年，到第二年生日，就会经过366天（因为经过了当前年的2月29日），否则经过365天。</code></pre><p><em>于是，再此人生日不是2月29日的前提下，先判断此人生日的月份是在3月之前，还是在3月之后，生日月份在3月前，则当前年的天数，就是到第二年生日经过的天数。生日月份在3月后，则后一年的天数，就是到第二年生日经过的天数。</em></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/C-oj/"># C++oj</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/02/%E9%AA%8C%E8%AF%81%E8%A7%92%E8%B0%B7%E7%8C%9C%E6%83%B3/">验证角谷猜想</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/01/A+B%20Coming/">A+B Coming</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>导弹拦截问题-贪心-最长不下降数列问题 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">导弹拦截问题-贪心-最长不下降数列问题</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 26, 2020&nbsp;&nbsp;14:43:57</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://img-blog.csdnimg.cn/20200226144435153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int s[1005];</span><br><span class="line">int l[1005];</span><br><span class="line">int main()&#123;</span><br><span class="line">	int k&#x3D;1,n&#x3D;1;</span><br><span class="line">	while(cin&gt;&gt;s[n])&#123;</span><br><span class="line">		n++;</span><br><span class="line">	&#125;</span><br><span class="line">	l[k]&#x3D;s[1];</span><br><span class="line">	int p&#x3D;0;</span><br><span class="line">	for(int i&#x3D;2;i&lt;n;i++)&#123;</span><br><span class="line">		p&#x3D;0;</span><br><span class="line">		for(int j&#x3D;1;j&lt;&#x3D;k;j++)&#123;  &#x2F;&#x2F;一共有k套系统</span><br><span class="line">			if(s[i]&lt;&#x3D;l[j])&#123;   &#x2F;&#x2F;我导弹不高于你的拦截高度，我才能被你拦截</span><br><span class="line">				if(p&#x3D;&#x3D;0)&#123;  &#x2F;&#x2F;随便选了一个系统</span><br><span class="line">					p&#x3D;j;&#x2F;&#x2F;记下拦截系统的编号</span><br><span class="line">				&#125;else if(l[j]&lt;l[p])&#123; &#x2F;&#x2F;发现还有更优的系统（不能浪费我的拦截高度，与导弹的距离越近越好</span><br><span class="line">					p&#x3D;j;&#x2F;&#x2F;赶紧换掉拦截系统的编号</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if(p&#x3D;&#x3D;0)&#123;&#x2F;&#x2F;没有拦截系统能拦住我的导弹</span><br><span class="line">			k++;&#x2F;&#x2F;赶紧新加一个拦截系统发</span><br><span class="line">			l[k]&#x3D;s[i];&#x2F;&#x2F;拦住你！</span><br><span class="line">		&#125;else&#123;&#x2F;&#x2F;有拦截系统能拦住我的导弹</span><br><span class="line">			l[p]&#x3D;s[i];&#x2F;&#x2F;拦住你！</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;k&lt;&lt;endl;&#x2F;&#x2F;总共需要拦截系统的数量</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一开始写的时候，没有考虑用贪心的思想。只有选用最靠近导弹距离并且能拦住到导弹的系统，这样好的系统才不会浪费，不然我拦截一个好低好低的导弹，我这个系统基本上就废掉了。<br>review:2.28</p>
+<p>补一道最长不下降数列问题<br><img src="https://img-blog.csdnimg.cn/20200311174727165.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct tick&#123;</span><br><span class="line">	int l;</span><br><span class="line">	int w;</span><br><span class="line">&#125;t[5005];</span><br><span class="line">int check[5005]&#x3D;&#123;0&#125;;</span><br><span class="line">bool cmp (tick a,tick b)&#123;&#x2F;&#x2F;按宽度排序，宽度相同按长度排序；这样我只要比较宽度</span><br><span class="line">	if(a.w&#x3D;&#x3D;b.w) return a.l&gt;b.l;</span><br><span class="line">	return a.w&gt;b.w;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	int n;</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">	for(int i&#x3D;0;i&lt;n;i++)&#123;</span><br><span class="line">		scanf(&quot;%d%d&quot;,&amp;t[i].l,&amp;t[i].w);</span><br><span class="line">	&#125;</span><br><span class="line">	sort(t,t+n,cmp);</span><br><span class="line">&#x2F;&#x2F;	for(int i&#x3D;0;i&lt;n;i++)&#123;</span><br><span class="line">&#x2F;&#x2F;		printf(&quot;%d %d\n&quot;,t[i].l,t[i].w);</span><br><span class="line">&#x2F;&#x2F;	&#125;</span><br><span class="line">	int temp;</span><br><span class="line">	for(int i&#x3D;0;i&lt;n;i++)&#123;&#x2F;&#x2F;反正我可以不管宽度了，宽度一定从大到小排好了</span><br><span class="line">		if(!check[i])&#123;&#x2F;&#x2F;找我这个宽度下比我这个棍子宽度小的棍子</span><br><span class="line">			temp&#x3D;t[i].l;</span><br><span class="line">			for(int j&#x3D;i+1;j&lt;n;j++)&#123;</span><br><span class="line">				if(!check[j]&amp;&amp;t[j].l&lt;&#x3D;temp)&#123;</span><br><span class="line">					temp&#x3D;t[j].l;</span><br><span class="line">					check[j]&#x3D;1;&#x2F;&#x2F;找到了，标记！</span><br><span class="line">&#x2F;&#x2F;					cout&lt;&lt;&quot;record j&quot;&lt;&lt;j&lt;&lt;endl;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	int sum&#x3D;0;</span><br><span class="line">	for(int i&#x3D;0;i&lt;n;i++)&#123;</span><br><span class="line">		if(check[i]&#x3D;&#x3D;0) &#123;</span><br><span class="line">		sum++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;sum&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/C-oj/"># C++oj</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/26/%E8%A3%85%E7%AE%B1%E9%97%AE%E9%A2%98/">装箱问题-贪心</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/24/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

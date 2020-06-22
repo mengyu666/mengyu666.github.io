@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>二叉查找树 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">二叉查找树</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 17, 2020&nbsp;&nbsp;23:00:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="二叉查找树的定义"><a href="#二叉查找树的定义" class="headerlink" title="二叉查找树的定义"></a>二叉查找树的定义</h1><ul>
+<li>是一颗空树</li>
+<li>由根结点，左子树，右子树组成，左子树，右子树都是二叉查找树。左子树上的所有结点的数据均小于等于根结点的数据域，右子树上所有结点的数据均大于根结点的数据域</li>
+</ul>
+<h1 id="二叉查找树的基本操作"><a href="#二叉查找树的基本操作" class="headerlink" title="二叉查找树的基本操作"></a>二叉查找树的基本操作</h1><h2 id="查找操作"><a href="#查找操作" class="headerlink" title="查找操作"></a>查找操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">void search(node* root, int x)&#123;  &#x2F;&#x2F;查找树中数据域为x的结点</span><br><span class="line">	if(root &#x3D;&#x3D; NULL)&#123; &#x2F;&#x2F;空树，查找失败</span><br><span class="line">		printf（&quot;search failed&quot;);</span><br><span class="line">		return; </span><br><span class="line">	&#125;</span><br><span class="line">	if(x &#x3D;&#x3D; root-&gt;data)&#123;  &#x2F;&#x2F;查找成功</span><br><span class="line">		printf(&quot;%d&quot;,root-&gt;data);</span><br><span class="line">	&#125;else if(x &lt; root-&gt;data)&#123;  &#x2F;&#x2F;x比根结点的数据域小，说明x在左子树</span><br><span class="line">		search(root-&gt;lchild,x);</span><br><span class="line">	&#125;else&#123;  &#x2F;&#x2F;x比根结点的数据域大，说明x在右子树</span><br><span class="line">		search(root-&gt;rchild,x);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void insert(node* &amp;root, int x)&#123;  &#x2F;&#x2F;在二叉树中插入数据域为x的结点</span><br><span class="line">	if(root &#x3D;&#x3D; NULL)&#123; &#x2F;&#x2F;空树，查找失败</span><br><span class="line">		root &#x3D; newNode(x);</span><br><span class="line">	&#x2F;*这样也成</span><br><span class="line">	root &#x3D; new node;</span><br><span class="line">	root-&gt;data &#x3D; data;</span><br><span class="line">	root-&gt;lchild &#x3D; root-&gt;rchild &#x3D; NULL;</span><br><span class="line">	*&#x2F;</span><br><span class="line">		return; </span><br><span class="line">	&#125;</span><br><span class="line">	if(x &#x3D;&#x3D; root-&gt;data)&#123;  &#x2F;&#x2F;查找成功，说明结点已经存在，不需要插入</span><br><span class="line">		return;</span><br><span class="line">	&#125;else if(x &lt; root-&gt;data)&#123;  &#x2F;&#x2F;x比根结点的数据域小，说明x插入在左子树</span><br><span class="line">		insert(root-&gt;lchild,x);</span><br><span class="line">	&#125;else&#123;  &#x2F;&#x2F;x比根结点的数据域大，说明x插入在右子树</span><br><span class="line">		insert(root-&gt;rchild,x);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ps：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">node* newNode(int v)&#123;</span><br><span class="line">	node *Node &#x3D;new node;</span><br><span class="line">	Node-&gt;data &#x3D;v; &#x2F;&#x2F;结点权值为v</span><br><span class="line">	Node-&gt;lchild &#x3D; Node-&gt;rchild NULL; &#x2F;&#x2F;初始状态下没有左右孩子</span><br><span class="line">	return Node;&#x2F;&#x2F;返回新建结点的地址</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二叉查找树的建立"><a href="#二叉查找树的建立" class="headerlink" title="二叉查找树的建立"></a>二叉查找树的建立</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">node* Create(int data[], int n)&#123; data[]:储存要插入的数据, n 数据的个数</span><br><span class="line">	node* root &#x3D;NULL;</span><br><span class="line">	for(int i&#x3D;0; i &lt; n; i++)&#123;</span><br><span class="line">		insert(root, data[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	return root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二叉查找树的删除"><a href="#二叉查找树的删除" class="headerlink" title="二叉查找树的删除"></a>二叉查找树的删除</h2><p>二叉查找树的删除某结点的方法：用该结点的前驱或后继代替该结点</p>
+<h3 id="二叉查找树的几个概念"><a href="#二叉查找树的几个概念" class="headerlink" title="二叉查找树的几个概念"></a>二叉查找树的几个概念</h3><ul>
+<li>二叉查找树中比结点权值小的最大结点称为该结点的前驱<br>结点的前驱是该结点左子树中最右结点（从该结点左子树开始不断沿着rchild往下直到rchild为NULL的结点）</li>
+<li>二叉查找树中比结点权值大的最小结点称为该结点的后继<br>结点的后继是该结点右子树中的最左结点（从该结点右子树开始不断沿着lchild往下直到lchild为NULL的结点）</li>
+</ul>
+<h3 id="寻找以root为根结点的树中的最大权值结点"><a href="#寻找以root为根结点的树中的最大权值结点" class="headerlink" title="寻找以root为根结点的树中的最大权值结点"></a>寻找以root为根结点的树中的最大权值结点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">node* findMax(node* root)&#123;</span><br><span class="line">	while(root-&gt;rchild !&#x3D;NULL)&#123;</span><br><span class="line">		root &#x3D; root-&gt;rchild;&#x2F;&#x2F;不断往右，直到没有右孩子</span><br><span class="line">	&#125;</span><br><span class="line">	return root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="寻找以root为根结点的树中的最小权值结点"><a href="#寻找以root为根结点的树中的最小权值结点" class="headerlink" title="寻找以root为根结点的树中的最小权值结点"></a>寻找以root为根结点的树中的最小权值结点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">node* findMin(node* root)&#123;</span><br><span class="line">	while(root-&gt;lchild !&#x3D;NULL)&#123;</span><br><span class="line">		root &#x3D; root-&gt;lchild;&#x2F;&#x2F;不断往左，直到没有左孩子</span><br><span class="line">	&#125;</span><br><span class="line">	return root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="删除代码"><a href="#删除代码" class="headerlink" title="删除代码"></a>删除代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">void deleteNode(node* &amp;root, int x) &#123;  &#x2F;&#x2F;删除以root为根结点的树中权值为x的结点</span><br><span class="line">	if(root &#x3D;&#x3D; NULL) return;  &#x2F;&#x2F;不存在权值为x的结点</span><br><span class="line">	if(root-&gt;data &#x3D;&#x3D; x) &#123;  &#x2F;&#x2F;找到权值为x的结点</span><br><span class="line">		if(root-&gt;lchild &#x3D;&#x3D; NULL &amp;&amp; root-&gt;rchild &#x3D;&#x3D; NULL) &#123;  &#x2F;&#x2F;为叶子结点，删了，不管了</span><br><span class="line">			root &#x3D; NULL; </span><br><span class="line">		&#125; else if(root-&gt;lchild !&#x3D; NULL) &#123;  &#x2F;&#x2F;左子树不为空</span><br><span class="line">			node* pre &#x3D; findMax(root-&gt;lchild);  &#x2F;&#x2F;找树中权值为x的结点的前驱</span><br><span class="line">			root-&gt;data &#x3D; pre-&gt;data;  &#x2F;&#x2F;用前驱点代替树中权值为x的结点</span><br><span class="line">			deleteNode(root-&gt;lchild, pre-&gt;data);&#x2F;&#x2F;在左子树中删除前驱点</span><br><span class="line">		&#125; else &#123;  &#x2F;&#x2F;右子树不为空</span><br><span class="line">			node* next &#x3D; findMin(root-&gt;rchild);&#x2F;&#x2F;找树中权值为x的结点的后继</span><br><span class="line">			root-&gt;data &#x3D; next-&gt;data; &#x2F;&#x2F;用后继点代替树中权值为x的结点</span><br><span class="line">			deleteNode(root-&gt;rchild, next-&gt;data); &#x2F;&#x2F;在右子树中删除后继点</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; else if(root-&gt;data &gt; x) &#123;</span><br><span class="line">		deleteNode(root-&gt;lchild, x); &#x2F;&#x2F;树中权值为x的结点不是根结点，往左子树遍历</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		deleteNode(root-&gt;rchild, x);&#x2F;&#x2F;树中权值为x的结点不是根结点，往右子树遍历</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二叉查找树的性质"><a href="#二叉查找树的性质" class="headerlink" title="二叉查找树的性质"></a>二叉查找树的性质</h2><p>插入序列就是二叉查找树的先序序列</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"># 数据结构</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/04/17/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">平衡二叉树（AVL树）</a>
+            
+            
+            <a class="next" rel="next" href="/2020/04/15/%E6%B4%9B%E8%B0%B7P4913%E4%BA%8C%E5%8F%89%E6%A0%91%E6%B7%B1%E5%BA%A6-%E4%BA%8C%E5%8F%89%E6%A0%91/">洛谷P4913二叉树深度-二叉树</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

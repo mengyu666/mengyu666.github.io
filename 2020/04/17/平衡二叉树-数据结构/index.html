@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>平衡二叉树（AVL树） | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">平衡二叉树（AVL树）</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 17, 2020&nbsp;&nbsp;23:00:02</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="平衡二叉树的定义"><a href="#平衡二叉树的定义" class="headerlink" title="平衡二叉树的定义"></a>平衡二叉树的定义</h1><ul>
+<li>平衡二叉树本身讲就是一棵二叉查找树,树的高度在每次插入元素后仍能保持O(logn)级别</li>
+<li>对AVL 树的任意结点来说，左子树与右子树的高度之差的绝对值不超过1</li>
+<li>左子树与右子树的高度之差称为该结点的平衡因子（highLeft-highRight)</li>
+</ul>
+<p>储存结点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct node&#123;</span><br><span class="line">	int data; &#x2F;&#x2F;数据域</span><br><span class="line">	int height; &#x2F;&#x2F;heght以当前结点为根结点时树的高度</span><br><span class="line">	node *lchild, *rchild;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>新建结点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">node* newNode(int v)&#123;</span><br><span class="line">	node *Node &#x3D; new node; &#x2F;&#x2F;申请一个node型变量的地址空间</span><br><span class="line">	Node-&gt;data &#x3D; data;&#x2F;&#x2F;权值</span><br><span class="line">	Node-&gt;height &#x3D; 1;&#x2F;&#x2F;结点高度初始为1</span><br><span class="line">	Node-&gt;lchild &#x3D; Node-&gt;rchild &#x3D; NULL;</span><br><span class="line">	return Node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>获取以root为根结点的子树的当前的高度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int getHeight(node* root)&#123;</span><br><span class="line">	if(root &#x3D;&#x3D; NULL) return 0; &#x2F;&#x2F;空结点高度为0</span><br><span class="line">	return root-&gt;height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>计算结点root的平衡因子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int getBalanceFactor(node* root)&#123;</span><br><span class="line">	return getHeight(root-&gt;lchild) - getHeight(root-&gt;rchild);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>为何不直接记录平衡因子？这样可以随时调用任何一个结点的平衡因子</strong></p>
+<p>更新结点root的高度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">updateHeight(node* root)&#123;</span><br><span class="line">	root-&gt;height &#x3D; max(getHeight(root-&gt;lchild), getHeight(root-&gt;rchild)) + 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="平衡二叉树的基本操作"><a href="#平衡二叉树的基本操作" class="headerlink" title="平衡二叉树的基本操作"></a>平衡二叉树的基本操作</h1><h2 id="查找操作-复杂度O-logn"><a href="#查找操作-复杂度O-logn" class="headerlink" title="查找操作(复杂度O(logn))"></a>查找操作(复杂度O(logn))</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">void search(node* root, int x)&#123;  &#x2F;&#x2F;查找树中数据域为x的结点</span><br><span class="line">	if(root &#x3D;&#x3D; NULL)&#123; &#x2F;&#x2F;空树，查找失败</span><br><span class="line">		printf（&quot;search failed&quot;);</span><br><span class="line">		return; </span><br><span class="line">	&#125;</span><br><span class="line">	if(x &#x3D;&#x3D; root-&gt;data)&#123;  &#x2F;&#x2F;查找成功</span><br><span class="line">		printf(&quot;%d&quot;,root-&gt;data);</span><br><span class="line">	&#125;else if(x &lt; root-&gt;data)&#123;  &#x2F;&#x2F;x比根结点的数据域小，说明x在左子树</span><br><span class="line">		search(root-&gt;lchild,x);</span><br><span class="line">	&#125;else&#123;  &#x2F;&#x2F;x比根结点的数据域大，说明x在右子树</span><br><span class="line">		search(root-&gt;rchild,x);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h2><p>左旋(Left Rotation)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void L(node* &amp;root)&#123;</span><br><span class="line">	node* temp &#x3D; root-&gt;rchild;</span><br><span class="line">	root-&gt;rchild &#x3D; temp-&gt;lchild;</span><br><span class="line">	temp-&gt;lchild &#x3D; root;</span><br><span class="line">	updateHeight(root);</span><br><span class="line">	updateHeight(temp);</span><br><span class="line">	root &#x3D; temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>右旋（Right Rotation)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void R(node* &amp;root)&#123;</span><br><span class="line">	rode* temp &#x3D; root-&gt;lchild;</span><br><span class="line">	root-&gt;lchild &#x3D; temp-&gt;rchild;</span><br><span class="line">	temp-&gt;rchild &#x3D; root;</span><br><span class="line">	updateHeight(root);</span><br><span class="line">	updateHeight(temp);</span><br><span class="line">	root &#x3D; temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>树型</th>
+<th>判定条件</th>
+<th>调整方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LL</td>
+<td>BF(root)=2,BF(root-&gt;lchild)=1</td>
+<td>对root进行右旋</td>
+</tr>
+<tr>
+<td>LR</td>
+<td>BF(root)=2,BF(root-&gt;lchild)=-1</td>
+<td>先对root-&gt;lchild进行左旋，再对root进行右旋</td>
+</tr>
+<tr>
+<td>RR</td>
+<td>BF(root)=-2,BF(root-&gt;rchild)=-1</td>
+<td>对root进行左旋</td>
+</tr>
+<tr>
+<td>RL</td>
+<td>BF(root)=-2,BF(root-&gt;rchild)=1</td>
+<td>先对root-&gt;rchild进行右旋，再对root进行左旋</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;插入权值为v的结点</span><br><span class="line">void insert(node* &amp;root, int v) &#123;</span><br><span class="line">	if(root &#x3D;&#x3D; NULL) &#123; &#x2F;&#x2F;空结点，插入</span><br><span class="line">		root &#x3D; newNode(v);</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	if(v &lt; root-&gt;data) &#123; &#x2F;&#x2F;v比根结点的权值小</span><br><span class="line">		insert(root-&gt;lchild, v); &#x2F;&#x2F;往左子树插入</span><br><span class="line">		updateHeight(root); &#x2F;&#x2F;更新树高</span><br><span class="line">		if(getBalanceFactor(root) &#x3D;&#x3D; 2) &#123;</span><br><span class="line">			if(getBalanceFactor(root-&gt;lchild) &#x3D;&#x3D; 1) &#123; LL型</span><br><span class="line">				R(root);</span><br><span class="line">			&#125; else if(getBalanceFactor(root-&gt;lchild) &#x3D;&#x3D; -1) &#123; &#x2F;&#x2F;LR型</span><br><span class="line">				L(root-&gt;lchild);</span><br><span class="line">				R(root);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; else &#123; &#x2F;&#x2F;v比根结点的权值大</span><br><span class="line">		insert(root-&gt;rchild, int v); &#x2F;&#x2F;往右子树插入</span><br><span class="line">		updateHeight(root); &#x2F;&#x2F;更新树高</span><br><span class="line">		if(getBalanceFactor(root) &#x3D;&#x3D;-2) &#123;</span><br><span class="line">			if(getBalanceFactor(root-&gt;rchild) &#x3D;&#x3D; -1) &#123; &#x2F;&#x2F;RR型</span><br><span class="line">				L(root);</span><br><span class="line">			&#125; else if (getBalanceFactor(root-&gt;rchild) &#x3D;&#x3D; 1) &#123; &#x2F;&#x2F;RL型</span><br><span class="line">				R(root-&gt;rchild);</span><br><span class="line">				L(root);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="AVL树的建立"><a href="#AVL树的建立" class="headerlink" title="AVL树的建立"></a>AVL树的建立</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">node* Create(int data[], int n)&#123; data[]:储存要插入的数据, n 数据的个数</span><br><span class="line">	node* root &#x3D;NULL;</span><br><span class="line">	for(int i&#x3D;0; i &lt; n; i++)&#123;</span><br><span class="line">		insert(root, data[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	return root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"># 数据结构</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/04/18/%E5%A0%86-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">堆</a>
+            
+            
+            <a class="next" rel="next" href="/2020/04/17/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">二叉查找树</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

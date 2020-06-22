@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>Chapter1-2 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Chapter1-2</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 25, 2020&nbsp;&nbsp;10:15:29</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Lecture-2-Valid-Inferences"><a href="#Lecture-2-Valid-Inferences" class="headerlink" title="Lecture 2 Valid Inferences"></a>Lecture 2 Valid Inferences</h1><h2 id="Inferences"><a href="#Inferences" class="headerlink" title="Inferences"></a>Inferences</h2><p>An inference is valid if:</p>
+<ul>
+<li>whenever all premises are true, then the conclusion is true.<br>An inference is valid if:</li>
+<li>whenever the conclusion is false, then at least one premise is false.<h2 id="Stoic-Logic"><a href="#Stoic-Logic" class="headerlink" title="Stoic Logic"></a>Stoic Logic</h2>Five indemonstrable statement forms:</li>
+</ul>
+<ol>
+<li>If the first, [then] the second. The first.Therefore, the second.</li>
+<li>If the first, [then] the second. Not thesecond. Therefore, not the first.</li>
+<li>Not both the first and the second. Thefirst. Therefore, not the second.</li>
+<li>Either the first or the second. The first.Therefore, not the second.</li>
+<li>Either the first or the second. Not the first.Therefore, the second.<h2 id="Ingredients-of-the-propositional-language"><a href="#Ingredients-of-the-propositional-language" class="headerlink" title="Ingredients of the propositional language"></a>Ingredients of the propositional language</h2><table>
+<thead>
+<tr>
+<th>中文</th>
+<th>Technical name</th>
+<th>In natural language</th>
+<th>Symbol</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>否定</td>
+<td>negation</td>
+<td>“not …”</td>
+<td>becomes ¬ . . .</td>
+</tr>
+<tr>
+<td>合取</td>
+<td>conjunction</td>
+<td>“… and …”</td>
+<td>becomes . . . ∧ . . .</td>
+</tr>
+<tr>
+<td>析取</td>
+<td>disjunction</td>
+<td>“… or …”</td>
+<td>becomes . . . ∨ . . .</td>
+</tr>
+<tr>
+<td>-</td>
+<td>implication</td>
+<td>“if … then …”</td>
+<td>becomes . . . → . . .</td>
+</tr>
+<tr>
+<td>-</td>
+<td>equivalence</td>
+<td>“… if and only if …”</td>
+<td>becomes . . . ↔ . . .</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<p>The symbol ∨ is for inclusive disjunction(两者选一或两者都选），not for exclusive disjunction (most often written as ⊕)（两者选一）When we use the word‘disjunction’ without further addition we mean the inclusive disjunction.</p>
+<p><strong>A disjunction that remains true if either or both of its arguments are true. This is equivalent to the OR connective.</strong><br><strong>By contrast, the exclusive disjunction is true if only one, but not both, of its arguments are true, and is false if neither or both are true, which is equivalent to the XOR connective.</strong></p>
+<h2 id="Formal-language-and-syntactic-trees"><a href="#Formal-language-and-syntactic-trees" class="headerlink" title="Formal language and syntactic trees"></a>Formal language and syntactic trees</h2><p>You can think of formulas in such a language as being constructed, starting from basic<br>propositions, often indicated by letters p, q, etcetera, and then applying logical operations,<br>with brackets added to secure unambiguous readability.</p>
+<p><img src="https://img-blog.csdnimg.cn/2020052511163756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>Definition 2.5 (Language of propositional logic)<br>Let P be a set of proposition letters and let p ∈ P.<br>$$<br>ϕ ::= p | ¬ϕ | (ϕ ∧ ϕ) | (ϕ ∨ ϕ) | (ϕ → ϕ) | (ϕ ↔ ϕ)<br>$$</p>
+<h1 id="Lecture-3-Propositional-Logic-Truth-Tables"><a href="#Lecture-3-Propositional-Logic-Truth-Tables" class="headerlink" title="Lecture 3 Propositional Logic Truth Tables"></a>Lecture 3 Propositional Logic Truth Tables</h1><p><img src="https://img-blog.csdnimg.cn/20200525113849131.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="Truth-Tables-implication-and-equivalence"><a href="#Truth-Tables-implication-and-equivalence" class="headerlink" title="Truth Tables: implication and equivalence"></a>Truth Tables: implication and equivalence</h2><p><img src="https://img-blog.csdnimg.cn/20200525115937164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="Truth-Tables-all-five-propositional-operators"><a href="#Truth-Tables-all-five-propositional-operators" class="headerlink" title="Truth Tables: all five propositional operators"></a>Truth Tables: all five propositional operators</h2><p><img src="https://img-blog.csdnimg.cn/20200525120044639.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="Valuations"><a href="#Valuations" class="headerlink" title="Valuations"></a>Valuations</h2><p>We call these functions V valuations; V (ϕ) = 1 saysthat the formula ϕ is true in the situation (represented by) V , and V (ϕ) = 0 says thatthe formula ϕ is false in the situation V . For V (ϕ) = 1 we also write V |= ϕ and forV (ϕ) = 0 we also write V 6|= ϕ. One can read V |= ϕ as “V makes true ϕ”, or as “Vsatisfies ϕ” or “V is a model of ϕ”.</p>
+<p>Notation:<br>V |= ϕ means ”the proposition ϕ is true under the valuation V” V |/= ϕ means ”the proposition ϕ is false under the valuation V”</p>
+<p><img src="https://img-blog.csdnimg.cn/20200603210356711.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="If-Only-If-If-and-Only-If"><a href="#If-Only-If-If-and-Only-If" class="headerlink" title="If, Only If, If and Only If"></a>If, Only If, If and Only If</h2><p>Here is a useful list of different ways to express implications:</p>
+<table>
+<thead>
+<tr>
+<th>If p then q</th>
+<th>p → q</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>p if q</td>
+<td>q → p</td>
+</tr>
+<tr>
+<td>p only if q</td>
+<td>p → q</td>
+</tr>
+</tbody></table>
+<p><strong>A common abbreviation for ’if and only if’that we will use occasionally is iff</strong></p>
+<h1 id="Propositional-Logic-Valid-Inferences"><a href="#Propositional-Logic-Valid-Inferences" class="headerlink" title="Propositional Logic Valid Inferences"></a>Propositional Logic Valid Inferences</h1><ul>
+<li>Definition 2.13 (Valid consequence) //所有的premise都是true且conclusion 也是true的情况下，我们说它是Valid consequence<br>The inference from a finite set of premises ϕ1, . . . , ϕkto a conclusion ψ is a valid consequence, something for which we writeϕ1, . . . , ϕk |= ψ,<br>if each valuation V with V (ϕ1) = . . . = V (ϕk) = 1 also has V (ψ) = 1.<br>举个例子：<br>比如说有ϕ → ψ, ¬ψ |= ¬ϕ，我们想知道它是不是valid.<br>我们可以这样做：<table>
+<thead>
+<tr>
+<th>ϕ</th>
+<th>ψ</th>
+<th>ϕ → ψ</th>
+<th>¬ψ</th>
+<th>¬ϕ</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>注意这里</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<p>所以说,the inference is valid</p>
+<p><img src="https://img-blog.csdnimg.cn/20200531162105205.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>Definition 2.14 (Logical equivalence)<br>If ϕ |= ψ and ψ |= ϕ we say that ϕ and ψ arelogically equivalent.</li>
+</ul>
+<h2 id="Classifying-formulas"><a href="#Classifying-formulas" class="headerlink" title="Classifying formulas"></a>Classifying formulas</h2><p>A formula is:</p>
+<ul>
+<li>unsatisfiable (or “a contradiction”)<br>  if it is false on every row of its truth table.</li>
+<li>a tautology (or “logically valid”)<br>  if it is true on every row of its truth table.<br>  The notation for tautologies is |= ψ</li>
+<li>satisfiable (or “logically contingent”)<br>  if it is true on at least one row of its truth table</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Logic/"># Logic</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/05/31/Chapter3-Logic/">Chapter3</a>
+            
+            
+            <a class="next" rel="next" href="/2020/05/23/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE-%E6%95%B0%E5%AD%A6/">二分查找</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

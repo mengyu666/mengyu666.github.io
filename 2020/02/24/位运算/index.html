@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>位运算 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">位运算</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 24, 2020&nbsp;&nbsp;23:34:56</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="用于消去x的最后一位的1"><a href="#用于消去x的最后一位的1" class="headerlink" title="用于消去x的最后一位的1"></a>用于消去x的最后一位的1</h1><h2 id="检测整数n是否是2的幂次"><a href="#检测整数n是否是2的幂次" class="headerlink" title="检测整数n是否是2的幂次"></a>检测整数n是否是2的幂次</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X&amp;(X-1)&#x2F;&#x2F;结果是0，能够被2整除；反之，不行</span><br></pre></td></tr></table></figure>
+<h2 id="计算给定整数的二进制表达中有多少个1"><a href="#计算给定整数的二进制表达中有多少个1" class="headerlink" title="计算给定整数的二进制表达中有多少个1"></a>计算给定整数的二进制表达中有多少个1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int count1InBit(int num）&#123;</span><br><span class="line">	while(num!0)&#123;</span><br><span class="line">	count++;</span><br><span class="line">	num&amp;&#x3D;num-1;</span><br><span class="line">	&#125;</span><br><span class="line">	return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="将整数A转换为B，需要改变多少个bit位"><a href="#将整数A转换为B，需要改变多少个bit位" class="headerlink" title="将整数A转换为B，需要改变多少个bit位"></a>将整数A转换为B，需要改变多少个bit位</h2><p>计算A异或B之后这个数中1的个数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">int countOf1_2(int num)</span><br><span class="line">&#123;</span><br><span class="line">	int count &#x3D; 0;</span><br><span class="line">	while(num)</span><br><span class="line">	&#123;</span><br><span class="line">		num &#x3D; num &amp; (num - 1);</span><br><span class="line">		count++;</span><br><span class="line">	&#125;</span><br><span class="line">	return count;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;	求解n变化为m，需要进行的操作步数</span><br><span class="line">int countChange(int n,int m)</span><br><span class="line">&#123;</span><br><span class="line">	n &#x3D; n ^ m; &#x2F;&#x2F;求n和m的异或,再计算结果中1的个数</span><br><span class="line">	return countOf1_2(n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="判断一个数是奇数还是偶数"><a href="#判断一个数是奇数还是偶数" class="headerlink" title="判断一个数是奇数还是偶数"></a>判断一个数是奇数还是偶数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bool ifeven(int num)&#123;</span><br><span class="line">	if（num&amp;1&#x3D;&#x3D;1）return false;</span><br><span class="line">	return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="使用二进制进行子集枚举"><a href="#使用二进制进行子集枚举" class="headerlink" title="使用二进制进行子集枚举"></a>使用二进制进行子集枚举</h1><h2 id="给定一个含不同整数的集合，返回其所有的子集"><a href="#给定一个含不同整数的集合，返回其所有的子集" class="headerlink" title="给定一个含不同整数的集合，返回其所有的子集"></a>给定一个含不同整数的集合，返回其所有的子集</h2><p>使用一个正整数，其二进制形式的第i位是1还是0，代表集合的第i个数取或者不取。因此从0到2^n-1共有2^n个整数，正好对应集合的2^n个子集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int n;</span><br><span class="line">int array[10];</span><br><span class="line">void subset(int a[], int n)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;1&lt;&lt;n表示子集的个数，包括空集</span><br><span class="line">    for (int i &#x3D; 0; i &lt; (1&lt;&lt;n); ++i)  &#x2F;&#x2F;具有定位的作用</span><br><span class="line">    &#123;</span><br><span class="line">        &#x2F;&#x2F;遍历所有的子集个数</span><br><span class="line">         for(int j &#x3D; 0; j &lt; n; ++j)</span><br><span class="line">         &#123;</span><br><span class="line">            if(i &amp; (1 &lt;&lt; j))    &#x2F;&#x2F;找到数组中的元素</span><br><span class="line">            printf(&quot;%d &quot;, a[j]);    &#x2F;&#x2F;这里可以换成填入容器中</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;\n&quot;);    &#x2F;&#x2F;这里可以换成填入新的容器中</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	for(int i&#x3D;0;i&lt;n;i++)&#123;</span><br><span class="line">		array[i]&#x3D;i+1;</span><br><span class="line">	&#125;</span><br><span class="line">	subset(array,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="a-b-b-a"><a href="#a-b-b-a" class="headerlink" title="a^b^b=a"></a>a^b^b=a</h1><h2 id="数组中，只有一个数出现一次，剩下都出现2次，找出出现一次的。"><a href="#数组中，只有一个数出现一次，剩下都出现2次，找出出现一次的。" class="headerlink" title="数组中，只有一个数出现一次，剩下都出现2次，找出出现一次的。"></a>数组中，只有一个数出现一次，剩下都出现2次，找出出现一次的。</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a[7]&#x3D;&#123;1,2,2,1,3,4,3&#125;;</span><br><span class="line">    int ans&#x3D;0;</span><br><span class="line">    for(int i&#x3D;0;i&lt;7;i++)&#123;</span><br><span class="line">        ans^&#x3D;a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d\n&quot;,ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="数组中，只有两个数出现一次，剩下都出现两次，找出出现一次的"><a href="#数组中，只有两个数出现一次，剩下都出现两次，找出出现一次的" class="headerlink" title="数组中，只有两个数出现一次，剩下都出现两次，找出出现一次的"></a>数组中，只有两个数出现一次，剩下都出现两次，找出出现一次的</h2><p>不妨假设出现一个的两个元素是x，y，那么最终所有的元素异或的结果就是res = x^y。并且res！=0，那么我们可以找出res二进制表示中的某一位是1，那么这一位1对于这两个数x,y只有一个数的该位置是1。对于原来的数组，我们可以根据这个位置是不是1就可以将数组分成两个部分。求出x,y其中一个，我们就能求出两个了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void findNum(int *a,int n)</span><br><span class="line">&#123;</span><br><span class="line">    int ans&#x3D;0;</span><br><span class="line">    int pos&#x3D;0;</span><br><span class="line">    int x&#x3D;0,y&#x3D;0;</span><br><span class="line">    for(int i&#x3D;0;i&lt;n;i++)</span><br><span class="line">        ans^&#x3D;a[i];</span><br><span class="line">    int tmp&#x3D;ans;</span><br><span class="line">    while((tmp&amp;1)&#x3D;&#x3D;0)&#123;</span><br><span class="line">    &#x2F;&#x2F;终止条件是二进制tmp最低位是1</span><br><span class="line">            pos++;</span><br><span class="line">            tmp&gt;&gt;&#x3D;1;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i&#x3D;0;i&lt;n;i++)&#123;</span><br><span class="line">        if((a[i]&gt;&gt;pos)&amp;1)&#123;&#x2F;&#x2F;取出第pos位的值</span><br><span class="line">            x^&#x3D;a[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    y&#x3D;x^ans;</span><br><span class="line">    if(x&gt;y) swap(x,y);&#x2F;&#x2F;从大到小输出x,y</span><br><span class="line">    printf(&quot;%d %d\n&quot;,x,y);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a[8]&#x3D;&#123;1,2,2,3,4,4,5,3&#125;;</span><br><span class="line">    findNum(a,8);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="交换两个数值"><a href="#交换两个数值" class="headerlink" title="交换两个数值"></a>交换两个数值</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int n;</span><br><span class="line">int array[10];</span><br><span class="line">void swap(int *a,int *b)&#123;</span><br><span class="line">*a^&#x3D; *b;</span><br><span class="line">*b^&#x3D; *a;</span><br><span class="line">*a^&#x3D; *b;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	int a&#x3D;55,b&#x3D;555;</span><br><span class="line">	swap(a,b);</span><br><span class="line">	cout&lt;&lt;a&lt;&lt;&quot; &quot;&lt;&lt;b&lt;&lt;endl; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">a ^&#x3D; b;</span><br><span class="line">b ^&#x3D; a;&#x2F;&#x2F;b&#x3D;b^a^b&#x3D;a</span><br><span class="line">a ^&#x3D; b;&#x2F;&#x2F;a&#x3D;a^b^a&#x3D;b</span><br></pre></td></tr></table></figure>
+<p>这样也照</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void mySwap(int* a,int* b)</span><br><span class="line">&#123;</span><br><span class="line">	(*a) ^&#x3D; (*b) ^&#x3D; (*a) ^&#x3D; (*b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="取某个数的绝对值Q"><a href="#取某个数的绝对值Q" class="headerlink" title="取某个数的绝对值Q"></a>取某个数的绝对值Q</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">m&#x3D;n&gt;&gt;31;</span><br><span class="line">return ((n^m)-m);</span><br></pre></td></tr></table></figure>
+<h1 id="判断两个数符号是否相同"><a href="#判断两个数符号是否相同" class="headerlink" title="判断两个数符号是否相同"></a>判断两个数符号是否相同</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if(n^m&gt;&#x3D;0)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;n和m同符号</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;n和m不同号</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="取相反数"><a href="#取相反数" class="headerlink" title="取相反数"></a>取相反数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~n + 1;</span><br></pre></td></tr></table></figure>
+<p>review<br>：2.28</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/C/"># C++</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/26/%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA%E9%97%AE%E9%A2%98/">导弹拦截问题-贪心-最长不下降数列问题</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/19/%E5%87%A0%E7%A7%8D%E6%B1%82%E7%B4%A0%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95/">几种求素数的方法</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

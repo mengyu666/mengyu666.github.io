@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>Prolog笔记4-Lists | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Prolog笔记4-Lists</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 12, 2020&nbsp;&nbsp;16:10:29</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h1><p>A list is a finite sequence of elements<br>Examples of lists in Prolog:<br>[mia, vincent, jules, yolanda]<br>[mia, robber(honeybunny), X, 2, mia]<br>[ ]<br>[mia, [vincent, jules], [butch, friend(butch)]]<br>[[ ], dead(z), [2, [b,c]], [ ], Z, [2, [b,c]]]</p>
+<h2 id="强调一下"><a href="#强调一下" class="headerlink" title="强调一下"></a>强调一下</h2><p>• List elements are enclosed in square brackets<br>• The length of a list is the number of elements it has<br>• All sorts of Prolog terms can be elements of a list<br>• There is a special list: the empty list [ ]</p>
+<h1 id="Head-and-Tail-in-Lists"><a href="#Head-and-Tail-in-Lists" class="headerlink" title="Head and Tail in Lists"></a>Head and Tail in Lists</h1><p>• A non-empty list can be thought of as consisting of two parts<br>– The head<br>– The tail<br>• The head is the first item in the list<br>• The tail is everything else<br>– The tail is the list that remains when we take the first element away<br>– The tail of a list is always a list</p>
+<p>对于一个非空链表来说，head是头元素，剩下的都是tail，tail还是一个链表</p>
+<p>举个栗子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">• [dead(z)] </span><br><span class="line">Head: dead(z) </span><br><span class="line">Tail: [ ]</span><br></pre></td></tr></table></figure>
+
+<h1 id="Head-and-tail-of-empty-list"><a href="#Head-and-tail-of-empty-list" class="headerlink" title="Head and tail of empty list"></a>Head and tail of empty list</h1><p>• The empty list has neither a head nor a tail<br>• For Prolog, [ ] is a special simple list without any internal structure<br>• The empty list plays an important role in recursive predicates for list processing in Prolog<br>空链表没头没尾，空链表是一种特殊的结构，空链表很重要</p>
+<h1 id="The-built-in-operator"><a href="#The-built-in-operator" class="headerlink" title="The built-in operator |"></a>The built-in operator |</h1><p>| 这个符号可以用来区分head和tail</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">?- [Head|Tail] &#x3D; [mia, vincent, jules, yolanda]. </span><br><span class="line">Head &#x3D; mia </span><br><span class="line">Tail &#x3D; [vincent,jules,yolanda] </span><br><span class="line">yes</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?- [X|Y] &#x3D; [ ]. </span><br><span class="line">no</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">?- [X,Y|Tail] &#x3D; [[ ], dead(z), [2, [b,c]], [], Z, [2, [b,c]]] .</span><br><span class="line">X &#x3D; [],</span><br><span class="line">Y &#x3D; dead(z),</span><br><span class="line">Tail &#x3D; [[2, [b, c]], [], Z, [2, [b, c]]].</span><br></pre></td></tr></table></figure>
+<h2 id="Anonymous-variables"><a href="#Anonymous-variables" class="headerlink" title="Anonymous variables"></a>Anonymous variables</h2><p>There is a simpler way of obtaining only the information we want: 只要我们感兴趣的元素、<br>The underscore is the anonymous variable 可以使用_ 操作符来代替我们不感兴趣的元素</p>
+<p>例如我们只对第二个和第四个元素感兴趣：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?-  [ _,X2, _,X4|_ ] &#x3D; [mia, vincent, marsellus, jody, yolanda].</span><br><span class="line">X2 &#x3D; vincent,</span><br><span class="line">X4 &#x3D; jody.</span><br></pre></td></tr></table></figure>
+<p>• Is used when you need to use a variable, but you are not interested in what Prolog instantiates it to<br>• Each occurrence of the anonymous variable is independent, i.e. can be bound to something different</p>
+<h1 id="member-–The-member-2-predicate"><a href="#member-–The-member-2-predicate" class="headerlink" title="member –The member/2 predicate"></a>member –The member/2 predicate</h1><p>• One of the most basic things we would like to know is whether something is an element of a list or not<br>• So let’s write a predicate that when given a term X and a list L, tells us whether or not X belongs to L<br>• This predicate is usually called member/2<br>内部实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">member(X,[X|T]). &#x2F;&#x2F;判断条件 fact | an object X is a member of a list if it is the head of that list</span><br><span class="line">member(X,[H|T]):- member(X,T). &#x2F;&#x2F;递归循环 rule | an object X is member of a list if it is a member of the tail of the list</span><br></pre></td></tr></table></figure>
+<p>相当于把链表从左到右依次遍历<br>如果有，满足判断条件，输出yes（true）；如果没有，删除头元素，继续递归，直到链表为空，跳出循环</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">?- member(vincent,[yolanda,trudy,vincent,jules]). </span><br><span class="line">yes</span><br><span class="line">?- member(zed,[yolanda,trudy,vincent,jules]). </span><br><span class="line">no</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200512153939379.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">member(X,[yolanda,trudy,vincent,jules]). &#x2F;&#x2F;相当于输出链表中的每一个元素</span><br><span class="line">X &#x3D; yolanda; </span><br><span class="line">X &#x3D; trudy; </span><br><span class="line">X &#x3D; vincent; </span><br><span class="line">X &#x3D; jules; </span><br><span class="line">no</span><br></pre></td></tr></table></figure>
+<p>更简单的写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">member(X,[X|_]). &#x2F;&#x2F;因为我们不在乎这里的tail</span><br><span class="line">member(X,[_|T]):- member(X,T). &#x2F;&#x2F;因为我们不在乎这里的头元素，我们只在乎元素X在不在链表T里</span><br></pre></td></tr></table></figure>
+<h1 id="the-a2b-2-predicate"><a href="#the-a2b-2-predicate" class="headerlink" title="the a2b/2 predicate"></a>the a2b/2 predicate</h1><p>we need a predicate a2b/2 that takes two lists as arguments, and succeeds if the first argument is a list of a s, and the second argument is a list of b s of exactly the same length<br>链表长度相同，且第一个链表只包含a,第二个链表只包含b</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a2b([],[]). </span><br><span class="line">a2b([a|L1],[b|L2]):- a2b(L1,L2).</span><br></pre></td></tr></table></figure>
+<p>a2b([a|L1],[b|L2]):- a2b(L1,L2).<br>This says: the a2b/2 predicate should succeed if its first argument is a list with head a , its second argument is a list with head b , and a2b/2 succeeds on the two tails.</p>
+<p>举个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?-a2b([a,a,a],[b,b,b]).</span><br><span class="line">yes</span><br></pre></td></tr></table></figure>
+<p>递归过程：<br> a2b([a,a,a],[b,b,b]).<br>Let’s work the example through. In this query, neither list is empty, so the fact does not help. Thus Prolog goes on to try the recursive rule. Now, the query does match the rule (after all, the head of the first list is a and the head of the second is b ) so Prolog now has a new <strong>goal</strong>, namely</p>
+<p>   a2b([a,a],[b,b]).<br>Once again, the fact does not help with this, but the recursive rule can be used again, leading to the following <strong>goal</strong>:</p>
+<p>   a2b([a],[b]).<br>Yet again the fact does not help, but the recursive rule does, so we get the following <strong>goal</strong>:</p>
+<p>   a2b([],[]).<br>At last we can use the fact: this tells us that, yes, we really do have two lists here that contain exactly the same number of a s and b s (namely, none at all). And because this goal succeeds, this means that the goal</p>
+<p>   a2b([a],[b]).<br>succeeds too. This in turn means that the goal</p>
+<p>   a2b([a,a],[b,b]).<br>succeeds, and thus that the original goal</p>
+<p>   a2b([a,a,a],[b,b,b]).<br>is satisfied.</p>
+<h2 id="a2b-2的另一种用处"><a href="#a2b-2的另一种用处" class="headerlink" title="a2b/2的另一种用处"></a>a2b/2的另一种用处</h2><p>it acts as a translator, translating lists of a s to lists of b s 且相同长度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?- a2b([a,a,a,a],X).</span><br><span class="line">X  &#x3D;  [b,b,b,b].</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">?-   a2b(X,Y).</span><br><span class="line">X &#x3D; Y, Y &#x3D; [] ;</span><br><span class="line">X &#x3D; [a],</span><br><span class="line">Y &#x3D; [b] ;</span><br><span class="line">X &#x3D; [a, a],</span><br><span class="line">Y &#x3D; [b, b] ;</span><br><span class="line">X &#x3D; [a, a, a],</span><br><span class="line">Y &#x3D; [b, b, b] ;</span><br><span class="line">X &#x3D; [a, a, a, a],</span><br><span class="line">Y &#x3D; [b, b, b, b] ;</span><br><span class="line">X &#x3D; [a, a, a, a, a],</span><br><span class="line">Y &#x3D; [b, b, b, b, b] ;</span><br><span class="line">X &#x3D; [a, a, a, a, a, a],</span><br><span class="line">Y &#x3D; [b, b, b, b, b, b] ;</span><br><span class="line">X &#x3D; [a, a, a, a, a, a, a],</span><br><span class="line">Y &#x3D; [b, b, b, b, b, b, b] </span><br><span class="line">……</span><br><span class="line">yes</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Prolog/"># Prolog</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/05/12/Prolog%E7%AC%94%E8%AE%B05-Arithmetic/">Prolog笔记5-Arithmetic</a>
+            
+            
+            <a class="next" rel="next" href="/2020/05/11/Prolog%E7%AC%94%E8%AE%B03-Recursion/">Prolog笔记3-Recursion</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

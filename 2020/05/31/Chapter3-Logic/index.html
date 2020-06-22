@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>Chapter3 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Chapter3</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 31, 2020&nbsp;&nbsp;21:37:36</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Lecture-6-Set-Theory-Defining-Sets"><a href="#Lecture-6-Set-Theory-Defining-Sets" class="headerlink" title="Lecture 6 Set Theory Defining Sets"></a>Lecture 6 Set Theory Defining Sets</h1><p><strong>说明：</strong><br><strong>本文中所有的”:=”符号与ppt中等号上加一个三角形的意义相同</strong></p>
+<h2 id="Sets"><a href="#Sets" class="headerlink" title="Sets"></a>Sets</h2><p>A set is a collection of definite, distinct objects.</p>
+<h3 id="The-basic-operation-on-a-set"><a href="#The-basic-operation-on-a-set" class="headerlink" title="The basic operation on a set"></a>The basic operation on a set</h3><p>Given some set S and some object x we can ask the question:“is x an element of S?”</p>
+<ul>
+<li>$x ∈ S$ when x is an element of the set S</li>
+<li>$x\notin S$  when x is not an element of the set S</li>
+</ul>
+<p>we cannot ask where x is in S (at the front, on top, …)or how many times x occurs in S, …</p>
+<h3 id="Defining-Sets"><a href="#Defining-Sets" class="headerlink" title="Defining Sets"></a>Defining Sets</h3><h4 id="By-enumeration"><a href="#By-enumeration" class="headerlink" title="By enumeration"></a>By enumeration</h4><p>S :={ 0, 2, 4, 6, 8, 10 }</p>
+<ul>
+<li><p>Enumeration: just list all the set’s elements</p>
+</li>
+<li><p>The order of the elements doesn’t matter</p>
+</li>
+<li><p>This only works for finite sets</p>
+<h4 id="comprehension"><a href="#comprehension" class="headerlink" title="comprehension"></a>comprehension</h4><p>T := { x ∈ S | x &gt; 5 • x }</p>
+</li>
+<li><p>For all elements x in the (already defined) set S</p>
+</li>
+<li><p>Filter to those that satisfy x &gt; 5</p>
+</li>
+<li><p>And keep the value x</p>
+</li>
+</ul>
+<p>注意这四个公式：</p>
+<ol>
+<li>$φ ↔ ψ$ and $(φ → ψ) ∧ (ψ → φ).$</li>
+<li>$φ → ψ$ and $¬φ ∨ ψ.$<br>3a. $φ ∧ ψ$ and $¬(¬φ ∨ ¬ψ).$<br>3b. $φ ∨ ψ$ and $¬(¬φ ∧ ¬ψ).$</li>
+</ol>
+<p>举个例子：<br>$(X\leq 5)\rightarrow (X^{2}&lt; 10)\cdot X+1$<br>可以转换为：¬$ (X\leq 5)$∨ $(X^{2}&lt; 10)$</p>
+<h3 id="“Pre-Defined”Sets"><a href="#“Pre-Defined”Sets" class="headerlink" title="“Pre-Defined”Sets"></a>“Pre-Defined”Sets</h3><ul>
+<li>N, <strong>the natural numbers</strong>自然数<br>Positive whole numbers, {0, 1, 2, 3, 4, . . .}</li>
+<li>Z, <strong>the integers</strong>整数<br>Positive and negative whole numbers, {. . . , −3, −2, −1, 0, 1, 2, 3, . . .}</li>
+<li>Q, <strong>the rational numbers</strong>有理数<br>Any number that can be written as a fraction (includes all integers)</li>
+<li>R, <strong>the real numbers</strong>实数<br>All numbers “written using a decimal point”<br>it includes all of the rationals, along with π, e,√2, . . .</li>
+</ul>
+<h3 id="Comparing-Sets"><a href="#Comparing-Sets" class="headerlink" title="Comparing Sets"></a>Comparing Sets</h3><table>
+<thead>
+<tr>
+<th>Definition</th>
+<th>Notation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Two sets are equal if and only if they have the same elements</td>
+<td>S = T</td>
+</tr>
+<tr>
+<td>S is a subset of T if all elements of S are also elements of T</td>
+<td>S ⊆ T</td>
+</tr>
+<tr>
+<td>S is a proper subset of T if all elements of S are also elements of T, but also S not equal T</td>
+<td>S ⊂ T</td>
+</tr>
+</tbody></table>
+<h4 id="formal-definition"><a href="#formal-definition" class="headerlink" title="formal definition"></a>formal definition</h4><p><img src="https://img-blog.csdnimg.cn/20200531234718864.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="defining-operations"><a href="#defining-operations" class="headerlink" title="defining operations"></a>defining operations</h4><p><img src="https://img-blog.csdnimg.cn/20200531235000869.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="The-empty-set"><a href="#The-empty-set" class="headerlink" title="The empty set"></a>The empty set</h3><ul>
+<li>The empty set is the set with no elements</li>
+<li>Usually named ∅, and enumerated as { }</li>
+<li>Formal definition: for any object x, we have x $\notin $ ∅</li>
+<li>Properties: for any set S we can show that:<br>∅ ⊆ S<br>S ∪ ∅ = S<br>S ∩ ∅ = ∅<br>S \ ∅ = S</li>
+</ul>
+<h3 id="Venn-diagrams-韦恩图"><a href="#Venn-diagrams-韦恩图" class="headerlink" title="Venn diagrams(韦恩图)"></a>Venn diagrams(韦恩图)</h3><h1 id="Lecture-7-Syllogistic-Reasoning"><a href="#Lecture-7-Syllogistic-Reasoning" class="headerlink" title="Lecture 7 Syllogistic Reasoning"></a>Lecture 7 Syllogistic Reasoning</h1><h2 id="Syllogisms"><a href="#Syllogisms" class="headerlink" title="Syllogisms"></a>Syllogisms</h2><h3 id="definition"><a href="#definition" class="headerlink" title="definition"></a>definition</h3><p>A syllogism is a inference with specific characteristics:</p>
+<ul>
+<li>Just two premises</li>
+<li>The premises and conclusion can have only the following forms:<br>1 All A are B<br>2 Some A are B<br>3 All A are not B (i.e. No A is B)<br>4 Some A are not B (i.e. Not all A are B)<br>where A and B are predicates, that is, they represent collection of<br>objects.</li>
+<li>The inference involves just three predicates.</li>
+</ul>
+<h3 id="Syllogistic-Reasoning-三段论推理"><a href="#Syllogistic-Reasoning-三段论推理" class="headerlink" title="Syllogistic Reasoning 三段论推理"></a>Syllogistic Reasoning 三段论推理</h3><p>Syllogistic reasoning allows us to check the validity of a given syllogistic<br>inference.<br>The process is:</p>
+<ul>
+<li>We interpret the three predicates as three sets.</li>
+<li>We interpret each of the premises in turn as applying constraints on the membership of these sets.</li>
+<li>Having processed all the premises, we evaluate the conclusion to see if it is supported in all of the scenarios that result.<br>We use Venn diagrams to help us represent the reasoning process.</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20200601151750937.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200601151808764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200601151830577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200601151846110.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200601151902596.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>Process the premises:<br>i. Crossing out - Universal step. A premise that starts with all/no means you cross out certain ‘forbidden’ regions in the diagram.<br>ii. Marking in - Existential step. A premise that starts with some/not-all means you mark certain areas as inhabited (if they haven’t been crossed out). </p>
+<h3 id="Counting-Syllogistic-Forms-Moods"><a href="#Counting-Syllogistic-Forms-Moods" class="headerlink" title="Counting Syllogistic Forms: Moods"></a>Counting Syllogistic Forms: Moods</h3><p>The <strong>mood</strong> of a syllogistic inference is a label based on the forms of the two premises and conclusion.</p>
+<p>缩写表示方法：</p>
+<table>
+<thead>
+<tr>
+<th>letter</th>
+<th>means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>All A are B universal affirmative</td>
+</tr>
+<tr>
+<td>I</td>
+<td>Some A are B particular affirmative</td>
+</tr>
+<tr>
+<td>E</td>
+<td>All A are not B universal negative</td>
+</tr>
+<tr>
+<td>O</td>
+<td>Some A are not B particular negative</td>
+</tr>
+</tbody></table>
+<p>A example mood :A-A-A<br>The figure of a syllogistic inference defines the order of the predicates inthe premises.<br>For each mood there are four figures</p>
+<p>How many kinds of syllogistic inferences are there?<br>There are 4 forms of statement (A, I, E, O)<br>There are three statements in a syllogistic inference<br>Thus 4 × 4 × 4 = 64 different moods<br>For each mood there are four figures<br>Thus there are 64 × 4 = 256 possible forms of syllogistic inferences<br>Note: only 15 of these are (universally) considered valid… plus maybe 9 more if you assume existential import</p>
+<h1 id="Lecture-9-Relations"><a href="#Lecture-9-Relations" class="headerlink" title="Lecture 9 Relations"></a>Lecture 9 Relations</h1><h2 id="Using-sets-to-define-relations"><a href="#Using-sets-to-define-relations" class="headerlink" title="Using sets to define relations"></a>Using sets to define relations</h2><p>By a relation we mean a meaningful link between people, things,objects, whatever.</p>
+<h2 id="Ordered-Pairs"><a href="#Ordered-Pairs" class="headerlink" title="Ordered Pairs"></a>Ordered Pairs</h2><p>An ordered pair is an object of the form (a, b) where a and b are some already-existing objects.</p>
+<p>Equality:<br>We define (a, b) = (c, d) if any only if a = c ∧ b = d.<br>For a given pair (a, b) we refer to a and b respectively as the first and second elements of the pair<br>Ordering: Note that, in general, (a, b) is different from (b, a).<br>In the special case where (a, b) = (b, a) we can deduce from thedefinition of equality that a = b ∧ b = a.</p>
+<h2 id="Ordered-Tuples-（有序）元组"><a href="#Ordered-Tuples-（有序）元组" class="headerlink" title="(Ordered) Tuples （有序）元组"></a>(Ordered) Tuples （有序）元组</h2><p>We can extend the definition of a pair to define an (ordered) triple asbeing an object of the form (a, b, c) …<br>We can generalise this by defining an n-tuple as being a sequence of n objects of the form (x1, x2, . . . , xn)<br>We get at an element of an n-tuple by using a projection function<br>πi(x1, x2, . . . , xn) , xi for i ∈ {1, . . . , n}<br>In particular, for any pair (a, b)<br>π1(a, b) = a<br>π2(a, b) = b</p>
+<ul>
+<li>元组可能包含同一元素的多个实例</li>
+<li>元组元素是有序的</li>
+<li>元组具有有限数量的元素，而集合或多集可能具有无限数量的元素</li>
+</ul>
+<h2 id="Cartesian-Product"><a href="#Cartesian-Product" class="headerlink" title="Cartesian Product"></a>Cartesian Product</h2><p>We define:<br>The Cartesian Product of two sets A and B is the set of all pairs of the form (a, b), for every a ∈ A and b ∈ B.<br>Notation: the Cartesian product of A and B is the set A × B<br>A × B:={a ∈ A, b ∈ B • (a, b)}</p>
+<h3 id="Defining-a-relation-in-terms-of-sets"><a href="#Defining-a-relation-in-terms-of-sets" class="headerlink" title="Defining a relation in terms of sets"></a>Defining a relation in terms of sets</h3><p>We can now give a definition of relations in terms of set theory…<br>Given two sets A and B we define:<br>a binary relation between A and B is a subset of A × B.</p>
+<p>Similarly, given three sets A, B and C,<br>a ternary relation between them is a subset of A × B × C</p>
+<p>… given n sets S1, S2, . . . , Sn,<br>an n-ary relation between them is a subset of S1 × S2 × . . . × Sn</p>
+<p>That is: an n-ary relation is a set<br>of n-tuples.</p>
+<h2 id="Relational-Operators"><a href="#Relational-Operators" class="headerlink" title="Relational Operators"></a>Relational Operators</h2><h3 id="Composing-two-relations"><a href="#Composing-two-relations" class="headerlink" title="Composing two relations"></a>Composing two relations</h3><p>Given three sets A, B and C, and two binary relations R ⊆ (A × B) and S ⊆ (B × C) we define the composition of R and S as the relation R  ;  S , {a ∈ A, b ∈ B, c ∈ C | (a, b) ∈ R,(b, c) ∈ S • (a, c)}</p>
+<p>Note that (R  ;  S) ⊆ (A × C)</p>
+<p>Notation:<br>We use the notation as R  ;  S, “R then S”<br>Also written as S ◦ R, “S after R” (not standard! opposite in textbook)</p>
+<h3 id="The-inverse-of-a-relation"><a href="#The-inverse-of-a-relation" class="headerlink" title="The inverse of a relation"></a>The inverse of a relation</h3><p>Given two sets A and B, and a binary relation R ⊆ (A × B) we define the<br>inverse of R as the relation<br>$R^{-1}$ , {a ∈ A, b ∈ B | (a, b) ∈ R • (b, a)}<br>Note that $R^{-1}$ ⊆ (B × A)<br>Notation:<br>This is usually written as $R^{-1}$Also written as R∼ or R˘ (unusual: textbook)</p>
+<p>Examples:<br>The inverse of {(1, 2),(2, 3)} is {(2, 1),(3, 2)}<br>Numbers: the inverse of the less-than relation is just the greater-thanrelation<br>Tudors: the inverse of is-a-parent-of is just is-a-child-of</p>
+<p>Lecture 10 Representing and Classifying Relations</p>
+<h2 id="Some-notation"><a href="#Some-notation" class="headerlink" title="Some notation"></a>Some notation</h2><ul>
+<li>Given some n-ary relation R, we denote membership of that relation by saying something like (x1, x2, . . . , xn) ∈ R</li>
+<li>Sometimes it is more convenient to use prefix notation: if we want toexpress that x1, x2, . . . , xn are related by the relation R we might just write R(x1, x2, . . . , xn)</li>
+<li>When we are dealing with a binary relation, we might choose to write the relation symbol infix, as in xRy.<br>The usual integer relations (&lt;, &gt;, etc.) are examples of binary relations that are typically written using infix notation.</li>
+</ul>
+<h2 id="Representing-relations-using-an-adjacency-matrix"><a href="#Representing-relations-using-an-adjacency-matrix" class="headerlink" title="Representing relations using an adjacency matrix"></a>Representing relations using an adjacency matrix</h2><h3 id="Adjacency-Matrix"><a href="#Adjacency-Matrix" class="headerlink" title="Adjacency Matrix"></a>Adjacency Matrix</h3><p>One way of representing a (finite) binary relation is as an adjacency matrix.<br>Each entry in the adjacency matrix is a boolean value.<br>Given any finite binary relation R ⊆ A × B, we can construct its adjacency matrix MR as follows:<br>We index the rows and columns of the matrix by the elements of A and B respectively (assumed to be in some fixed order).<br>For any (a, b) ∈ (A × B) we set the entry MR for row a and column b to true iff (a, b) ∈ R</p>
+<p>举个栗子：<br><img src="https://img-blog.csdnimg.cn/20200603104359120.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>这里表示的是AxB<br>A：表示每一行所对应的<br>B:  表示每一列所对应的<br>如果A is a parent of B, 那么所对应位置的布尔值就为T反之为F</p>
+<h3 id="relational-operations"><a href="#relational-operations" class="headerlink" title="relational operations"></a>relational operations</h3><p>The relational operations map quite nicely to matrix operations:<br>relational application: matrix multiplication 关系应用：矩阵乘法<br>relational composition: matrix multiplication 关系合成：矩阵乘法<br>relational inverse: transpose of a matrix 关系逆：矩阵的转置<br>relational union: (point-wise) disjunction of the matrices 关系并（点）矩阵的析取<br>relational intersection: (point-wise) conjunction of the matrices 关系交集：（逐点）矩阵的连接</p>
+<p>For matrix multiplication:<br>addition is disjunction, multiplication is conjunction. 加法是析取，乘法是连接。<br>if you prefer, use 1 and 0 with the rule that 1 + 1 = 1</p>
+<p>举个例子：<br>$谁是Eli  I的父母？$<br><img src="https://img-blog.csdnimg.cn/20200603110013665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="examples-of-operators-inverse"><a href="#examples-of-operators-inverse" class="headerlink" title="examples of operators (inverse)"></a>examples of operators (inverse)</h3><p><img src="https://img-blog.csdnimg.cn/20200603105847823.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="examples-of-operators-composition"><a href="#examples-of-operators-composition" class="headerlink" title="examples of operators (composition)"></a>examples of operators (composition)</h3><p><img src="https://img-blog.csdnimg.cn/2020060311023865.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>$A ; B$ $=$ $Matrix$ $B$ $X$ $Matrix$ $A$ </p>
+<h3 id="examples-inverse-and-composition"><a href="#examples-inverse-and-composition" class="headerlink" title="examples (inverse and composition)"></a>examples (inverse and composition)</h3><p><img src="https://img-blog.csdnimg.cn/2020060311025544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="Classifying-Relations"><a href="#Classifying-Relations" class="headerlink" title="Classifying Relations"></a>Classifying Relations</h2><h3 id="reflexive"><a href="#reflexive" class="headerlink" title="reflexive"></a>reflexive</h3><p>If A is a set, then the relation I = {a ∈ A • (a, a)} is called the identity relation on A.<br>That is, the identity relation just maps every object to itself.</p>
+<p>Any binary relation R that has the property that I ⊆ R called a reflexive relation.<br>That is, a reflexive relation at least maps every object to itself, and maybe to some other objects too.</p>
+<p>Any binary relation R that has the property that I ∩ R = ∅ called an irreflexive relation.<br>That is, an irreflexive relation never maps any object to itself.<br>如果A是一个集合，那么关系I={A∈A•（A，A）}称为A上的恒等关系。<br>也就是说，身份关系只是将每个对象映射到自身。</p>
+<p>任何具有I⊆R所称自反关系性质的二元关系R。<br>也就是说，一个自反关系至少将每个对象映射到它自己，也可能映射到其他一些对象。</p>
+<p>任何具有I∩R = ∅的性质的二元关系R称为不可伸缩关系。<br>也就是说，不可伸缩的关系从不将任何对象映射到自身。</p>
+<h3 id="symmetric-对称"><a href="#symmetric-对称" class="headerlink" title="symmetric(对称)"></a>symmetric(对称)</h3><p>Any binary relation R that has the property that $R^{-1}$ ⊆ R is called symmetric.<br>i.e. whenever it contains the pair (a, b) it also contains the pair (b, a).</p>
+<p>An antisymmetric relation is a binary relation with the property that if it ever contains both (a, b) and (b, a) then we must have a = b.</p>
+<p>i.e. an antisymmetric relation can be reflexive, but is not otherwise symmetric.</p>
+<p>Aside: A relation that is both antisymmetric and also irreflexive is called asymmetric.</p>
+<p>reflexive: for all x, R(x, x)<br>irreflexive: for all x, ¬R(x, x)<br>symmetric: for all x, y, R(x, y) → R(y, x)<br>antisymmetric: for all x, y, (R(x, y) ∧ R(y, x)) → x = y<br>asymmetric: for all x, y, R(x, y) → ¬R(y, x)</p>
+<p>下面举一些例子：<br><img src="https://img-blog.csdnimg.cn/2020060315253874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="Transitive-Relations"><a href="#Transitive-Relations" class="headerlink" title="Transitive Relations"></a>Transitive Relations</h2><p>Any binary relation R that has the property that whenever (x, y) ∈ Rand (y, z) ∈ R then (x, z) ∈ R is called transitive.</p>
+<p>Any binary relation that is reflexive, transitive and also antisymmetric is called a partial order. (no cycles)</p>
+<p>If, in addition, for every two objects x, y we have either (x, y) ∈ R or (y, x) ∈ R, then we call it a total order. (a chain)</p>
+<p>Any binary relation that is reflexive, transitive and also symmetric is called an equivalence relation.</p>
+<h3 id="Equivalence-relations-and-partitions"><a href="#Equivalence-relations-and-partitions" class="headerlink" title="Equivalence relations and partitions"></a>Equivalence relations and partitions</h3><p>Given any set S, a partition of S is a set of subsets that are collectively exhaustive and mutually exclusive.<br>That is, sets S1, . . . , Sn are a partition of S if:</p>
+<ul>
+<li>(S1 ∪ . . . ∪ Sn) = S [collectively exhaustive]</li>
+<li>for any sets Si and Sj , if i not equal j then Si ∩ Sj = ∅ </li>
+</ul>
+<p>Any equivalence relation over some set S automatically partitions S into a set of equivalence classes.</p>
+<p>举个例子：<br><img src="https://img-blog.csdnimg.cn/20200603171923765.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Logic/"># Logic</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/06/03/Chapter4-Logic/">Chapter4</a>
+            
+            
+            <a class="next" rel="next" href="/2020/05/25/Chapter1-2-Logic/">Chapter1-2</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

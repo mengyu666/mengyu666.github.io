@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>数据结构-Vector-Java | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">数据结构-Vector-Java</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 16, 2020&nbsp;&nbsp;9:10:32</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">protected Object[] elementData;</span><br><span class="line">protected int elementCount;</span><br><span class="line">protected int capacityIncrement;</span><br></pre></td></tr></table></figure>
+<p>elementData：这个 。emmmm<br>elementCount：有效的元素的个数<br>capacityIncrement：容量的增加因子（通俗说就是每次增加多少）</p>
+<p>对于capacityIncrement：<br>如果capacityIncrement不大于0，则当vector容量不够时，它会倍增</p>
+<h2 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h2><h3 id="Vector"><a href="#Vector" class="headerlink" title="Vector()"></a>Vector()</h3><p>创建一个默认的向量，默认大小为 10</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    &#x2F;**</span><br><span class="line">     * Constructs an empty vector so that its internal data array</span><br><span class="line">     * has size &#123;@code 10&#125; and its standard capacity increment is</span><br><span class="line">     * zero.</span><br><span class="line">     *&#x2F;</span><br><span class="line">public Vector() &#123;</span><br><span class="line">        this(10);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>capacityIncrement   =   0;</p>
+<h3 id="Vector-int-size"><a href="#Vector-int-size" class="headerlink" title="Vector(int size)"></a>Vector(int size)</h3><p>创建指定大小的向量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Constructs an empty vector with the specified initial capacity and</span><br><span class="line"> * with its capacity increment equal to zero.</span><br><span class="line"> *</span><br><span class="line"> * @param   initialCapacity   the initial capacity of the vector</span><br><span class="line"> * @throws IllegalArgumentException if the specified initial capacity</span><br><span class="line"> *         is negative</span><br><span class="line"> *&#x2F;</span><br><span class="line">public Vector(int initialCapacity) &#123;</span><br><span class="line">    this(initialCapacity, 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>capacityIncrement   =   0;</p>
+<h3 id="Vector-int-size-int-incr"><a href="#Vector-int-size-int-incr" class="headerlink" title="Vector(int size,int incr)"></a>Vector(int size,int incr)</h3><p>创建指定大小的向量，并且增量用 incr 指定。增量表示向量每次增加的元素数目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">     * Constructs an empty vector with the specified initial capacity and</span><br><span class="line">     * capacity increment.</span><br><span class="line">     *</span><br><span class="line">     * @param   initialCapacity     the initial capacity of the vector</span><br><span class="line">     * @param   capacityIncrement   the amount by which the capacity is</span><br><span class="line">     *                              increased when the vector overflows</span><br><span class="line">     * @throws IllegalArgumentException if the specified initial capacity</span><br><span class="line">     *         is negative</span><br><span class="line">     *&#x2F;</span><br><span class="line">public Vector(int initialCapacity, int capacityIncrement) &#123;</span><br><span class="line">        super();  &#x2F;&#x2F;AbstractList class</span><br><span class="line">        if (initialCapacity &lt; 0)</span><br><span class="line">            throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+</span><br><span class="line">                                               initialCapacity);</span><br><span class="line">        this.elementData &#x3D; new Object[initialCapacity];</span><br><span class="line">        this.capacityIncrement &#x3D; capacityIncrement;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Vector-Collection-c-不懂？"><a href="#Vector-Collection-c-不懂？" class="headerlink" title="Vector(Collection c) 不懂？"></a>Vector(Collection c) 不懂？</h3><p>创建一个包含集合 c 元素的向量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Constructs a vector containing the elements of the specified</span><br><span class="line"> * collection, in the order they are returned by the collection&#39;s</span><br><span class="line"> * iterator.</span><br><span class="line"> *</span><br><span class="line"> * @param c the collection whose elements are to be placed into this</span><br><span class="line"> *       vector</span><br><span class="line"> * @throws NullPointerException if the specified collection is null</span><br><span class="line"> * @since   1.2</span><br><span class="line"> *&#x2F;</span><br><span class="line">public Vector(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    elementData &#x3D; c.toArray();</span><br><span class="line">    elementCount &#x3D; elementData.length;</span><br><span class="line">    &#x2F;&#x2F; c.toArray might (incorrectly) not return Object[] (see 6260652)</span><br><span class="line">    if (elementData.getClass() !&#x3D; Object[].class)</span><br><span class="line">        elementData &#x3D; Arrays.copyOf(elementData, elementCount, Object[].class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="增加元素"><a href="#增加元素" class="headerlink" title="增加元素"></a>增加元素</h2><h3 id="在Vector尾部追加元素"><a href="#在Vector尾部追加元素" class="headerlink" title="在Vector尾部追加元素"></a>在Vector尾部追加元素</h3><p>两种：</p>
+<h4 id="boolean-add-Object-o"><a href="#boolean-add-Object-o" class="headerlink" title="boolean add(Object o)"></a>boolean add(Object o)</h4><p>来自List接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Appends the specified element to the end of this Vector.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be appended to this Vector</span><br><span class="line"> * @return &#123;@code true&#125; (as specified by &#123;@link Collection#add&#125;)</span><br><span class="line"> * @since 1.2</span><br><span class="line"> *&#x2F;</span><br><span class="line">public synchronized boolean add(E e) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    &#x2F;&#x2F;判断容量大小</span><br><span class="line">    ensureCapacityHelper(elementCount + 1);</span><br><span class="line">    elementData[elementCount++] &#x3D; e;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="void-addElement-Object-obj"><a href="#void-addElement-Object-obj" class="headerlink" title="void addElement(Object obj)"></a>void addElement(Object obj)</h4><p>来自Vector</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Adds the specified component to the end of this vector,</span><br><span class="line"> * increasing its size by one. The capacity of this vector is</span><br><span class="line"> * increased if its size becomes greater than its capacity.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method is identical in functionality to the</span><br><span class="line"> * &#123;@link #add(Object) add(E)&#125;</span><br><span class="line"> * method (which is part of the &#123;@link List&#125; interface).</span><br><span class="line"> *</span><br><span class="line"> * @param obj    the component to be added</span><br><span class="line"> *&#x2F;</span><br><span class="line">public synchronized void addElement(E obj) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    &#x2F;&#x2F;判断容量大小</span><br><span class="line">    ensureCapacityHelper(elementCount + 1);</span><br><span class="line">    elementData[elementCount++] &#x3D; obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>对ensureCapacityHelper(elementCount + 1);</em>具体分析：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;增加一个元素后，当前minCapacity &#x3D;elementCount + 1</span><br><span class="line">    private void ensureCapacityHelper(int minCapacity) &#123;</span><br><span class="line">        &#x2F;&#x2F; 若我这个vector中有效元素的个数大于elementData.length ，就要扩容</span><br><span class="line">        if (minCapacity - elementData.length &gt; 0)</span><br><span class="line">            &#x2F;&#x2F;扩容</span><br><span class="line">            grow(minCapacity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>扩容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    &#x2F;&#x2F; overflow-conscious code</span><br><span class="line">    int oldCapacity &#x3D; elementData.length;  &#x2F;&#x2F;当前vector的容量</span><br><span class="line">     &#x2F;&#x2F;若capacityIncrement &gt; 0, 增加capacityIncrement </span><br><span class="line">     &#x2F;&#x2F;若capacityIncrement 不大于 0, oldCapacity翻倍</span><br><span class="line">    int newCapacity &#x3D; oldCapacity + ((capacityIncrement &gt; 0) ?</span><br><span class="line">                                     capacityIncrement : oldCapacity);</span><br><span class="line">    &#x2F;&#x2F;若扩容一次后，Capacity仍然小，则新容量(newCapacity)改为实际需要的容量(minCapacity)</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity &#x3D; minCapacity;</span><br><span class="line">    &#x2F;*</span><br><span class="line">     *</span><br><span class="line">     *MAX_ARRAY_SIZE  &#x3D; Integer.MAX_VALUE - 8；</span><br><span class="line">     *Integer.MAX_VALUE &#x3D; 0x7fffffff  int 能表达的的最大整数</span><br><span class="line">     *</span><br><span class="line">     *&#x2F;</span><br><span class="line">    &#x2F;&#x2F;如果实际需要的容量大于MAX_ARRAY_SIZE </span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity &#x3D; hugeCapacity(minCapacity);</span><br><span class="line">    &#x2F;&#x2F;按照新的容量创建一个新数组，将原数组的内容copy到新数组中</span><br><span class="line">    elementData &#x3D; Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>😥<br>//实际需要的容量大于MAX_ARRAY_SIZE<br>    private static int hugeCapacity(int minCapacity) {<br>        if (minCapacity &lt; 0) // overflow<br>            throw new OutOfMemoryError();<br>？        return (minCapacity &gt; MAX_ARRAY_SIZE) ?Integer.MAX_VALUE :MAX_ARRAY_SIZE;<br>    }</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#### 举例</span><br></pre></td></tr></table></figure>
+<p>import java.util.Enumeration;<br>import java.util.Vector;</p>
+<p>public class VectorDemo{<br>       public static void main(String args[]) {<br>              // initial size is 3, increment is 2<br>              Vector<Integer> v = new Vector<Integer>();<br>              v.add(1);😥<br>              v.add(new Integer(2));😥<br>              v.addElement(3);😥<br>              v.addElement(new Integer(4));😥</p>
+<pre><code>    // enumerate the elements in the vector.
+       Enumeration&lt;Integer&gt; vEnum = v.elements();
+       System.out.println(&quot;Elements in vector:&quot;);
+       while(vEnum.hasMoreElements())
+          System.out.print(vEnum.nextElement() + &quot; &quot;);
+       System.out.println();
+}</code></pre><p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">结果</span><br></pre></td></tr></table></figure>
+<p>Elements in vector:<br>1 2 3 4 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">### 在指定位置增加元素</span><br><span class="line">#### void add(int index, Object element)</span><br></pre></td></tr></table></figure>
+<pre><code>/**
+ * Inserts the specified element at the specified position in this Vector.
+ * Shifts the element currently at that position (if any) and any
+ * subsequent elements to the right (adds one to their indices).
+ *
+ * @param index       index at which the specified element is to be inserted
+ * @param element   element to be inserted
+ * @throws ArrayIndexOutOfBoundsException if the index is out of range
+ *         ({@code index &lt; 0 || index &gt; size()})
+ * @since 1.2
+ */
+public void add(int index, E element) {
+    insertElementAt(element, index);
+}</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insertElementAt(E obj, int index)</span><br><span class="line">属于 link List接口里</span><br></pre></td></tr></table></figure>
+<pre><code>public synchronized void insertElementAt(E obj, int index) {
+    //fail-fast 机制
+    modCount++;
+    //判断下标的合法性  如果超出，则抛出异常
+    if (index &gt; elementCount) {
+        throw new ArrayIndexOutOfBoundsException(index
+                                                 + &quot; &gt; &quot; + elementCount);
+    }
+    //判断容量大小及是否需要扩增
+    ensureCapacityHelper(elementCount + 1);
+    //局部复制数组以移动数组中元素的位置
+    System.arraycopy(elementData, index, elementData, index + 1, elementCount - index);
+    //将想要插入的元素插入进去
+    elementData[index] = obj;
+    //有效元素的数量+1
+    elementCount++;
+}</code></pre><h4 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class VectorDemo&#123;</span><br><span class="line">	   public static void main(String args[]) &#123;</span><br><span class="line">		      &#x2F;&#x2F; initial size is 3, increment is 2</span><br><span class="line">		      Vector&lt;Integer&gt; v &#x3D; new Vector&lt;Integer&gt;();</span><br><span class="line">		      v.add(1);</span><br><span class="line">		      v.add(new Integer(2));</span><br><span class="line">		      v.addElement(3);</span><br><span class="line">		      v.addElement(new Integer(4));</span><br><span class="line">		      v.add(2, 5);</span><br><span class="line">		   &#x2F;&#x2F; enumerate the elements in the vector.</span><br><span class="line">		      Enumeration&lt;Integer&gt; vEnum &#x3D; v.elements();</span><br><span class="line">		      System.out.println(&quot;Elements in vector:&quot;);</span><br><span class="line">		      while(vEnum.hasMoreElements())</span><br><span class="line">		         System.out.print(vEnum.nextElement() + &quot; &quot;);</span><br><span class="line">		      System.out.println();</span><br><span class="line">	   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h2><h3 id="根据元素值来删除元素"><a href="#根据元素值来删除元素" class="headerlink" title="根据元素值来删除元素"></a>根据元素值来删除元素</h3><h4 id="boolean-remove-Object-o"><a href="#boolean-remove-Object-o" class="headerlink" title="boolean remove(Object o)"></a>boolean remove(Object o)</h4><p>List接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Removes the first occurrence of the specified element in this Vector</span><br><span class="line"> * If the Vector does not contain the element, it is unchanged.  More</span><br><span class="line"> * formally, removes the element with the lowest index i such that</span><br><span class="line"> * &#123;@code (o&#x3D;&#x3D;null ? get(i)&#x3D;&#x3D;null : o.equals(get(i)))&#125; (if such</span><br><span class="line"> * an element exists).</span><br><span class="line"> *</span><br><span class="line"> * @param o     element to be removed from this Vector, if present</span><br><span class="line"> * @return true if the Vector contained the specified element</span><br><span class="line"> * @since 1.2</span><br><span class="line"> *&#x2F;</span><br><span class="line">public boolean remove(Object o) &#123;</span><br><span class="line">    return removeElement(o);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Removes the first (lowest-indexed) occurrence of the argument</span><br><span class="line"> * from this vector. If the object is found in this vector, each</span><br><span class="line"> * component in the vector with an index greater or equal to the</span><br><span class="line"> * object&#39;s index is shifted downward to have an index one smaller</span><br><span class="line"> * than the value it had previously.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method is identical in functionality to the</span><br><span class="line"> * &#123;@link #remove(Object)&#125; method (which is part of the</span><br><span class="line"> * &#123;@link List&#125; interface).</span><br><span class="line"> *</span><br><span class="line"> * @param   obj   the component to be removed</span><br><span class="line"> * @return  &#123;@code true&#125; if the argument was a component of this</span><br><span class="line"> *          vector; &#123;@code false&#125; otherwise.</span><br><span class="line"> *&#x2F;</span><br><span class="line">public synchronized boolean removeElement(Object obj) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    int i &#x3D; indexOf(obj);  😥&#x2F;&#x2F;怎么会是负值，没找到的时候吗？</span><br><span class="line">    if (i &gt;&#x3D; 0) &#123;</span><br><span class="line">        removeElementAt(i);</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Deletes the component at the specified index. Each component in</span><br><span class="line"> * this vector with an index greater or equal to the specified</span><br><span class="line"> * &#123;@code index&#125; is shifted downward to have an index one</span><br><span class="line"> * smaller than the value it had previously. The size of this vector</span><br><span class="line"> * is decreased by &#123;@code 1&#125;.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The index must be a value greater than or equal to &#123;@code 0&#125;</span><br><span class="line"> * and less than the current size of the vector.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method is identical in functionality to the &#123;@link #remove(int)&#125;</span><br><span class="line"> * method (which is part of the &#123;@link List&#125; interface).  Note that the</span><br><span class="line"> * &#123;@code remove&#125; method returns the old value that was stored at the</span><br><span class="line"> * specified position.</span><br><span class="line"> *</span><br><span class="line"> * @param      index   the index of the object to remove</span><br><span class="line"> * @throws ArrayIndexOutOfBoundsException if the index is out of range</span><br><span class="line"> *         (&#123;@code index &lt; 0 || index &gt;&#x3D; size()&#125;)</span><br><span class="line"> *&#x2F;</span><br><span class="line">public synchronized void removeElementAt(int index) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    &#x2F;&#x2F;判断下标的合法性  如果超出，则抛出异常</span><br><span class="line">    if (index &gt;&#x3D; elementCount) &#123;</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index + &quot; &gt;&#x3D; &quot; +</span><br><span class="line">                                                 elementCount);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;判断下标的合法性  如果不大于零，则抛出异常</span><br><span class="line">    else if (index &lt; 0) &#123;</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;数组中要copy长度</span><br><span class="line">    int j &#x3D; elementCount - index - 1;</span><br><span class="line">    &#x2F;&#x2F;局部复制数组以移动数组中元素的位置</span><br><span class="line">       [相当于把要删除元素的位置空出来, 要删除元素右边的所有的元素左移一个位置]</span><br><span class="line">    if (j &gt; 0) &#123;</span><br><span class="line">        System.arraycopy(elementData, index + 1, elementData, index, j);</span><br><span class="line">    &#125;</span><br><span class="line">   &#x2F;&#x2F;有效元素的数量-1</span><br><span class="line">    elementCount--;</span><br><span class="line">    elementData[elementCount] &#x3D; null; &#x2F;* to let gc do its work *&#x2F;😥？</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="boolean-removeElement-Object-obj"><a href="#boolean-removeElement-Object-obj" class="headerlink" title="boolean removeElement(Object obj)"></a>boolean removeElement(Object obj)</h4><p>Vector本身的方法<br>上面有☝</p>
+<h3 id="删除指定位置的元素"><a href="#删除指定位置的元素" class="headerlink" title="删除指定位置的元素"></a>删除指定位置的元素</h3><h4 id="integer-remove-index"><a href="#integer-remove-index" class="headerlink" title="integer remove(index)"></a>integer remove(index)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Removes the element at the specified position in this Vector.</span><br><span class="line"> * Shifts any subsequent elements to the left (subtracts one from their</span><br><span class="line"> * indices).  Returns the element that was removed from the Vector.</span><br><span class="line"> *</span><br><span class="line"> * @throws ArrayIndexOutOfBoundsException if the index is out of range</span><br><span class="line"> *         (&#123;@code index &lt; 0 || index &gt;&#x3D; size()&#125;)</span><br><span class="line"> * @param index the index of the element to be removed</span><br><span class="line"> * @return element that was removed</span><br><span class="line"> * @since 1.2</span><br><span class="line"> *&#x2F;</span><br><span class="line">public synchronized E remove(int index) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    &#x2F;&#x2F;判断下标的合法性  如果超出，则抛出异常</span><br><span class="line">    if (index &gt;&#x3D; elementCount)</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index);</span><br><span class="line">    &#x2F;&#x2F;获取要删除位置的元素值</span><br><span class="line">    E oldValue &#x3D; elementData(index);</span><br><span class="line">    &#x2F;&#x2F;计算需要移动的元素个数</span><br><span class="line">    int numMoved &#x3D; elementCount - index - 1;</span><br><span class="line">    &#x2F;&#x2F;局部复制数组以移动数组中元素的位置</span><br><span class="line">    if (numMoved &gt; 0)</span><br><span class="line">        System.arraycopy(elementData, index+1, elementData, index,</span><br><span class="line">                         numMoved);</span><br><span class="line">    elementData[--elementCount] &#x3D; null; &#x2F;&#x2F; Let gc do its work</span><br><span class="line">    &#x2F;&#x2F;返回要删除位置的元素</span><br><span class="line">    return oldValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="void-removeElementAt-int-index"><a href="#void-removeElementAt-int-index" class="headerlink" title="void removeElementAt(int index)"></a>void removeElementAt(int index)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Deletes the component at the specified index. Each component in</span><br><span class="line"> * this vector with an index greater or equal to the specified</span><br><span class="line"> * &#123;@code index&#125; is shifted downward to have an index one</span><br><span class="line"> * smaller than the value it had previously. The size of this vector</span><br><span class="line"> * is decreased by &#123;@code 1&#125;.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The index must be a value greater than or equal to &#123;@code 0&#125;</span><br><span class="line"> * and less than the current size of the vector.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This method is identical in functionality to the &#123;@link #remove(int)&#125;</span><br><span class="line"> * method (which is part of the &#123;@link List&#125; interface).  Note that the</span><br><span class="line"> * &#123;@code remove&#125; method returns the old value that was stored at the</span><br><span class="line"> * specified position.</span><br><span class="line"> *</span><br><span class="line"> * @param      index   the index of the object to remove</span><br><span class="line"> * @throws ArrayIndexOutOfBoundsException if the index is out of range</span><br><span class="line"> *         (&#123;@code index &lt; 0 || index &gt;&#x3D; size()&#125;)</span><br><span class="line"> *&#x2F;</span><br><span class="line">public synchronized void removeElementAt(int index) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    if (index &gt;&#x3D; elementCount) &#123;</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index + &quot; &gt;&#x3D; &quot; +</span><br><span class="line">                                                 elementCount);</span><br><span class="line">    &#125;</span><br><span class="line">    else if (index &lt; 0) &#123;</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index);</span><br><span class="line">    &#125;</span><br><span class="line">    int j &#x3D; elementCount - index - 1;</span><br><span class="line">    if (j &gt; 0) &#123;</span><br><span class="line">        System.arraycopy(elementData, index + 1, elementData, index, j);</span><br><span class="line">    &#125;</span><br><span class="line">    elementCount--;</span><br><span class="line">    elementData[elementCount] &#x3D; null; &#x2F;* to let gc do its work *&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Java/"># Java</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/06/17/html/">html</a>
+            
+            
+            <a class="next" rel="next" href="/2020/06/16/%E6%8E%A5%E5%8F%A3-Java/">接口</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

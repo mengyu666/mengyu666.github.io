@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>大数类和大浮点类 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">大数类和大浮点类</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 7, 2020&nbsp;&nbsp;15:11:54</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><strong>将普通的数值转换成大数值</strong><br>分别调用BigInteger.valueOf(“普通数值”),BigDecimal.valueOf(“普通数值”)即可</p>
+<h1 id="BigInteger"><a href="#BigInteger" class="headerlink" title="BigInteger"></a>BigInteger</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>BigInteger类型的数字范围较Integer，Long类型的数字范围要大得多，它支持任意精度的整数，也就是说在运算中 BigInteger 类型可以准确地表示任何大小的整数值而不会丢失任何信息。<br><em>库:import java.math.BigInteger;</em></p>
+<h2 id="读入一个BigInteger"><a href="#读入一个BigInteger" class="headerlink" title="读入一个BigInteger"></a>读入一个BigInteger</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Scanner sc &#x3D; new Scanner(System.in);</span><br><span class="line">BigInteger m &#x3D; scan.nextBigInteger();</span><br></pre></td></tr></table></figure>
+<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;在构造将函数时，把radix进制的字符串转化为BigInteger</span><br><span class="line">	String str &#x3D; &quot;100010&quot;;</span><br><span class="line">	int radix &#x3D; 2;</span><br><span class="line">	BigInteger num1 &#x3D; new BigInteger(str,radix);</span><br><span class="line">	System.out.println(num1);&#x2F;&#x2F;34</span><br><span class="line">------------------------------------------------------------</span><br><span class="line">	String str &#x3D; &quot;1F&quot;;</span><br><span class="line">	int radix &#x3D; 2;</span><br><span class="line">	BigInteger num1 &#x3D; new BigInteger(str,16);</span><br><span class="line">	System.out.println(num1);&#x2F;31</span><br><span class="line">&#x2F;&#x2F;通常不写，则默认是10进制的转换</span><br><span class="line"> 	String str &#x3D; &quot;100010&quot;;</span><br><span class="line">	int radix &#x3D; 2;</span><br><span class="line">	BigInteger num1 &#x3D; new BigInteger(str,radix);</span><br><span class="line">	System.out.println(num1);&#x2F;&#x2F;100010</span><br></pre></td></tr></table></figure>
+<h2 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">BigInteger a &#x3D; new BigInteger(&quot;13&quot;);</span><br><span class="line">BigInteger b &#x3D; new BigInteger(&quot;4&quot;);</span><br><span class="line">int n &#x3D; 3;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;1.加</span><br><span class="line">BigInteger bigNum1 &#x3D; a.add(b);		&#x2F;&#x2F;17</span><br><span class="line">&#x2F;&#x2F;2.减</span><br><span class="line">BigInteger bigNum2 &#x3D; a.subtract(b);		&#x2F;&#x2F;9</span><br><span class="line">&#x2F;&#x2F;3.乘</span><br><span class="line">BigInteger bigNum3 &#x3D; a.multiply(b);		&#x2F;&#x2F;52</span><br><span class="line">&#x2F;&#x2F;4.除	a&#x2F;b</span><br><span class="line">BigInteger bigNum4 &#x3D; a.divide(b);		&#x2F;&#x2F;3</span><br><span class="line">&#x2F;&#x2F;5.取模(需 b &gt; 0，否则出现异常：ArithmeticException(&quot;BigInteger: modulus not positive&quot;))</span><br><span class="line">BigInteger bigNum5 &#x3D; a.mod(b);		&#x2F;&#x2F;1</span><br><span class="line">&#x2F;&#x2F;6.求余    a%b</span><br><span class="line">BigInteger bigNum6 &#x3D; a.remainder(b);		&#x2F;&#x2F;1</span><br><span class="line">&#x2F;&#x2F;7.平方(需 n &gt;&#x3D; 0，否则出现异常：ArithmeticException(&quot;Negative exponent&quot;))</span><br><span class="line">BigInteger bigNum7 &#x3D; a.pow(n);		&#x2F;&#x2F;2197</span><br><span class="line">&#x2F;&#x2F;8.取绝对值</span><br><span class="line">BigInteger bigNum8 &#x3D; a.abs();		&#x2F;&#x2F;13</span><br><span class="line">&#x2F;&#x2F;9.取相反数</span><br><span class="line">BigInteger bigNum9 &#x3D; a.negate();		&#x2F;&#x2F;-13</span><br></pre></td></tr></table></figure>
+<p><em>取模与取余的区别</em></p>
+<ul>
+<li>在不同环境下“%”运算符的含义不同：<br> 1.c/c++、Java为求余<br> 2.Python为取模</li>
+<li>主要区别在于对负整数进行除法运算时操作不同<br>对整型变量a、b来说，求余运算和取模运算的公式都是：</li>
+</ul>
+<p>1.求整数商：c=a/b；<br>2.计算余数或者模：r=a-c<em>b。<br>*两种运算在第一步时就产生了不同的结果：求余运算在取c的值时，向0方向舍入；而取模运算在计算c的值时，向负无穷方向舍入。</em><br>a=10  b=7<br>1.求整数商：求余运算得c=-1（向0方向舍入）；取模运算得c=-2（向负无穷方向舍入）。<br>2.计算余数或者模：由于c值不同，求余得r=-3；取模得r=4。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">BigInteger a &#x3D; new BigInteger(&quot;-10&quot;);</span><br><span class="line">BigInteger b &#x3D; new BigInteger(&quot;7&quot;);</span><br><span class="line">BigInteger bigNum5 &#x3D; a.mod(b);&#x2F;&#x2F;取模</span><br><span class="line">BigInteger bigNum6 &#x3D; a.remainder(b);	&#x2F;&#x2F;求余</span><br><span class="line">System.out.println(bigNum5);&#x2F;&#x2F;4</span><br><span class="line">System.out.println(bigNum6);&#x2F;&#x2F;-3</span><br></pre></td></tr></table></figure>
+<p>3.当a 和 b的正负号一样的时候，两个函数结果是等同的；当a 和b的符号不同时，rem 函数结果的符号和 a 的一样，而 mod 和 b 一样</p>
+<h2 id="比较大小"><a href="#比较大小" class="headerlink" title="比较大小"></a>比较大小</h2><ul>
+<li>compareTo()返回一个int型数据：1 大于； 0 等于； -1 小于；</li>
+<li>max()，min()：分别返回大的（小的）那个BigInteger数据；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">BigInteger bigNum1 &#x3D; new BigInteger(&quot;52&quot;);</span><br><span class="line">BigInteger bigNum2 &#x3D; new BigInteger(&quot;27&quot;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;1.compareTo()：返回一个int型数据（1 大于； 0 等于； -1 小于）</span><br><span class="line">int num &#x3D; bigNum1.compareTo(bigNum2);			&#x2F;&#x2F;1</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;2.max()：直接返回大的那个数，类型为BigInteger</span><br><span class="line">BigInteger compareMax &#x3D; bigNum1.max(bigNum2);	&#x2F;&#x2F;52</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;3.min()：直接返回小的那个数，类型为BigInteger</span><br><span class="line">BigInteger compareMin &#x3D; bigNum1.min(bigNum2);	&#x2F;&#x2F;27</span><br></pre></td></tr></table></figure>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2>三个：0 1 10<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;0</span><br><span class="line">BigInteger zero &#x3D; BigInteger.ZERO;</span><br><span class="line">&#x2F;&#x2F;1</span><br><span class="line">BigInteger one &#x3D; BigInteger.ONE;</span><br><span class="line">&#x2F;&#x2F;10</span><br><span class="line">BigInteger ten &#x3D; BigInteger.TEN;</span><br></pre></td></tr></table></figure>
+<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BigInteger bigNum &#x3D; new BigInteger(&quot;52&quot;);</span><br><span class="line">	int radix &#x3D; 2;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;1.转换为bigNum的二进制补码形式</span><br><span class="line">BigInteger bigNum &#x3D; new BigInteger(&quot;52&quot;);</span><br><span class="line">byte[] num1 &#x3D; bigNum.toByteArray();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;2.转换为bigNum的十进制字符串形式</span><br><span class="line">BigInteger bigNum &#x3D; new BigInteger(&quot;52&quot;);</span><br><span class="line">String num2 &#x3D; bigNum.toString();	&#x2F;&#x2F;52</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;3.转换为bigNum的radix进制字符串形式</span><br><span class="line">BigInteger bigNum &#x3D; new BigInteger(&quot;52&quot;);</span><br><span class="line">int radix &#x3D; 2;</span><br><span class="line">String num3 &#x3D; bigNum.toString(radix);	&#x2F;&#x2F;110100</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;4.将bigNum转换为int</span><br><span class="line">BigInteger bigNum &#x3D; new BigInteger(&quot;52&quot;);</span><br><span class="line">int num4 &#x3D; bigNum.intValue();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;5.将bigNum转换为long</span><br><span class="line">BigInteger bigNum &#x3D; new BigInteger(&quot;52&quot;);</span><br><span class="line">long num5 &#x3D; bigNum.longValue();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;6.将bigNum转换为float</span><br><span class="line">BigInteger bigNum &#x3D; new BigInteger(&quot;52&quot;);</span><br><span class="line">float num6 &#x3D; bigNum.floatValue();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;7.将bigNum转换为double</span><br><span class="line">BigInteger bigNum &#x3D; new BigInteger(&quot;52&quot;);</span><br><span class="line">double num7 &#x3D; bigNum.doubleValue();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>将String转换为BigInteger</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String a &#x3D; &quot;123&quot;;</span><br><span class="line">BigInteger b &#x3D; new BigInteger(a);</span><br></pre></td></tr></table></figure>
+
+<p>将整数类型转换为BigInteger<br>两种方法：</p>
+<ul>
+<li>先转换为String类型，再转换为BigInteger</li>
+<li>调用BigInteger的静态方法(本质上其实就是方法一)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int regularInt &#x3D; 321312; &#x2F;&#x2F; some value</span><br><span class="line">BigInteger bigInt &#x3D; new BigInteger(String.valueOf(regularInt));</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;BigInteger java.math.BigInteger.valueOf(long value)(本质就是：</span><br><span class="line">int a &#x3D; 123;&#x2F;&#x2F;或long&#x2F;byte&#x2F;short</span><br><span class="line">BigInteger b &#x3D; BigInteger.valueOf(a);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BigInteger num[]&#x3D;new BigInteger[100];</span><br></pre></td></tr></table></figure>
+<h2 id="二进制运算"><a href="#二进制运算" class="headerlink" title="二进制运算"></a>二进制运算</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">BigInteger a &#x3D; new BigInteger(&quot;13&quot;);&#x2F;&#x2F;1101</span><br><span class="line">BigInteger b &#x3D; new BigInteger(&quot;2&quot;);  &#x2F;&#x2F;0010</span><br><span class="line">int n &#x3D; 1;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;1.与：a&amp;b</span><br><span class="line">BigInteger bigNum1 &#x3D; a.and(b); &#x2F;&#x2F;0000			&#x2F;&#x2F;0</span><br><span class="line">&#x2F;&#x2F;2.或：a|b</span><br><span class="line">BigInteger bigNum2 &#x3D; a.or(b);  &#x2F;&#x2F;1111			&#x2F;&#x2F;15</span><br><span class="line">&#x2F;&#x2F;3.异或：a^b</span><br><span class="line">BigInteger bigNum3 &#x3D; a.xor(b); &#x2F;&#x2F;1111			&#x2F;&#x2F;15</span><br><span class="line">&#x2F;&#x2F;4.取反：~a(?)</span><br><span class="line">BigInteger bigNum4 &#x3D; a.not();  &#x2F;&#x2F;0010 -&gt;1110		&#x2F;&#x2F;-14</span><br><span class="line">&#x2F;&#x2F;5.左移n位： (a &lt;&lt; n)  &#x2F;&#x2F;11010</span><br><span class="line">BigInteger bigNum5 &#x3D; a.shiftLeft(n);	&#x2F;&#x2F;26</span><br><span class="line">&#x2F;&#x2F;6.右移n位： (a &gt;&gt; n)  &#x2F;&#x2F;0110</span><br><span class="line">BigInteger bigNum6 &#x3D; a.shiftRight(n);	&#x2F;&#x2F;6</span><br></pre></td></tr></table></figure>
+<h1 id="BigDecimal"><a href="#BigDecimal" class="headerlink" title="BigDecimal"></a>BigDecimal</h1><h2 id="介绍：进行小数的精确计算"><a href="#介绍：进行小数的精确计算" class="headerlink" title="介绍：进行小数的精确计算"></a>介绍：进行小数的精确计算</h2><h2 id="方法基本与BigInteger-相同"><a href="#方法基本与BigInteger-相同" class="headerlink" title="方法基本与BigInteger 相同"></a>方法基本与BigInteger 相同</h2><p><strong>BigDecimal初始化小数时，尽量用字符串形式</strong></p>
+<p>注意：<br>BigDecimal 的除法运算：<br>BigDecimal除法可能出现不能整除的情况，比如 4.5/1.3，这时会报错java.lang.ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result.<br>    <em>divide方法可以传三个参数</em><br>第一参数表示除数，<br>第二个参数表示小数点后保留位数<br>第三个参数表示舍入模式，只有在作除法运算或四舍五入时才用到舍入模式</p>
+<p>舍入模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ROUND_CEILING    &#x2F;&#x2F;向正无穷方向舍入</span><br><span class="line"></span><br><span class="line">ROUND_DOWN    &#x2F;&#x2F;向零方向舍入</span><br><span class="line"></span><br><span class="line">ROUND_FLOOR    &#x2F;&#x2F;向负无穷方向舍入</span><br><span class="line"></span><br><span class="line">ROUND_HALF_DOWN    &#x2F;&#x2F;向（距离）最近的一边舍入，除非两边（的距离）是相等,如果是这样，向下舍入, 例如1.55 保留一位小数结果为1.5</span><br><span class="line"></span><br><span class="line">ROUND_HALF_EVEN    &#x2F;&#x2F;向（距离）最近的一边舍入，除非两边（的距离）是相等,如果是这样，如果保留位数是奇数，使用ROUND_HALF_UP，如果是偶数，使用ROUND_HALF_DOWN</span><br><span class="line"></span><br><span class="line">ROUND_HALF_UP    &#x2F;&#x2F;向（距离）最近的一边舍入，除非两边（的距离）是相等,如果是这样，向上舍入, 1.55保留一位小数结果为1.6</span><br><span class="line"></span><br><span class="line">ROUND_UNNECESSARY    &#x2F;&#x2F;计算结果是精确的，不需要舍入模式</span><br><span class="line"></span><br><span class="line">ROUND_UP    &#x2F;&#x2F;向远离0的方向舍入</span><br></pre></td></tr></table></figure>
+<p><strong>四舍五入采用 ROUND_HALF_UP</strong></p>
+<h3 id="对BigDecimal进行截断和四舍五入可用setScale方法"><a href="#对BigDecimal进行截断和四舍五入可用setScale方法" class="headerlink" title="对BigDecimal进行截断和四舍五入可用setScale方法"></a>对BigDecimal进行截断和四舍五入可用setScale方法</h3><p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">       BigDecimal a &#x3D; new BigDecimal(&quot;4.5635&quot;);</span><br><span class="line">       a &#x3D; a.setScale(3, RoundingMode.HALF_UP);    &#x2F;&#x2F;保留3位小数，且四舍五入</span><br><span class="line">       System.out.println(a);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="处理BigDecimal除法可能出现不能整除的情况"><a href="#处理BigDecimal除法可能出现不能整除的情况" class="headerlink" title="处理BigDecimal除法可能出现不能整除的情况"></a>处理BigDecimal除法可能出现不能整除的情况</h3><p>举例：6/9 保留三位小数，四舍五入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">BigDecimal b &#x3D; new BigDecimal(&quot;6&quot;);</span><br><span class="line">BigDecimal a &#x3D; new BigDecimal(&quot;9&quot;);</span><br><span class="line">BigDecimal c&#x3D; b.divide(a,3, RoundingMode.HALF_UP);    &#x2F;&#x2F;保留3位小数，且四舍五入</span><br><span class="line">      System.out.println(c);&#x2F;&#x2F;0.667</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="将任意类型转化为BigDecimal"><a href="#将任意类型转化为BigDecimal" class="headerlink" title="将任意类型转化为BigDecimal"></a>将任意类型转化为BigDecimal</h3><h4 id="将String转换为BigDecimal"><a href="#将String转换为BigDecimal" class="headerlink" title="将String转换为BigDecimal"></a>将String转换为BigDecimal</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String a&#x3D; &quot;1.23&quot;;</span><br><span class="line">BigDecimal b &#x3D; new BigDecimal(a)</span><br></pre></td></tr></table></figure>
+
+<h4 id="将基本数据类型转换为BigDecimal"><a href="#将基本数据类型转换为BigDecimal" class="headerlink" title="将基本数据类型转换为BigDecimal"></a>将基本数据类型转换为BigDecimal</h4><p>举个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int a &#x3D; 123;</span><br><span class="line">BigDecimal b &#x3D; BigDecimal.valueOf(a);</span><br></pre></td></tr></table></figure>
+
+<p>其他的类型类似！</p>
+<p>对于BigDecimal的大小比较<br>用equals方法的话会不仅会比较值的大小，还会比较两个对象的精确度，而compareTo方法则不会比较精确度，只比较数值的大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;比较1.2和1.20</span><br><span class="line">&#x2F;&#x2F;输出false</span><br><span class="line">System.out.println(new BigDecimal(&quot;1.2&quot;).equals(new BigDecimal(&quot;1.20&quot;)));   </span><br><span class="line">&#x2F;&#x2F;输出true</span><br><span class="line">System.out.println(new BigDecimal(&quot;1.2&quot;).compareTo(new BigDecimal(&quot;1.20&quot;)) &#x3D;&#x3D; 0);</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Java/"># Java</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/07/%E6%94%BE%E8%8B%B9%E6%9E%9C-%E9%80%92%E5%BD%92/">放苹果-递归</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/04/%E7%AE%97%E6%B3%95-%E6%8E%92%E5%BA%8F/">排序</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

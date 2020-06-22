@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>高精度计算（体现了Java的巨大优越性的时刻） | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">高精度计算（体现了Java的巨大优越性的时刻）</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 4, 2020&nbsp;&nbsp;15:52:03</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="数据的接收和储存（利用字符串和数组）"><a href="#数据的接收和储存（利用字符串和数组）" class="headerlink" title="数据的接收和储存（利用字符串和数组）"></a>数据的接收和储存（利用字符串和数组）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int a[100];</span><br><span class="line">string s;</span><br><span class="line">cin&gt;&gt;s;</span><br><span class="line">len&#x3D;s.length();&#x2F;&#x2F;用len计算字符串s的位数</span><br><span class="line">for(int i&#x3D;1;i&lt;&#x3D;len;i++) </span><br><span class="line">a[i]&#x3D;s[len-i]-48;&#x2F;&#x2F;将数串转换为数组a，并倒序储存</span><br></pre></td></tr></table></figure>
+<h1 id="加减乘除"><a href="#加减乘除" class="headerlink" title="加减乘除"></a>加减乘除</h1><h2 id="高精度加法"><a href="#高精度加法" class="headerlink" title="高精度加法"></a>高精度加法</h2><p>主要算法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">inta[],b[],c[];  &#x2F;&#x2F;array a saves the augend,array b saves the addend,array c saves the result</span><br><span class="line">int i&#x3D;1,x&#x3D;0;&#x2F;&#x2F;x是进位   i从1开始是因为有前导0（a[0]&#x3D;0,b[0]&#x3D;0,c[0]&#x3D;0)</span><br><span class="line">while((i&lt;&#x3D;a数组的长素）||（i&lt;&#x3D;b数组的长度))</span><br><span class="line">&#123;</span><br><span class="line">c[i]&#x3D;a[i]+b[i]+x;</span><br><span class="line">x&#x3D;c[i]&#x2F;10;</span><br><span class="line">c[i]%&#x3D;10;</span><br><span class="line">i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">&#x2F;&#x2F;	char a1[100],b1[100];</span><br><span class="line">	string a1,b1;	</span><br><span class="line">	int a[100],b[100],c[100],lena,lenb,lenc,i,x;</span><br><span class="line">	memset(a,0,sizeof(a));</span><br><span class="line">	memset(b,0,sizeof(b));</span><br><span class="line">	memset(c,0,sizeof(c));</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;	gets(a1);</span><br><span class="line">&#x2F;&#x2F;	gets(b1);</span><br><span class="line">&#x2F;&#x2F;	lena&#x3D;strlen(a1);</span><br><span class="line">&#x2F;&#x2F;	lenb&#x3D;strlen(b1);</span><br><span class="line">	cin&gt;&gt;a1&gt;&gt;b1;	</span><br><span class="line">	lena&#x3D;a1.length();</span><br><span class="line">	lenb&#x3D;b1.length();</span><br><span class="line">	</span><br><span class="line">	for(i&#x3D;0;i&lt;&#x3D;lena-1;i++) a[lena-i]&#x3D;a1[i]-&#39;0&#39;;&#x2F;&#x2F;读取加数 </span><br><span class="line">	for(i&#x3D;0;i&lt;&#x3D;lenb-1;i++) b[lenb-i]&#x3D;b1[i]-&#39;0&#39;;&#x2F;&#x2F;读取加数 </span><br><span class="line">	&#x2F;&#x2F;开始进行加法运算 </span><br><span class="line">	lenc&#x3D;1;</span><br><span class="line">	x&#x3D;0;</span><br><span class="line">	while(lenc&lt;&#x3D;lena||lenc&lt;&#x3D;lenb)</span><br><span class="line">	&#123;</span><br><span class="line">		c[lenc]&#x3D;a[lenc]+b[lenc]+x;</span><br><span class="line">		x&#x3D;c[lenc]&#x2F;10;</span><br><span class="line">		c[lenc]%&#x3D;10;</span><br><span class="line">		lenc++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	c[lenc]&#x3D;x;</span><br><span class="line">	&#x2F;&#x2F;处理最高进位及删除前导0</span><br><span class="line">	while(c[lenc]&#x3D;&#x3D;0)  lenc--;</span><br><span class="line">	&#x2F;&#x2F;输出结果</span><br><span class="line">	for(i&#x3D;lenc;i&gt;&#x3D;1;i--)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;c[i];</span><br><span class="line">	 &#125;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	return 0; </span><br><span class="line">	</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="高精度减法"><a href="#高精度减法" class="headerlink" title="高精度减法"></a>高精度减法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	char n[256],n1[256],n2[256];</span><br><span class="line">	int a[256],b[256],c[256],lena,lenb,lenc,i;</span><br><span class="line">	memset(a,0,sizeof(a));</span><br><span class="line">	memset(b,0,sizeof(b));</span><br><span class="line">	memset(c,0,sizeof(c));</span><br><span class="line">	printf(&quot;输入被减数 :&quot;);</span><br><span class="line">	gets(n1);</span><br><span class="line">	printf(&quot;输入减数 :&quot;);</span><br><span class="line">	gets(n2);</span><br><span class="line">	&#x2F;&#x2F;处理被减数与减数，使后面的计算一定为大数减小数,并且处理负号 </span><br><span class="line">	if(strlen(n1)&lt;strlen(n2)||(strlen(n1)&#x3D;&#x3D;strlen(n2)&amp;&amp;strcmp(n1,n2)&lt;0))</span><br><span class="line">	&#123;</span><br><span class="line">		strcpy(n,n1);</span><br><span class="line">		strcpy(n1,n2);</span><br><span class="line">		strcpy(n2,n);</span><br><span class="line">		cout&lt;&lt;&quot;-&quot;;</span><br><span class="line">	 &#125;</span><br><span class="line">	lena&#x3D;strlen(n1);</span><br><span class="line">	lenb&#x3D;strlen(n2);</span><br><span class="line">	&#x2F;&#x2F;将被减数和减数放入数组</span><br><span class="line">	for(int i&#x3D;0;i&lt;&#x3D;lena-1;i++)  a[lena-i]&#x3D;n1[i]-48;</span><br><span class="line">	for(int i&#x3D;0;i&lt;&#x3D;lenb-1;i++)  b[lenb-i]&#x3D;n2[i]-48; </span><br><span class="line">	i&#x3D;1;</span><br><span class="line"></span><br><span class="line">	while(i&lt;&#x3D;lena||i&lt;&#x3D;lenb)</span><br><span class="line">	&#123;</span><br><span class="line">		if(a[i]&lt;b[i])</span><br><span class="line">		&#123;</span><br><span class="line">			a[i]+&#x3D;10;</span><br><span class="line">			a[i+1]--;</span><br><span class="line">		&#125;</span><br><span class="line">	c[i]&#x3D;a[i]-b[i];</span><br><span class="line">	i++;</span><br><span class="line">	&#125;</span><br><span class="line">	lenc&#x3D;i;</span><br><span class="line">	&#x2F;&#x2F;最高位的0不输出</span><br><span class="line">	while((c[lenc]&#x3D;&#x3D;0)&amp;&amp;(lenc&gt;1))  lenc--;</span><br><span class="line">	&#x2F;&#x2F;输出结果</span><br><span class="line">	for(i&#x3D;lenc;i&gt;&#x3D;1;i--)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;c[i];</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">	 </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="高精度乘法"><a href="#高精度乘法" class="headerlink" title="高精度乘法"></a>高精度乘法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	string a1,b1;</span><br><span class="line">	int a[101],b[101],c[100001],lena,lenb,lenc,i,j,x;</span><br><span class="line">	memset(a,0,sizeof(a));</span><br><span class="line">	memset(b,0,sizeof(b)); </span><br><span class="line">	memset(c,0,sizeof(c)); </span><br><span class="line">	</span><br><span class="line">	cin&gt;&gt;a1&gt;&gt;b1; </span><br><span class="line">	lena&#x3D;a1.length();</span><br><span class="line">	lenb&#x3D;b1.length();</span><br><span class="line">	</span><br><span class="line">	for(i&#x3D;0;i&lt;&#x3D;lena-1;i++) a[lena-i]&#x3D;a1[i]-48;</span><br><span class="line">	for(i&#x3D;0;i&lt;&#x3D;lenb-1;i++) b[lenb-i]&#x3D;b1[i]-48;</span><br><span class="line">	&#x2F;&#x2F;对乘数的每一位进行处理 </span><br><span class="line">	for(i&#x3D;1;i&lt;&#x3D;lena;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		x&#x3D;0;</span><br><span class="line">		for(j&#x3D;1;j&lt;&#x3D;lenb;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			c[i+j-1]&#x3D;a[i]*b[i]+x+c[i+j-1];</span><br><span class="line">			x&#x3D;c[i+j-1]&#x2F;10;</span><br><span class="line">			c[i+j-1]%&#x3D;10;</span><br><span class="line">		&#125;</span><br><span class="line">		c[i+lenb]&#x3D;x;</span><br><span class="line">	&#125;</span><br><span class="line">	lenc&#x3D;lena+lenb;</span><br><span class="line">	&#x2F;&#x2F;删除前导0 </span><br><span class="line">	while(c[lenc]&#x3D;&#x3D;0&amp;&amp;lenc&gt;1)</span><br><span class="line">	&#123;</span><br><span class="line">		lenc--;</span><br><span class="line">	&#125;</span><br><span class="line">	for(i&#x3D;lenc;i&gt;&#x3D;1;i--)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;c[i];</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="高精度除以低精度"><a href="#高精度除以低精度" class="headerlink" title="高精度除以低精度"></a>高精度除以低精度</h2><h2 id="高精度除以低精度-1"><a href="#高精度除以低精度-1" class="headerlink" title="高精度除以低精度"></a>高精度除以低精度</h2>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/C/"># C++</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/04/%E5%9B%9E%E6%96%87%E7%B4%A0%E6%95%B0/">回文素数</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/04/%E7%BB%93%E6%9E%84%E4%BD%93/">结构体</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

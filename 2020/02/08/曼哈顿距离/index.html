@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>曼哈顿距离 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">曼哈顿距离</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 8, 2020&nbsp;&nbsp;17:55:34</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="曼哈顿距离"><a href="#曼哈顿距离" class="headerlink" title="曼哈顿距离"></a>曼哈顿距离</h1><p><img src="https://img-blog.csdnimg.cn/20200208175808863.png" alt="在这里插入图片描述"><br>曼哈顿距离又称马氏距离、出租车距离：两个点在标准坐标系上的绝对轴距总和</p>
+<p>&lt;1&gt;白色表示障碍物  &lt;2&gt; 灰色表示可走路径<br>           从图可知,A点到B点中,红线代表曼哈顿距离，绿色代表欧氏距离，也就是我们说的直线距离，而蓝色和黄色代表等价的曼哈顿距离。<br>计算公式：<img src="https://img-blog.csdnimg.cn/20200208175921559.jpg" alt="在这里插入图片描述"><br><em>我们平常说的距离是欧氏距离</em><br>题目：<br>鲁宾逊先生有一只宠物猴，名叫多多。这天，他们两个正沿着乡间小路散步，突然发现路边的告示牌上贴着一张小小的纸条：“欢迎免费品尝我种的花生！——熊字”。<br>鲁宾逊先生和多多都很开心，因为花生正是他们的最爱。在告示牌背后，路边真的有一块花生田，花生植株整齐地排列成矩形网格（如图1）。有经验的多多一眼就能看出，每棵花生植株下的花生有多少。为了训练多多的算术，鲁宾逊先生说：“你先找出花生最多的植株，去采摘它的花生；然后再找出剩下的植株里花生最多的，去采摘它的花生；依此类推，不过你一定要在我限定的时间内回到路边。”<br>我们假定多多在每个单位时间内，可以做下列四件事情中的一件：</p>
+<ol>
+<li>从路边跳到最靠近路边（即第一行）的某棵花生植株；</li>
+<li>从一棵植株跳到前后左右与之相邻的另一棵植株；</li>
+<li>采摘一棵植株下的花生；</li>
+<li>从最靠近路边（即第一行）的某棵花生植株跳回路边。<br>现在给定一块花生田的大小和花生的分布，请问在限定时间内，多多最多可以采到多少个花生？注意可能只有部分植株下面长有花生，假设这些植株下的花生个数各不相同。<br><img src="https://img-blog.csdnimg.cn/20200208180219547.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例如在图2所示的花生田里，只有位于(2, 5), (3, 7), (4, 2), (5, 4)的植株下长有花生，个数分别为13, 7, 15, 9。沿着图示的路线，多多在21个单位时间内，最多可以采到37个花生。<br>输入<br>输入文件peanuts.in的第一行包括三个整数，M, N和K，用空格隔开；表示花生田的大小为M * N（1 &lt;= M, N &lt;= 20），多多采花生的限定时间为K（0 &lt;= K &lt;= 1000）个单位时间。接下来的M行，每行包括N个非负整数，也用空格隔开；第i + 1行的第j个整数Pij（0 &lt;= Pij &lt;= 500）表示花生田里植株(i, j)下花生的数目，0表示该植株下没有花生。<br>输出<br>输出文件peanuts.out包括一行，这一行只包含一个整数，即在限定时间内，多多最多可以采到花生的个数。<br>输入样例<br>【样例输入1】<br>6 7 21<br>0 0 0 0 0 0 0<br>0 0 0 0 13 0 0<br>0 0 0 0 0 0 7<br>0 15 0 0 0 0 0<br>0 0 0 9 0 0 0<br>0 0 0 0 0 0 0<br>【样例输入2】<br>6 7 20<br>0 0 0 0 0 0 0<br>0 0 0 0 13 0 0<br>0 0 0 0 0 0 7<br>0 15 0 0 0 0 0<br>0 0 0 9 0 0 0<br>0 0 0 0 0 0 0<br>输出样例<br>【样例输出1】<br>37<br>【样例输出2】<br>28</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N&#x3D;30;</span><br><span class="line">int mp[N][N];</span><br><span class="line">int n,m,k;</span><br><span class="line">int tm;</span><br><span class="line">int fx,fy,ex,ey;&#x2F;&#x2F;起点，终点</span><br><span class="line">int pn;</span><br><span class="line">int ans;</span><br><span class="line">struct dire&#x2F;&#x2F;记忆花生地址 </span><br><span class="line">&#123;</span><br><span class="line">    int x,y,sum;</span><br><span class="line">&#125;stu[N*N];</span><br><span class="line">bool comp(struct dire a,struct dire b)&#x2F;&#x2F;比较，大的在前，小的在后 </span><br><span class="line">&#123;</span><br><span class="line">    return a.sum&gt;b.sum;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;</span><br><span class="line">    for(int i&#x3D;1;i&lt;&#x3D;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int j&#x3D;1;j&lt;&#x3D;m;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin&gt;&gt;mp[i][j];</span><br><span class="line">            if(mp[i][j]&gt;0)&#x2F;&#x2F;有花生 ，多多：我看到你们了 </span><br><span class="line">            &#123;</span><br><span class="line">                stu[++pn].sum&#x3D;mp[i][j];&#x2F;&#x2F;获得一系列有花生的坐标</span><br><span class="line">                stu[pn].x&#x3D;i;</span><br><span class="line">                stu[pn].y&#x3D;j;&#x2F;&#x2F;保存坐标</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(stu+1,stu+pn+1,comp);&#x2F;&#x2F;按照题意来，先大后小 </span><br><span class="line">    fx&#x3D;1;</span><br><span class="line">    fy&#x3D;stu[1].y;&#x2F;&#x2F;设立你的初始位置 </span><br><span class="line">    k--;&#x2F;&#x2F;从人群中窜出一个光头,多多用了一个单位从人群中跳出 </span><br><span class="line">    for(int i&#x3D;1;i&lt;&#x3D;pn;i++)&#x2F;&#x2F;枚举每一个有花生的点</span><br><span class="line">    &#123;</span><br><span class="line">        tm&#x3D;0;&#x2F;&#x2F;计时器清零 </span><br><span class="line">        ex&#x3D;stu[i].x;</span><br><span class="line">        ey&#x3D;stu[i].y;&#x2F;&#x2F;设定多多的终点坐标</span><br><span class="line">        tm&#x3D;abs(fx-ex)+abs(fy-ey);&#x2F;&#x2F;求曼哈顿距离，计算本次导航距离 </span><br><span class="line">        k--;&#x2F;&#x2F;采花生 </span><br><span class="line">        k-&#x3D;tm;&#x2F;&#x2F;剩余时间减去前往时间 </span><br><span class="line">        if(k&gt;&#x3D;ex)&#x2F;&#x2F;可以返回,装上花生 </span><br><span class="line">        &#123;</span><br><span class="line">            ans+&#x3D;mp[ex][ey];&#x2F;&#x2F;加入 </span><br><span class="line">            fx&#x3D;ex;</span><br><span class="line">            fy&#x3D;ey;&#x2F;&#x2F;路径规划成功，前往 fx,fy </span><br><span class="line">        &#125;</span><br><span class="line">        else&#x2F;&#x2F;多多如果去这个目标就回不去了，带上现在的花生米回去 </span><br><span class="line">        &#123;</span><br><span class="line">            cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;&#x2F;&#x2F;真棒，获得了全部的花生米 </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%AE%97%E6%B3%95/"># 算法</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/08/C-%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%EF%BC%88%EF%BC%94%E7%A7%8D%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%89/">C++中常用的大小写转换（４种常用方法）</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/08/%E6%B4%9B%E8%B0%B7p1056%E6%8E%92%E5%BA%A7%E6%A4%85/">洛谷p1056排座椅</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>Prolog笔记1 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Prolog笔记1</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">March 27, 2020&nbsp;&nbsp;9:23:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><ol>
+<li>Prolog中的“.”和C语言中的“;”一样，都是代表一段代码的结尾。</li>
+<li>在Prolog终端输入的时候，没一个语句都是以“?-”这样两个字符开头的，它代表我们输入的程序代码其实是对Prolog系统的一个查询（问询），一旦用户输入了查询，Prolog系统会运用它的知识库来判定这个查询是真(true)是假(false).</li>
+<li>每一行都代表一个子句（clause）。带有“:-”的子句叫规则（rule），不带有“:-”的子句叫事实(fact)<br>rule/fact<br><img src="https://img-blog.csdnimg.cn/20200327093020400.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200327093037118.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ol>
+<p><strong>Clause</strong><br><img src="https://img-blog.csdnimg.cn/20200327092640831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>4. Predicates<br><img src="https://img-blog.csdnimg.cn/20200327092739670.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="Expressing-Conjinction"><a href="#Expressing-Conjinction" class="headerlink" title="Expressing Conjinction"></a>Expressing Conjinction</h1><p>prolog中“,”代表逻辑关系中的“且”，“;”代表逻辑关系中的“或”<br>（表示为如下的逻辑关系）<br><img src="https://img-blog.csdnimg.cn/20200327172946816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_8,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">woman(mia). </span><br><span class="line">woman(jody). </span><br><span class="line">woman(yolanda).</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?- woman(X).</span><br></pre></td></tr></table></figure>
+<p>会获得：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X&#x3D;mia; </span><br><span class="line">X&#x3D;jody; </span><br><span class="line">X&#x3D;yolanda;</span><br></pre></td></tr></table></figure>
+<h2 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">woman(mia). </span><br><span class="line">woman(jody). </span><br><span class="line">woman(yolanda). </span><br><span class="line">loves(vincent, mia). </span><br><span class="line">loves(marsellus, mia). </span><br><span class="line">loves(pumpkin, honey_bunny). </span><br><span class="line">loves(honey_bunny, pumpkin).</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?- loves(marsellus,X), woman(X).</span><br></pre></td></tr></table></figure>
+<p>会获得：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x&#x3D;mia</span><br></pre></td></tr></table></figure>
+<h2 id="例3"><a href="#例3" class="headerlink" title="例3"></a>例3</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">loves(vincent,mia). </span><br><span class="line">loves(marsellus,mia).  </span><br><span class="line">loves(pumpkin, honey_bunny). </span><br><span class="line">loves(honey_bunny, pumpkin). </span><br><span class="line"> </span><br><span class="line">jealous(X,Y):- loves(X,Z), loves(Y,Z). &#x2F;&#x2F;这里就相当于定义一个条件，看是否能找到X,Y,Z来满足</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?- jealous(marsellus,W).</span><br></pre></td></tr></table></figure>
+<p>会获得：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W&#x3D;vincent</span><br></pre></td></tr></table></figure>
+<h1 id="Syntax-of-Prolog"><a href="#Syntax-of-Prolog" class="headerlink" title="Syntax of Prolog"></a>Syntax of Prolog</h1><p>What exactly are facts, rules and queries built out of? </p>
+<ul>
+<li>A: Prolog terms<br><img src="https://img-blog.csdnimg.cn/20200402093053279.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<h2 id="Atoms"><a href="#Atoms" class="headerlink" title="Atoms"></a>Atoms</h2><ol>
+<li><p>A sequence of characters of upper-case letters, lower-case letters, digits, or underscore, starting with a lowercase letter<br>//标识符原子<br>– Examples: butch, big_kahuna_burger, playGuitar</p>
+</li>
+<li><p>An arbitrary sequence of characters enclosed in single quotes<br>//字符串原子：用引号括起来的字符串<br>– Examples: ‘Vincent’, ‘Five dollar shake’, ‘@$%’</p>
+</li>
+<li><p>A sequence of special characters //特殊原子<br>– Examples: : , ; . :-</p>
+</li>
+</ol>
+<h2 id="Numbers"><a href="#Numbers" class="headerlink" title="Numbers"></a>Numbers</h2><ul>
+<li>Integers: 12, -34, 22342 </li>
+<li>Floats: 34573.3234, 0.3435</li>
+</ul>
+<h2 id="Variables-变量"><a href="#Variables-变量" class="headerlink" title="Variables//变量"></a>Variables//变量</h2><p>A sequence of characters of uppercase letters, lower-case letters, digits, or underscore, starting with either an uppercase letter or an underscore<br>//用来表示暂时不能命名或者不需要命名的对象</p>
+<ul>
+<li>Examples: X, Y, Variable, Vincent, _tag</li>
+</ul>
+<h2 id="Complex-Terms-复合项"><a href="#Complex-Terms-复合项" class="headerlink" title="Complex Terms//复合项"></a>Complex Terms//复合项</h2><p>• Atoms, numbers and variables are building blocks for complex terms<br>• Complex terms are built out of a functor directly followed by a sequence of arguments<br>– Arguments are put in round brackets, separated by commas<br>– The functor must be an atom</p>
+<h3 id="Examples-of-complex-terms"><a href="#Examples-of-complex-terms" class="headerlink" title="Examples of complex terms"></a>Examples of complex terms</h3><ol>
+<li><p>Examples we have seen before:<br>– playsAirGuitar(jody)<br>– loves(vincent, mia)<br>– jealous(marsellus, W) </p>
+</li>
+<li><p>Complex terms inside complex terms:<br>– hide(X,father(father(father(butch))))</p>
+</li>
+</ol>
+<h2 id="Arity-参数数量"><a href="#Arity-参数数量" class="headerlink" title="Arity//参数数量"></a>Arity//参数数量</h2><p>The number of arguments a complex term has is called its arity</p>
+<ul>
+<li>Examples:<br>woman(mia) is a term with arity 1<br>loves(vincent,mia) has arity 2<br>father(father(butch)) arity 1</li>
+</ul>
+<h3 id="Arity-is-important"><a href="#Arity-is-important" class="headerlink" title="Arity is important"></a>Arity is important</h3><ul>
+<li>You can define two predicates with the same functor but with different arity</li>
+<li>Prolog would treat this as two different predicates! </li>
+<li>In Prolog documentation, arity of a predicate is usually indicated with the suffix “/“ followed by a number to indicate the arity<h3 id="Example-of-Arity"><a href="#Example-of-Arity" class="headerlink" title="Example of Arity"></a>Example of Arity</h3><img src="https://img-blog.csdnimg.cn/20200402093855962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<p><a href="https://wenku.baidu.com/view/00464e4be45c3b3567ec8b2e.html" target="_blank" rel="noopener">点它能获取更多知识</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Prolog/"># Prolog</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/03/31/%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E5%92%8C/">最大连续子序列和</a>
+            
+            
+            <a class="next" rel="next" href="/2020/03/25/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98-%E6%A8%A1%E6%9D%BF/">最长公共子序列问题(LCS)-模板</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

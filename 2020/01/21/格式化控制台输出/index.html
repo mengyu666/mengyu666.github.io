@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>格式化控制台输出 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">格式化控制台输出</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 21, 2020&nbsp;&nbsp;22:04:39</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>调用方法：System.out.printf(format,item1,item2,……,itemk);<br>format:   类似”%5.2f”，不在字符串中要加双引号，在字符串中不用双引号。</p>
+<p>格式限定符：指定每项该如何显示。</p>
+<p>常见的格式限定符</p>
+<table>
+<thead>
+<tr>
+<th align="center">限定符</th>
+<th align="center">输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">%b</td>
+<td align="center">boolean布尔值</td>
+</tr>
+<tr>
+<td align="center">&amp;c</td>
+<td align="center">character字符</td>
+</tr>
+<tr>
+<td align="center">%d</td>
+<td align="center">decimal Integer十进制整数</td>
+</tr>
+<tr>
+<td align="center">%f</td>
+<td align="center">float—point number浮点数（要匹配浮点型值）</td>
+</tr>
+<tr>
+<td align="center">%e</td>
+<td align="center">scientific number representation 标准科学计数法形式的数 （要匹配浮点型值）</td>
+</tr>
+<tr>
+<td align="center">%s</td>
+<td align="center">string字符串</td>
+</tr>
+</tbody></table>
+<p><strong>项与格式限定符必须在顺序，数量和类型上相配</strong><br>如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">"%d"</span>,<span class="string">"%f"</span>,count,amout);</span><br></pre></td></tr></table></figure>
+<p>count 对应%d，十进制整数<br>amount对应%f，浮点数</p>
+<p><strong>默认情况下，浮点数显示小数点后6位数字</strong><br>可以在标识符中指定宽度和精度：比如%5d    我指定它输出整数项的宽度至少位5，如果该条目的数字位数小于5，就在数字前面加空格；如果该条目的位数大于5，则自动增加宽度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> count=<span class="number">123.456</span></span><br><span class="line">System.out.printf(<span class="string">"%2.2f"</span>,count);<span class="comment">//123.46</span></span><br><span class="line">System.out.printf(<span class="string">"%2.3f"</span>,count);<span class="comment">//123.456</span></span><br><span class="line">System.out.printf(<span class="string">"%7.2f"</span>,count);<span class="comment">// 123.46</span></span><br><span class="line">System.out.printf(<span class="string">"%2.2e"</span>,count);<span class="comment">// 1.235e+02</span></span><br><span class="line">System.out.printf(<span class="string">"%2.4e"</span>,count);<span class="comment">// 1.2346e+02</span></span><br></pre></td></tr></table></figure>
+<p>宽度包括所有的部分，包括小数点，数字位，指数部分（1.23e+02算8位<br>类似上面的，小数点左边表示域宽度，小数点右边表示精度（小数点要保留几位）</p>
+<p>如果要在数字前添0而不是空格来凑齐位数，可以在一个数字限定符前面添加0</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">"%08.2f"</span>,<span class="number">123.45</span>);<span class="comment">//00123.45</span></span><br></pre></td></tr></table></figure>
+<p>默认情况下，输出是右对齐的，可以在格式限定符中方一个减号（-），指定该项在指定的域的输出中是左对齐的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">"%8.2f"</span>,count);<span class="comment">//  123.46</span></span><br><span class="line">System.out.printf(<span class="string">"%-8.2f"</span>,count);<span class="comment">//123.46</span></span><br></pre></td></tr></table></figure>
+
+<p><font color=red size=8>注意：</font><br>1.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">"%8.2f\n"</span>,count);</span><br><span class="line">System.out.printf(<span class="string">"%-8.2f"</span>,count);</span><br></pre></td></tr></table></figure>
+<p>结果是：<br>[-][-]123.46<br>123.46<br>2.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">"%2.2f"</span>,count);<span class="comment">//正确表达</span></span><br><span class="line">System.out.printf(<span class="string">"%.2f"</span>,count);<span class="comment">//正确表达</span></span><br><span class="line">System.out.printf(<span class="string">"%0.2f"</span>,count);<span class="comment">//error   错误表达</span></span><br></pre></td></tr></table></figure>
+<p>3.<br>使用符号%来标记格式限定符，要在格式限定符中输出字面值%，需要使用%%</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">"%.2f%%"</span>,<span class="number">75.234</span>);<span class="comment">//75.23%</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Java/"># Java</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/01/26/%E7%AD%9B%E6%95%B0%E6%B3%95%E6%B1%82%E7%B4%A0%E6%95%B0-%E6%95%B0%E5%AD%A6/">求素数</a>
+            
+            
+            <a class="next" rel="next" href="/2020/01/20/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0%EF%BC%8C%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/">第四章 数学函数，字符和字符串</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

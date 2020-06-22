@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>CodeForces-V-Queue | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">CodeForces-V-Queue</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 6, 2020&nbsp;&nbsp;21:59:16</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><a href="http://codeforces.com/problemset/problem/490/B" target="_blank" rel="noopener">题目点这里</a></p>
+<p>反思：原本是想用链表实现，有指向前一个，指向后一个，数据域的链表，但发现无法实现。于是就想能不能只用含有数据域和指向后一个指针的链表，以0为分界线，0左边的全部的是奇数号同学，0右边全部为偶数号同学。这样的偶数号的同学很好确定，但奇数号的同学没法确定，因为没有指向上一个元素的指针😭</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits&#x2F;stdc++.h&gt; </span><br><span class="line">using namespace std;</span><br><span class="line">int pre[222222],next[222222];</span><br><span class="line">int ans[222222];</span><br><span class="line">bool vis[222222];</span><br><span class="line">int main()&#123;</span><br><span class="line">	int n,a,b;</span><br><span class="line">	cin&gt;&gt;n; </span><br><span class="line">	for(int i &#x3D; 0;i &lt; n;i++)&#123;</span><br><span class="line">		cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">		next[a] &#x3D; b;  &#x2F;&#x2F;记录结点的后一个结点</span><br><span class="line">		pre[b] &#x3D; a;   &#x2F;&#x2F;记录结点的前一个结点</span><br><span class="line">		vis[a] &#x3D; vis[b] &#x3D; 1; &#x2F;&#x2F;记录都有什么编号出现过，用于查找位置为奇数同学</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#x2F;&#x2F;先记录偶数同学	</span><br><span class="line">	int pos &#x3D;2;&#x2F;&#x2F;偶数的位置</span><br><span class="line">	for(int i&#x3D;next[0];i;i&#x3D;next[i],pos+&#x3D;2)&#123; &#x2F;&#x2F;i是同学的编号，pos是位置的编号</span><br><span class="line">		ans[pos] &#x3D; i; &#x2F;&#x2F;记录在偶数位置上的同学的编号</span><br><span class="line">		vis[i] &#x3D;0; &#x2F;&#x2F;标记偶数的同学以方便找奇数的同学</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#x2F;&#x2F;找一个奇数位置的同学</span><br><span class="line">	for(pos &#x3D;1;;pos++)&#123;</span><br><span class="line">		if(vis[pos]) break;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;往前遍历，直到找到第一个奇数位置同学</span><br><span class="line">	while(pre[pos])&#123;</span><br><span class="line">		pos &#x3D; pre[pos];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	int start &#x3D;pos;&#x2F;&#x2F;记录奇数位置同学的编号</span><br><span class="line">	pos &#x3D;1;&#x2F;&#x2F;奇数的位置</span><br><span class="line">	for(int i&#x3D;start;i;i&#x3D;next[i],pos+&#x3D;2)&#123; &#x2F;&#x2F;i是同学的编号，pos是位置的编号</span><br><span class="line">		ans[pos] &#x3D; i; &#x2F;&#x2F;记录在奇数位置上的同学的编号</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#x2F;&#x2F;所有同学的编号都记录在ans数组</span><br><span class="line">	for(int i &#x3D;1;i&lt;&#x3D;n;i++)&#123;</span><br><span class="line">		cout&lt;&lt;ans[i];</span><br><span class="line">		if(i&lt;n) cout&lt;&lt;&quot; &quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有个小疑问：为什么是for(int i=start;i;i=next[i],pos+=2){ }，而不是for(int i=start;;i=next[i],pos+=2){ }，即中间加上i的原因🙃</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CodeForces-1500/"># CodeForces-1500</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/05/11/Prolog%E7%AC%94%E8%AE%B03-Recursion/">Prolog笔记3-Recursion</a>
+            
+            
+            <a class="next" rel="next" href="/2020/04/29/%E6%B4%9B%E8%B0%B7P1496%E7%81%AB%E7%83%A7%E8%B5%A4%E5%A3%81/">洛谷P1496火烧赤壁</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

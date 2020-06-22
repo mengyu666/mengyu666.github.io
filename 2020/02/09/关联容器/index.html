@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>关联容器 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">关联容器</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 9, 2020&nbsp;&nbsp;21:40:22</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>有时在需要大量增加，删除数据的同时，还要进行大量数据的查找<br>增加数据，删除数据，查找数据都能在log（N）复杂度中完成</p>
+<p>四种排序容器-能自动维持有序的特性</p>
+<h1 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h1><p>头文件：include<set></p>
+<h2 id="定义一个multiset-st-存放T类型的数据，并且能够自动排序，开始st为空"><a href="#定义一个multiset-st-存放T类型的数据，并且能够自动排序，开始st为空" class="headerlink" title="定义一个multiset st 存放T类型的数据，并且能够自动排序，开始st为空"></a>定义一个multiset st 存放T类型的数据，并且能够自动排序，开始st为空</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">multiset&lt;T&gt; st;</span><br></pre></td></tr></table></figure>
+<h2 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">st.multiset(要插入的元素);</span><br></pre></td></tr></table></figure>
+
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;要遍历multiset，访问multiset上的元素，需要迭代器,类似于指针</span><br><span class="line">multiset&lt;T&gt;::iterator i;</span><br><span class="line">st.begin() &#x2F;&#x2F;返回值类型为multiset&lt;T&gt;::iterator，是指向st中头一个元素的迭代器</span><br><span class="line"></span><br><span class="line">st.end() &#x2F;&#x2F;返回值类型为multiset&lt;T&gt;::iterator，是指向st中最后一个元素后面的迭代器（空）</span><br><span class="line"></span><br><span class="line">st.find() &#x2F;&#x2F;返回值类型为multiset&lt;T&gt;::iterator，是指向st中所查找的元素的迭代器；如果不存在，指向st.end()</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	multiset&lt;int&gt; st;</span><br><span class="line">	int a[10]&#x3D;&#123;2,3,5,4,6,1,8,9,0,7&#125;;</span><br><span class="line">	for(int i&#x3D;0;i&lt;10;i++)&#123;</span><br><span class="line">		st.insert(a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	multiset&lt;int&gt;::iterator i;</span><br><span class="line">	for(i&#x3D;st.begin();i!&#x3D;st.end();i++)&#123;</span><br><span class="line">		cout&lt;&lt;*i&lt;&lt;&quot; &quot;;&#x2F;&#x2F;0 1 2 3 4 5 6 7 8 9 </span><br><span class="line">	&#125;</span><br><span class="line">	i&#x3D;st.find(22);</span><br><span class="line">	cout&lt;&lt;*i&lt;&lt;endl;&#x2F;&#x2F;啥都没有 :(</span><br><span class="line">	st.insert(22);</span><br><span class="line">	i&#x3D;st.find(22);</span><br><span class="line">	cout&lt;&lt;*i&lt;&lt;endl; &#x2F;&#x2F;22 </span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">st.lower_bound(m);&#x2F;&#x2F;返回最靠后的迭代器it，使得[begin(),it)中的元素都在m前面</span><br><span class="line">st.upper_bound(m);&#x2F;&#x2F;返回最靠前的迭代器it，使得[it,end() )中的元素都在m后面</span><br><span class="line">sr.erase(m);&#x2F;&#x2F;删除元素m</span><br><span class="line">(</span><br><span class="line"> sr.erase(i);&#x2F;&#x2F;删除迭代器i指向的元素</span><br><span class="line">）</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;cin&gt;&gt;n;</span><br><span class="line">	multiset&lt;int&gt; st;</span><br><span class="line">	int a[10]&#x3D;&#123;2,3,5,4,6,1,8,9,0,7&#125;;</span><br><span class="line">	for(int i&#x3D;0;i&lt;10;i++)&#123;</span><br><span class="line">		st.insert(a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	multiset&lt;int&gt;::iterator i;</span><br><span class="line">	for(i&#x3D;st.begin();i!&#x3D;st.end();i++)&#123;</span><br><span class="line">		cout&lt;&lt;*i&lt;&lt;&quot; &quot;;&#x2F;&#x2F;0 1 2 3 4 5 6 7 8 9 </span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	i&#x3D;st.lower_bound(5); &#x2F;&#x2F;5</span><br><span class="line">	cout&lt;&lt;*i&lt;&lt;endl;</span><br><span class="line">	i&#x3D;st.upper_bound(7); &#x2F;&#x2F;8</span><br><span class="line">	cout&lt;&lt;*i&lt;&lt;endl;</span><br><span class="line">	st.erase(3);</span><br><span class="line">	for(i&#x3D;st.begin();i!&#x3D;st.end();i++)&#123;</span><br><span class="line">		cout&lt;&lt;*i&lt;&lt;&quot; &quot;;&#x2F;&#x2F;0 1 2 4 5 6 7 8 9 </span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义排序规则"><a href="#自定义排序规则" class="headerlink" title="自定义排序规则"></a>自定义排序规则</h2><h1 id="set"><a href="#set" class="headerlink" title="set"></a>set</h1><h2 id="pair模板"><a href="#pair模板" class="headerlink" title="pair模板"></a>pair模板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pair&lt;T1,T2&gt;等价于：</span><br><span class="line"></span><br><span class="line">struct&#123;</span><br><span class="line">	T1 first;</span><br><span class="line">	T2 second;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-C/"># 数据结构-C++</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/02/10/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">优先队列</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/08/%E8%BE%93%E5%85%A5/">输入方法</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

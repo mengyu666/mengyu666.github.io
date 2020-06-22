@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>分数 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">分数</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 21, 2020&nbsp;&nbsp;19:03:47</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="分数的表示和化简"><a href="#分数的表示和化简" class="headerlink" title="分数的表示和化简"></a>分数的表示和化简</h1><h2 id="分数的表示"><a href="#分数的表示" class="headerlink" title="分数的表示"></a>分数的表示</h2><p>用假分数的方式来表示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">struct Fraction&#123;</span><br><span class="line">	long long up, down;  &#x2F;&#x2F;分子，分母</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>三条规则：</p>
+<ul>
+<li>down为非负数，如果分数为负，令分子up为负</li>
+<li>如果该分数恰为0，那么规定其分子为0，分母为1</li>
+<li>分子和分母没有除了1以外的公约数<h2 id="分数的化简"><a href="#分数的化简" class="headerlink" title="分数的化简"></a>分数的化简</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Fraction reduction(Fraction result)&#123;</span><br><span class="line">	if(result.down&lt;0)&#123; &#x2F;&#x2F;这一步必须有，虽然暂时想不出来为什么，可能是因为符号吧🙃</span><br><span class="line">		result.up &#x3D; -result.up;</span><br><span class="line">		result.down &#x3D; -result.down;</span><br><span class="line">	&#125;</span><br><span class="line">	if(result.up &#x3D;&#x3D; 0)&#123;</span><br><span class="line">		result.down &#x3D; 1;</span><br><span class="line">	&#125;else&#123; &#x2F;&#x2F;约分</span><br><span class="line">		int d &#x3D; __gcd(abs(result.up), abs(result.down));  &#x2F;&#x2F;找分子，分母的最大公约数</span><br><span class="line">		result.up &#x2F;&#x3D; d; &#x2F;&#x2F;约去最大公约数</span><br><span class="line">		result.down &#x2F;&#x3D; d; &#x2F;&#x2F;约去最大公约数</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="分数的四则运算"><a href="#分数的四则运算" class="headerlink" title="分数的四则运算"></a>分数的四则运算</h1><h2 id="分数的加法"><a href="#分数的加法" class="headerlink" title="分数的加法"></a>分数的加法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Fraction add(Fraction f1, Fraction f2)&#123;</span><br><span class="line">	Fraction result;</span><br><span class="line">	result.up &#x3D; f1.up * f2.down + f2.up * f1.down;</span><br><span class="line">	result.down &#x3D; f1.down * f2.down;</span><br><span class="line">	return reduction(result); &#x2F;&#x2F;注意这里是化简了</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分数的减法"><a href="#分数的减法" class="headerlink" title="分数的减法"></a>分数的减法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Fraction minu(Fraction f1, Fraction f2)&#123;</span><br><span class="line">	Fraction result;</span><br><span class="line">	result.up &#x3D; f1.up * f2.down - f2.up*f1.down;</span><br><span class="line">	result.down &#x3D; f1.down * f2.down;</span><br><span class="line">	return reduction(result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分数的乘法"><a href="#分数的乘法" class="headerlink" title="分数的乘法"></a>分数的乘法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Fraction multi(Fraction f1, Fraction f2)&#123;</span><br><span class="line">	Fraction result;</span><br><span class="line">	result.up &#x3D; f1.up * f2.up;</span><br><span class="line">	result.down &#x3D; f1.down * f2.down;</span><br><span class="line">	return reduction(result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分数的除法"><a href="#分数的除法" class="headerlink" title="分数的除法"></a>分数的除法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Fraction divide(Fraction f1, Fraction f2)&#123;</span><br><span class="line">	Fraction result;</span><br><span class="line">	result.up &#x3D; f1.up * f2.down;</span><br><span class="line">	result.down &#x3D; f1.down * f2.up;</span><br><span class="line">	return reduction(result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="分数的输出"><a href="#分数的输出" class="headerlink" title="分数的输出"></a>分数的输出</h1><p>分三类：</p>
+<ul>
+<li>分数是整数，即分母down为1</li>
+<li>分数是真分数，直接输出</li>
+<li>分数是假分数，即分子up&gt;分母down<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void showResult(Fraction r)&#123;</span><br><span class="line">	r &#x3D; reduction(r); &#x2F;&#x2F;首先化简分数</span><br><span class="line">	if(r.down &#x3D;&#x3D; 1) printf(&quot;%lld&quot;,r.up);&#x2F;&#x2F;分数是整数，即分母down为1，直接输出分子</span><br><span class="line">	else if(abs(r.up)&gt;abs(r.down))&#123; &#x2F;&#x2F;假分数</span><br><span class="line">		printf(&quot;%d %d %d&quot;,r.up&#x2F;r.down,abs(r.up)%r.down, r.down); </span><br><span class="line">	&#125;else&#123; &#x2F;&#x2F;真分数</span><br><span class="line">		printf(&quot;%d%d&quot;, r.up, r.down);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%95%B0%E5%AD%A6/"># 数学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/04/24/Processing/">Processing</a>
+            
+            
+            <a class="next" rel="next" href="/2020/04/21/%E9%93%BE%E8%A1%A8-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">链表</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>
