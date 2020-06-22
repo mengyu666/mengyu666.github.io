@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>CSS选择器 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">CSS选择器</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 20, 2020&nbsp;&nbsp;15:37:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h1><h2 id="常用选择器："><a href="#常用选择器：" class="headerlink" title="常用选择器："></a>常用选择器：</h2><h3 id="元素选择器"><a href="#元素选择器" class="headerlink" title="元素选择器"></a>元素选择器</h3><p>根据标签名选定指定元素<br>如：p{},h1{},div{}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="id选择器"><a href="#id选择器" class="headerlink" title="id选择器"></a>id选择器</h3><p>根据元素的id属性值选定一个元素<br>语法： #id属性值{}<br>如：#red{}, #black{}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#red&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">&lt;h1 id&#x3D;&quot;red&quot;&gt; 我是红色&lt;&#x2F;h1&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="类选择器"><a href="#类选择器" class="headerlink" title="类选择器"></a>类选择器</h3><p>根据元素的class属性选中一组属性<br>语法： .class属性值{}</p>
+<p>class是一个标签的属性，它和id类似，不同的是class可以重复使用</p>
+<ul>
+<li>可以通过class属性来为元素分组</li>
+<li>可以同时为一个元素指定多个class属性，多个class属性使用空格隔开<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.blue&#123;</span><br><span class="line">    color: blue;</span><br><span class="line">&#125;</span><br><span class="line">.hahaha&#123;</span><br><span class="line">    size: 20px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;h1 class&#x3D;&quot;blue&quot;&gt; 我变蓝了&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;p class&#x3D;&quot;blue&quot;&gt; 我也变蓝了&lt;&#x2F;p&gt;</span><br><span class="line">&lt;p class&#x3D;&quot;blue   hahaha&quot;&gt; 我也变蓝了&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="通配选择器"><a href="#通配选择器" class="headerlink" title="通配选择器"></a>通配选择器</h3>选中页面中所有的元素<br>语法：*<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">    color: red;</span><br><span class="line">    font-size: 30px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="复合选择器"><a href="#复合选择器" class="headerlink" title="复合选择器"></a>复合选择器</h2><h3 id="交集选择器"><a href="#交集选择器" class="headerlink" title="交集选择器"></a>交集选择器</h3>选中同时符合多个条件的元素<br>语法：选择器1选择器2选择器3#id属性值……{}<br>交集选择器如果有元素选择器，必须以元素选择器开头<br>举个例子：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;将class为red的颜色设为红色</span><br><span class="line">.red&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;将class为red的字体大小设为30px</span><br><span class="line">div.red&#123;</span><br><span class="line">    font-size: 30px;</span><br><span class="line">&#125;</span><br><span class="line">……</span><br><span class="line">&lt;div class&#x3D;&quot;red&quot;&gt; 我是div&lt;&#x2F;div&gt;</span><br><span class="line">&lt;p class&#x3D;&quot;red&quot;&gt;我是p元素&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="并集选择器-分组选择器"><a href="#并集选择器-分组选择器" class="headerlink" title="并集选择器(分组选择器)"></a>并集选择器(分组选择器)</h3>同时选择多个选择器对应的元素<br>语法：选择器1,选择器2,选择器3,#id属性值……{}<br>举个例子：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p,div&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt; 我是div&lt;&#x2F;div&gt;</span><br><span class="line">&lt;p&gt;我是p元素&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="关系选择器"><a href="#关系选择器" class="headerlink" title="关系选择器"></a>关系选择器</h2>不同元素之间关系：</li>
+<li>父元素：<ul>
+<li>直接包含子元素的元素叫做父元素</li>
+</ul>
+</li>
+<li>子元素：<ul>
+<li>直接被父元素包含的元素是子元素</li>
+</ul>
+</li>
+<li>祖先元素：<ul>
+<li>直接或间接包含后代的元素</li>
+<li>一个元素的父元素也是它的祖先元素</li>
+</ul>
+</li>
+<li>后代元素：<ul>
+<li>直接或间接被祖先元素包含的元素</li>
+</ul>
+</li>
+<li>兄弟元素：<ul>
+<li>拥有相同父元素的元素是兄弟元素<h3 id="子元素选择器"><a href="#子元素选择器" class="headerlink" title="子元素选择器"></a>子元素选择器</h3>选定指定父元素的指定子元素<br>语法：父元素 &gt; 子元素{}</li>
+</ul>
+</li>
+<li>父元素，子元素可以用复合选择器混合表示<br>如：父元素：p.aaa  既是p元素，且class属性又是aaa</li>
+<li>可以连着写 div &gt; p &gt; span{}<br>选中子代的子代<h3 id="后代元素选择器"><a href="#后代元素选择器" class="headerlink" title="后代元素选择器"></a>后代元素选择器</h3>可以选中指定元素内的指定后代元素<br>语法：祖先 后代{}</li>
+<li>祖先元素，后代元素可以用复合选择器混合表示<br>如：祖先元素：p.aaa  既是p元素，且class属性又是aaa</li>
+<li>可以连着写 div p span{}<br>选中后代的后代<br>如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p div&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="兄弟元素选择器"><a href="#兄弟元素选择器" class="headerlink" title="兄弟元素选择器"></a>兄弟元素选择器</h3>选择<strong>下一个</strong>兄弟<br>语法：前一个标签+下一个标签{}</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">div+div&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">    &lt;div&gt;我是第1个div&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;div&gt;我是第2个&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;h1&gt;我是第3个&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;h2&gt;我是第4个&lt;&#x2F;h2&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<div>我是第1个div</div>
+<p style="color: red;">我是第2个div</p> 
+<h1>我是第3个</h1>
+<h2>我是第4个</h2>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">div+div&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">    &lt;div&gt;我是第1个&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;span&gt;我是第2个&lt;&#x2F;span&gt;</span><br><span class="line">    &lt;h1&gt;我是第3个&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;h2&gt;我是第4个&lt;&#x2F;h2&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+
+<div>我是第1个</div>
+<span>我是第2个</span>
+<h1>我是第3个</h1>
+<h2>我是第4个</h2>
+
+<p>选择<strong>下面所有的</strong>兄弟<br>语法：前一个标签~下一个标签{}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">div div&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">    &lt;div&gt;我是第1个div&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;div&gt;我是第2个div&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;div&gt;我是第3个div&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;div&gt;我是第4个div&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<div>我是第1个div</div>
+<p style="color: red;">我是第2个div</p> 
+<p style="color: red;">我是第3个div</p> 
+<p style="color: red;">我是第4个div</p> 
+
+<h2 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h2><h3 id="属性名"><a href="#属性名" class="headerlink" title="[属性名]"></a>[属性名]</h3><p>选择含有指定属性的元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">        p[title]&#123;</span><br><span class="line">            color: orange;</span><br><span class="line">        &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;abc&quot;&gt;少小离家老大回&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;abcdef&quot;&gt;乡音无改鬓毛衰&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;helloabc&quot;&gt;儿童相见不相识&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;笑问客从何处来&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;秋水共长天一色&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;落霞与孤鹜齐飞&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+<p style="color: orange;">少小离家老大回</p>
+<p style="color: orange;">乡音无改鬓毛衰</p>
+<p style="color: orange;">儿童相见不相识</p>
+<p>笑问客从何处来</p>
+<p>秋水共长天一色</p>
+<p>落霞与孤鹜齐飞</p>
+
+<h3 id="属性名-属性值"><a href="#属性名-属性值" class="headerlink" title="[属性名=属性值]"></a>[属性名=属性值]</h3><p>选择含有指定属性和属性值的元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">        p[title&#x3D;&quot;abc&quot;]&#123;</span><br><span class="line">            color: orange;</span><br><span class="line">        &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;abc&quot;&gt;少小离家老大回&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;abcdef&quot;&gt;乡音无改鬓毛衰&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;helloabc&quot;&gt;儿童相见不相识&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;笑问客从何处来&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;秋水共长天一色&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;落霞与孤鹜齐飞&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+<p style="color: orange;">少小离家老大回</p>
+<p>乡音无改鬓毛衰</p>
+<p>儿童相见不相识</p>
+<p>笑问客从何处来</p>
+<p>秋水共长天一色</p>
+<p>落霞与孤鹜齐飞</p>
+
+<h3 id="属性名-属性值-1"><a href="#属性名-属性值-1" class="headerlink" title="[属性名^=属性值]"></a>[属性名^=属性值]</h3><p>选择属性值以指定值开头的元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">        p[title^&#x3D;&quot;abc&quot;]&#123;</span><br><span class="line">            color: orange;</span><br><span class="line">        &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;abc&quot;&gt;少小离家老大回&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;abcdef&quot;&gt;乡音无改鬓毛衰&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;helloabc&quot;&gt;儿童相见不相识&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;笑问客从何处来&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;秋水共长天一色&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;落霞与孤鹜齐飞&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+<p style="color: orange;">少小离家老大回</p>
+<p style="color: orange;">乡音无改鬓毛衰</p>
+<p>儿童相见不相识</p>
+<p>笑问客从何处来</p>
+<p>秋水共长天一色</p>
+<p>落霞与孤鹜齐飞</p>
+
+<h3 id="属性名-属性值-2"><a href="#属性名-属性值-2" class="headerlink" title="[属性名$=属性值]"></a>[属性名$=属性值]</h3><p>选择属性值以指定值结尾的元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">        p[title$&#x3D;&quot;abc&quot;]&#123;</span><br><span class="line">            color: orange;</span><br><span class="line">        &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;abc&quot;&gt;少小离家老大回&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;abcdef&quot;&gt;乡音无改鬓毛衰&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;helloabc&quot;&gt;儿童相见不相识&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;笑问客从何处来&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;秋水共长天一色&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;落霞与孤鹜齐飞&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+<p style="color: orange;">少小离家老大回</p>
+<p>乡音无改鬓毛衰</p>
+<p style="color: orange;">儿童相见不相识</p>
+<p>笑问客从何处来</p>
+<p>秋水共长天一色</p>
+<p>落霞与孤鹜齐飞</p>
+
+<h3 id="属性名-属性值-3"><a href="#属性名-属性值-3" class="headerlink" title="[属性名*=属性值]"></a>[属性名*=属性值]</h3><p>选择属性值中<strong>含有</strong>某值的元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">        p[title*^*&#x3D;&quot;abc&quot;]&#123;</span><br><span class="line">            color: orange;</span><br><span class="line">        &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;abc&quot;&gt;少小离家老大回&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;abcdef&quot;&gt;乡音无改鬓毛衰&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p title&#x3D;&quot;helloabc&quot;&gt;儿童相见不相识&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;笑问客从何处来&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;秋水共长天一色&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;落霞与孤鹜齐飞&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+<p style="color: orange;">少小离家老大回</p>
+<p style="color: orange;">乡音无改鬓毛衰</p>
+<p style="color: orange;">儿童相见不相识</p>
+<p>笑问客从何处来</p>
+<p>秋水共长天一色</p>
+<p>落霞与孤鹜齐飞</p>
+
+<h2 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h2><p>伪类（不存在的类，特殊的类）</p>
+<ul>
+<li>伪类用来描述一个元素的特殊状态<br>比如：第一个子元素、被点击的元素、鼠标移入的元素…</li>
+<li>伪类一般情况下都是使用:开头<br>:first-child 第一个子元素<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">div p:first-child </span><br><span class="line">selects all first child p elements that are in a div.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ul &gt; li:first-child&#123;</span><br><span class="line">            color: red;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;    </span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;span&gt;我是一个span&lt;&#x2F;span&gt;</span><br><span class="line">        &lt;li&gt;第〇个&lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li&gt;第一个&lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li&gt;第二个&lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li&gt;第三个&lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li&gt;第四个&lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li&gt;第五个&lt;&#x2F;li&gt;</span><br><span class="line">    &lt;&#x2F;ul&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+始终第一个红</li>
+</ul>
+<p>:nth-child() 选中第n个子元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;选中第3个子元素</span><br><span class="line">    ul &gt; li:nth-child(3)&#123;</span><br><span class="line">            color: red;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>特殊值：<br>    n n的范围0到正无穷  即选中所有<br>    2n 或 even 表示选中偶数位的元素<br>    2n+1 或 odd 表示选中奇数位的元素</p>
+<p><strong>以上这些伪类都是根据所有的子元素进行排序</strong><br>:first-of-type<br>:last-of-type<br>:nth-of-type()<br><strong>这几个伪类的功能和上述的类似，不通点是他们是在同类型元素中进行排序</strong><br>:not() 否定伪类<br>将符合条件的元素从选择器中去除<br>可以套娃</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ul &gt; li:not(:nth-of-type(3))&#123;</span><br><span class="line">            color: yellowgreen;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="a元素的伪类"><a href="#a元素的伪类" class="headerlink" title="a元素的伪类"></a>a元素的伪类</h2><h3 id="link-（a元素独有）"><a href="#link-（a元素独有）" class="headerlink" title=":link （a元素独有）"></a>:link （a元素独有）</h3><p>用来表示没访问过的链接（正常的链接）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a:link&#123;</span><br><span class="line">    color: red;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="visited（a元素独有）"><a href="#visited（a元素独有）" class="headerlink" title=":visited（a元素独有）"></a>:visited（a元素独有）</h3><p>用来表示访问过的链接<br>由于隐私的原因，所以visited这个伪类只能修改链接的颜色</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a:visited&#123;</span><br><span class="line">        color: orange; </span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="hover"><a href="#hover" class="headerlink" title=":hover"></a>:hover</h3><p>用来表示鼠标移入的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a:hover&#123;</span><br><span class="line">    color: aqua;</span><br><span class="line">    font-size: 50px;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="active"><a href="#active" class="headerlink" title=":active"></a>:active</h3><p>用来表示鼠标点击</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a:active&#123;</span><br><span class="line">    color: yellowgreen;            </span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="伪元素选择器"><a href="#伪元素选择器" class="headerlink" title="伪元素选择器"></a>伪元素选择器</h2><p>伪元素，表示页面中一些特殊的并不真实的存在的元素（特殊的位置）<br>伪元素使用 :: 开头<br>::first-letter 表示第一个字母<br>::first-line 表示第一行<br>::selection 表示选中的内容<br>::before 元素的开始<br>::after 元素的最后</p>
+<ul>
+<li>before 和 after 必须结合content属性来使用</li>
+<li>通过content添加的元素无法用鼠标选中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    p::first-letter&#123;</span><br><span class="line">        font-size: 50px;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    p::first-line&#123;</span><br><span class="line">        background-color: yellow; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    p::selection&#123;</span><br><span class="line">        background-color: greenyellow;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     div::before&#123;</span><br><span class="line">        content: &#39;abc&#39;;</span><br><span class="line">        color: red;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    div::after&#123;</span><br><span class="line">        content: &#39;haha&#39;;</span><br><span class="line">        color: blue;</span><br><span class="line">    &#125; </span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="选择器的权重"><a href="#选择器的权重" class="headerlink" title="选择器的权重"></a>选择器的权重</h1><p>样式的冲突</p>
+<ul>
+<li>当我们通过不同的选择器，选中相同的元素，并且为相同的样式设置不同的值时，此时就发生了样式的冲突。</li>
+<li>发生样式冲突时，应用哪个样式由选择器的权重（优先级）决定</li>
+</ul>
+<p>选择器的权重</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>权重</th>
+<th>权重通俗的解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内联样式</td>
+<td>1,0,0,0</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>id选择器</td>
+<td>0,1,0,0</td>
+<td>100</td>
+</tr>
+<tr>
+<td>类和伪类选择器</td>
+<td>0,0,1,0</td>
+<td>10</td>
+</tr>
+<tr>
+<td>元素选择器</td>
+<td>0,0,0,1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>通配选择器</td>
+<td>0,0,0,0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>继承的样式</td>
+<td>没有优先级</td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>比较优先级时，需要将所有的选择器的优先级进行相加计算，最后优先级越高，则越优先显示（分组选择器是单独计算的）</li>
+<li>选择器的累加不会超过其最大的数量级，类选择器再高也不会超过id选择器</li>
+<li>如果优先级计算后相同，此时则优先使用靠下的样式（后面的样式覆盖了前面的样式）</li>
+<li>可以在某一个样式的后边添加 !important ，则此时该样式会获取到最高的优先级，甚至超过内联样式<br>  注意：在开发中这个玩意一定要慎用！</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/06/20/css-%E6%A0%B7%E5%BC%8F%E7%9A%84%E7%BB%A7%E6%89%BF/">CSS样式的继承</a>
+            
+            
+            <a class="next" rel="next" href="/2020/06/19/css-CSS%E7%AE%80%E4%BB%8B/">CSS简介</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

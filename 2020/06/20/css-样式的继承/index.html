@@ -12,7 +12,7 @@
 
 
 
-<title>html | rmy&#39;s blog</title>
+<title>CSS样式的继承 | rmy&#39;s blog</title>
 
 
 
@@ -173,7 +173,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">html</h1>
+            <h1 class="post-title">CSS样式的继承</h1>
             
                 <div class="post-meta">
                     
@@ -182,7 +182,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">June 17, 2020&nbsp;&nbsp;12:13:29</a>
+                        Date: <a href="#">June 20, 2020&nbsp;&nbsp;16:31:00</a>
                         </span>
                     
                     
@@ -191,19 +191,12 @@
         </header>
 
         <div class="post-content">
-            <h1 id="HTML-基础"><a href="#HTML-基础" class="headerlink" title="HTML 基础"></a>HTML 基础</h1><h2 id="HTML-标题"><a href="#HTML-标题" class="headerlink" title="HTML 标题"></a>HTML 标题</h2><p>通过<h1> - <h6> 标签来定义的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;这是一个标题&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;h3&gt;这是一个标题&lt;&#x2F;h3&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="HTML-段落"><a href="#HTML-段落" class="headerlink" title="HTML 段落"></a>HTML 段落</h2><p>HTML 段落是通过标签 <p> 来定义的.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;这是一个段落。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;p&gt;这是另外一个段落。&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="HTML-链接"><a href="#HTML-链接" class="headerlink" title="HTML 链接"></a>HTML 链接</h2><p>HTML 链接是通过标签 <a> 来定义的.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.runoob.com&quot;&gt;这是一个链接&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="HTML-图像"><a href="#HTML-图像" class="headerlink" title="HTML 图像"></a>HTML 图像</h2><p>HTML 图像是通过标签 <img> 来定义的.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src&#x3D;&quot;&#x2F;images&#x2F;logo.png&quot; width&#x3D;&quot;258&quot; height&#x3D;&quot;39&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="HTML-文档的基本结构"><a href="#HTML-文档的基本结构" class="headerlink" title="HTML 文档的基本结构"></a>HTML 文档的基本结构</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;!--html的根标签(元素)--&gt;</span><br><span class="line">&lt;!--head时网页的头部，其中的内容不会在网页中直接出现，帮助浏览器或搜索引擎来解析网页--&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">	&lt;!-- title之间的内容会显示在工具条上  --&gt;</span><br><span class="line">		&lt;title&gt;这是标题&lt;&#x2F;title&gt;</span><br><span class="line">	&lt;&#x2F;head&gt;</span><br><span class="line">	&lt;!--body是网页的子元素，表示网页的主体，网页中所有的可见内容都应该写在body里--&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">	&lt;!-- 这是注释--&gt;</span><br><span class="line">	……</span><br><span class="line">	……</span><br><span class="line">	&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="一些小东西"><a href="#一些小东西" class="headerlink" title="一些小东西"></a>一些小东西</h2><h3 id="文档声明"><a href="#文档声明" class="headerlink" title="文档声明"></a>文档声明</h3><p>告诉浏览器当前页面的版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">声明这个页面使用html5编码的</span><br><span class="line">放在代码的最最前头</span><br><span class="line">--&gt;</span><br><span class="line">&lt;!doctype html&gt;</span><br><span class="line">或&lt;!Doctype HTML&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="UTF-8编码"><a href="#UTF-8编码" class="headerlink" title="UTF-8编码"></a>UTF-8编码</h3><p>可以通过meta标签来设置网页的字符集，避免出现乱码问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">	&lt;!--meta标签用来设置网页的元数据--&gt;</span><br><span class="line">	&lt;!--可以通过meta标签来设置网页的字符集，避免出现乱码问题--&gt;</span><br><span class="line">	&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;</span><br><span class="line">		&lt;!-- title之间的内容会显示在工具条上  --&gt;</span><br><span class="line">		&lt;title&gt;这是标题&lt;&#x2F;title&gt;</span><br><span class="line">	&lt;&#x2F;head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">	&lt;!-- 这是注释--&gt;</span><br><span class="line">	……</span><br><span class="line">	……</span><br><span class="line">	&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+            <h1 id="样式的继承"><a href="#样式的继承" class="headerlink" title="样式的继承"></a>样式的继承</h1><p> 样式的继承，我们为一个元素设置的样式同时也会应用到它的后代元素上</p>
+<ul>
+<li>继承是发生在祖先后后代之间的</li>
+<li>继承的设计是为了方便我们的开发，利用继承我们可以将一些通用的样式统一设置到共同的祖先元素上，这样只需设置一次即可让所有的元素都具有该样式<br>注意：<br>并不是所有的样式都会被继承：比如 背景相关的，布局相关等的这些样式都不会被继承。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line"></span><br><span class="line">        body&#123;</span><br><span class="line">            font-size: 44px;</span><br><span class="line">        &#125;</span><br><span class="line">        div&#123;</span><br><span class="line">            color: yellowgreen</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    &lt;&#x2F;style&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">        我是一个p元素</span><br><span class="line">        &lt;span&gt;我是p元素中的span&lt;&#x2F;span&gt;</span><br><span class="line">    &lt;&#x2F;p&gt;</span><br><span class="line">    &lt;span&gt;我是p元素外的span&lt;&#x2F;span&gt;</span><br><span class="line"></span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        我是div</span><br><span class="line">        &lt;span&gt;</span><br><span class="line">            我是div中的span</span><br><span class="line">            &lt;em&gt;我是span中的em&lt;&#x2F;em&gt;</span><br><span class="line">        &lt;&#x2F;span&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+效果展示如下：<br><img src="https://img-blog.csdnimg.cn/20200620165430223.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
 
         </div>
 
@@ -232,7 +225,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/HTML/"># HTML</a>
+                        <a href="/tags/CSS/"># CSS</a>
                     
                         
                 </span>
@@ -245,10 +238,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/06/18/html-html%E4%BB%8B%E7%BB%8D/">html介绍</a>
+                <a class="prev" rel="prev" href="/2020/06/20/css-%E5%8D%95%E4%BD%8D_%E9%A2%9C%E8%89%B2/">CSS单位——颜色</a>
             
             
-            <a class="next" rel="next" href="/2020/06/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-Java/">数据结构-Vector-Java</a>
+            <a class="next" rel="next" href="/2020/06/20/css-%E9%80%89%E6%8B%A9%E5%99%A8/">CSS选择器</a>
             
         </section>
 

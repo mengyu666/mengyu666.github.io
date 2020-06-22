@@ -12,7 +12,7 @@
 
 
 
-<title>隆重庆祝 | rmy&#39;s blog</title>
+<title>CSS基本语法 | rmy&#39;s blog</title>
 
 
 
@@ -107,11 +107,73 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">隆重庆祝</h1>
+            <h1 class="post-title">CSS基本语法</h1>
             
                 <div class="post-meta">
                     
@@ -120,7 +182,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">June 22, 2020&nbsp;&nbsp;21:04:01</a>
+                        Date: <a href="#">June 19, 2020&nbsp;&nbsp;15:37:00</a>
                         </span>
                     
                     
@@ -129,7 +191,17 @@
         </header>
 
         <div class="post-content">
-            <p>隆重庆祝，6月22日晚21时47分36秒<br>blog终于更了！！！</p>
+            <p>&lt; style&gt;&lt; /style&gt;  是特殊的区域，要用CSS语法</p>
+<h1 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line"></span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure>
+<h1 id="CSS-基本语法："><a href="#CSS-基本语法：" class="headerlink" title="CSS 基本语法："></a>CSS 基本语法：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">p&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">--------------------------</span><br><span class="line">h1&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>选择器：通过选择器可以选中页面中的指定元素<br>如p的作用就是选中页面中的所有p元素</li>
+<li>声明块：通过声明块指定要为元素设置的样式(就是大括号中内容)<ul>
+<li>声明块由一个个声明组成</li>
+<li>声明是一个名值对结构，一个样式名对应一个样式值   格式： 名:值；</li>
+</ul>
+</li>
+</ul>
 
         </div>
 
@@ -157,6 +229,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
                 </span>
             </div>
             <div>
@@ -167,8 +243,10 @@
         </section>
         <section class="post-nav">
             
+                <a class="prev" rel="prev" href="/2020/06/19/css-CSS%E7%AE%80%E4%BB%8B/">CSS简介</a>
             
-            <a class="next" rel="next" href="/2020/06/20/css-%E5%8D%95%E4%BD%8D_%E9%A2%9C%E8%89%B2/">CSS单位——颜色</a>
+            
+            <a class="next" rel="next" href="/2020/06/18/html-%E5%9B%BE%E7%89%87_%E5%86%85%E8%81%94%E6%A1%86%E6%9E%B6_%E9%9F%B3%E8%A7%86%E9%A2%91/">图片_内联框架_音视频</a>
             
         </section>
 

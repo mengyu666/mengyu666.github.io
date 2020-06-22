@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>列表,相对路径与超链接 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">列表,相对路径与超链接</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 18, 2020&nbsp;&nbsp;16:16:29</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><p>在html中也可以创建列表，html列表一共有三种：</p>
+<ul>
+<li>有序列表</li>
+<li>无序列表</li>
+<li>定义列表<h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2>无序列表，使用ul标签来创建无序列表<br>使用li表示列表项<br>大概是没序号的感觉<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;结构&lt;&#x2F;li&gt;</span><br><span class="line">    &lt;li&gt;表现&lt;&#x2F;li&gt;</span><br><span class="line">    &lt;li&gt;行为&lt;&#x2F;li&gt;</span><br><span class="line">&lt;&#x2F;ul&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h2>有序列表，使用ol标签来创建无序列表<br>使用li表示列表项<br>大概是有序号的感觉<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ol&gt;</span><br><span class="line">    &lt;li&gt;结构&lt;&#x2F;li&gt;</span><br><span class="line">    &lt;li&gt;表现&lt;&#x2F;li&gt;</span><br><span class="line">    &lt;li&gt;行为&lt;&#x2F;li&gt;</span><br><span class="line">&lt;&#x2F;ol&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="定义列表"><a href="#定义列表" class="headerlink" title="定义列表"></a>定义列表</h2><p>定义列表，使用dl标签来创建一个定义列表<br>使用dt来表示定义的内容<br>使用dd来对内容进行解释说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dl&gt;</span><br><span class="line">    &lt;dt&gt;结构&lt;&#x2F;dt&gt;</span><br><span class="line">    &lt;dd&gt;结构表示网页的结构，结构用来规定网页中哪里是标题，哪里是段落&lt;&#x2F;dd&gt;</span><br><span class="line">    &lt;dd&gt;结构表示网页的结构，结构用来规定网页中哪里是标题，哪里是段落&lt;&#x2F;dd&gt;</span><br><span class="line">    &lt;dd&gt;结构表示网页的结构，结构用来规定网页中哪里是标题，哪里是段落&lt;&#x2F;dd&gt;</span><br><span class="line">&lt;&#x2F;dl&gt;</span><br></pre></td></tr></table></figure>
+
+<p>列表之间可以套娃</p>
+<h1 id="相对路径"><a href="#相对路径" class="headerlink" title="相对路径"></a>相对路径</h1><p>当需要跳转到一个服务器内部的页面时，一般会使用相对路径<br>相对路径都会使用.或..开头<br>./<br>../<br>./可以省略不写，如果不写./也不写../就相当于写了./</p>
+<ul>
+<li><p>./ 表示当前文件所在的目录</p>
+</li>
+<li><p>../表示当前文件所有目录的上一级目录</p>
+<h1 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h1><p>超链接可以让我们从一个页面跳转到其他页面，或者是当前页面的其他的位置<br>使用 a 标签来定义超链接<br>超链接是也是一个行内元素，在a标签中可以嵌套除它自身外的任何元素</p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2></li>
+<li><p>href 指定跳转的目标路径</p>
+<ul>
+<li>值可以是一个外部网站的地址</li>
+<li>也可以写一个内部页面的地址<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.baidu.com&quot;&gt;超链接&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href&#x3D;&quot;xxxx.html&quot;&gt;xxxx&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>target 用来指定超链接打开的位置<br>可选值：</p>
+<ul>
+<li>_self 默认值 在当前页面中打开超链接</li>
+<li>_blank 在一个新的要么中打开超链接<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.baidu.com&quot; target&#x3D;&quot;_self&quot;&gt;百度&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.baidu.com&quot; target&#x3D;&quot;_blank&quot;&gt;百度&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="占位符与id属性"><a href="#占位符与id属性" class="headerlink" title="占位符与id属性"></a>占位符与id属性</h2>可以直接将超链接的href属性设置为#，这样点击超链接以后页面不会发生跳转，而是转到当前页面的顶部的位置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href&#x3D;&quot;#&quot;&gt;这是一个新的超链接&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure>
+可以使用 javascript:; 来作为href的属性，此时点击这个超链接什么也不会发生<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href&#x3D;&quot;javascript:;&quot;&gt;这是一个新的超链接&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure>
+id属性（唯一不重复的）</li>
+</ul>
+</li>
+<li><p>每一个标签都可以添加一个id属性</p>
+</li>
+<li><p>id属性就是元素的唯一标识，同一个页面中不能出现重复的id属性    </p>
+</li>
+<li><p>id属性必须要以字母开头</p>
+</li>
+</ul>
+<p>可以跳转到页面的指定位置，只需将href属性设置 #+目标元素的id属性值<br>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt; id&#x3D;&quot;BV2344&quot; xxxxxxx&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<p>举个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;a id&#x3D;&quot;front&quot; href&#x3D;&quot;#middle&quot;&gt;去中间&lt;&#x2F;a&gt;</span><br><span class="line">&lt;a id&#x3D;&quot;middle&quot; href&#x3D;&quot;#&quot;&gt;回到顶部&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure>
+<p>这样，点击页面开头去中间的超链接就会去中间位置，点击中间位置的超链接就会回到顶部</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/HTML/"># HTML</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/06/18/html-%E5%9B%BE%E7%89%87_%E5%86%85%E8%81%94%E6%A1%86%E6%9E%B6_%E9%9F%B3%E8%A7%86%E9%A2%91/">图片_内联框架_音视频</a>
+            
+            
+            <a class="next" rel="next" href="/2020/06/18/html-%E6%A0%87%E7%AD%BE_%E5%AE%9E%E4%BD%93/">标签与实体</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>
