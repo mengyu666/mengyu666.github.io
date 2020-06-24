@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>CSS盒子模型 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">CSS盒子模型</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 23, 2020&nbsp;&nbsp;16:31:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>盒模型、盒子模型、框模型（box model）</p>
+<ul>
+<li>CSS将页面中的所有元素都设置为了一个矩形的盒子</li>
+<li>将元素设置为矩形的盒子后，对页面的布局就变成将不同的盒子摆放到不同的位置</li>
+<li>每一个盒子都由一下几个部分组成：<ul>
+<li>内容区（content）</li>
+<li>边框（border）</li>
+<li>内边距（padding）</li>
+<li>外边距（margin）</li>
+</ul>
+</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;box1&quot;&gt;我是一个盒子模型&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>盒子模型的属性（即上面组成的属性在选择器中设置）</strong></p>
+<p>举个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">        .box1&#123;</span><br><span class="line">            width: 200px;</span><br><span class="line">            height: 200px;</span><br><span class="line">            background-color: #bfa;</span><br><span class="line">            border-width: 10px;</span><br><span class="line">            border-color: red;</span><br><span class="line">            border-style: solid;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="内容区（content）"><a href="#内容区（content）" class="headerlink" title="内容区（content）"></a>内容区（content）</h1><p>内容区（content），元素中的所有的子元素和文本内容都在内容区中排列<br>内容区的大小由width 和 height两个属性来设置</p>
+<ul>
+<li>width 设置内容区的宽度</li>
+<li>height 设置内容区的高度   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">        .box1&#123;</span><br><span class="line">            width: 200px;</span><br><span class="line">            height: 200px;</span><br><span class="line">            background-color: #bfa; &#x2F;&#x2F;设置内容区的背景颜色</span><br><span class="line">        &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="边框（border）"><a href="#边框（border）" class="headerlink" title="边框（border）"></a>边框（border）</h1>边框（border），边框属于盒子边缘，边框里边属于盒子内部，出了边框都是盒子的外部<br>边框的大小会影响到整个盒子的大小<br>要设置边框，需要至少设置三个样式：</li>
+<li>边框的宽度 border-width</li>
+<li>边框的颜色 border-color</li>
+<li>边框的样式 border-style<br>举个例子：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">        .box1&#123;</span><br><span class="line">            ……</span><br><span class="line">            ……</span><br><span class="line">            border-width: 10px;</span><br><span class="line">            border-color: red;</span><br><span class="line">            border-style: solid;</span><br><span class="line">            ……</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="边框的宽度-border-width"><a href="#边框的宽度-border-width" class="headerlink" title="边框的宽度 border-width"></a>边框的宽度 border-width</h2>border-width: 10px;<br>默认值，一般都是 3个像素（就是不写的时候）<br>border-width可以用来指定四个方向的边框的宽度</li>
+</ul>
+<p>值的情况：<br>四个值：|上|右|下|左|</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border-width: 10px 30px 40px 5px;</span><br></pre></td></tr></table></figure>
+<p>三个值：|上|左右|下|</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border-width: 10px 30px 5px;</span><br></pre></td></tr></table></figure>
+<p>两个值：|上下|左右|</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border-width: 10px 5px;</span><br></pre></td></tr></table></figure>
+<p>一个值：|上下左右|</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border-width: 10px;</span><br></pre></td></tr></table></figure>
+
+<p> 除了border-width还有一组 border-xxx-width<br> xxx可以是 top right bottom left<br>用来单独指定某一个边的宽度<br>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">border-top-width: 10px;</span><br><span class="line">border-left-width: 30px;</span><br></pre></td></tr></table></figure>
+<h2 id="边框的颜色-border-color"><a href="#边框的颜色-border-color" class="headerlink" title="边框的颜色 border-color"></a>边框的颜色 border-color</h2><p>border-color：red;<br>用来指定边框的颜色，<br>border-color也可以省略不写，如果省略了则自动使用<strong>color</strong>的颜色值;如果color也未指定，则是color的默认值：黑色<br>同样可以分别指定四个边的边框，规则和border-width一样</p>
+<h2 id="边框的样式-border-style"><a href="#边框的样式-border-style" class="headerlink" title="边框的样式 border-style"></a>边框的样式 border-style</h2><p>border-style的默认值是none 表示没有边框<br>同样可以分别指定四个边的边框，规则和border-width一样<br> solid 表示实线<br>dotted 点状虚线<br>dashed 虚线<br>double 双线<br>……</p>
+<h1 id="border简写属性"><a href="#border简写属性" class="headerlink" title="border简写属性"></a>border简写属性</h1><p>通过该属性可以同时设置边框所有的相关样式，并且没有顺序要求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border: solid 10px orange;</span><br></pre></td></tr></table></figure>
+<p>除了border以外还有四个 border-xxx</p>
+<ul>
+<li>border-top</li>
+<li>border-right</li>
+<li>border-bottom</li>
+<li>border-left<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">border-left: 10px solid red;</span><br><span class="line">border-bottom: 10px solid red;</span><br></pre></td></tr></table></figure>
+<h2 id="trick"><a href="#trick" class="headerlink" title="trick"></a>trick</h2>比若说想要三个边有颜色，一条边没有颜色</li>
+</ul>
+<p>可以这样，分别设置三条边的属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">border-top: 10px solid red;</span><br><span class="line">border-left: 10px solid red;</span><br><span class="line"> border-bottom: 10px solid red;</span><br></pre></td></tr></table></figure>
+<p>也可以利用覆盖的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">border: 10px red solid;</span><br><span class="line">border-right: none;</span><br></pre></td></tr></table></figure>
+<h1 id="内边框"><a href="#内边框" class="headerlink" title="内边框"></a>内边框</h1><p>内边距（padding）</p>
+<ul>
+<li>内容区和边框之间的距离是内边距</li>
+<li>一共有四个方向的内边距：<ul>
+<li>padding-top</li>
+<li>padding-right</li>
+<li>padding-bottom</li>
+<li>padding-left</li>
+</ul>
+</li>
+<li>内边距的设置会影响到盒子的大小</li>
+<li>背景颜色会延伸到内边距上</li>
+</ul>
+<p>所以，如果想让内边距的颜色与背景颜色不同，可以采用套娃</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv&#x3D;&quot;X-UA-Compatible&quot; content&#x3D;&quot;ie&#x3D;edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        .box1&#123;</span><br><span class="line">            &#x2F;&#x2F;内容区</span><br><span class="line">            width: 200px;</span><br><span class="line">            height: 200px;</span><br><span class="line">            background-color: #bfa;</span><br><span class="line">            &#x2F;&#x2F;边框</span><br><span class="line">            border: 10px orange solid;</span><br><span class="line">            &#x2F;&#x2F;内边框</span><br><span class="line">            padding: 30px ;</span><br><span class="line">        &#125;</span><br><span class="line">          &#x2F;**</span><br><span class="line">          *用以区分 内容区 和 内边框</span><br><span class="line">          *inner 标识了子元素</span><br><span class="line">          *box1 标识了父元素</span><br><span class="line">          *子元素的所占空间相对于父元素的内容区为100%，即子元素的内容区与父元素的内容区大小一致，不是**位置**一致</span><br><span class="line">          *这里对父元素的pedding进行操作</span><br><span class="line">          *</span><br><span class="line">          *&#x2F;</span><br><span class="line">        .inner&#123;</span><br><span class="line">            width: 100%;</span><br><span class="line">            height: 100%;</span><br><span class="line">            background-color: yellow;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;&#x2F;style&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;box1&quot;&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;inner&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+<p>一个盒子的<strong>可见框</strong>的大小，由<strong>内容区</strong>，<strong>内边距</strong>和<strong>边框</strong>共同决定，<br>所以在计算盒子大小时，需要将这三个区域加到一起计算</p>
+<p> padding 内边距的简写属性，可以同时指定四个方向的内边距,规则和border-width 一样<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">padding: 10px 20px 30px 40px;</span><br><span class="line">padding: 10px 20px 30px ;</span><br><span class="line">padding: 10px 20px ; </span><br><span class="line">padding: 30px ;</span><br></pre></td></tr></table></figure></p>
+<h1 id="外边框"><a href="#外边框" class="headerlink" title="外边框"></a>外边框</h1><ul>
+<li><p>外边距不会影响盒子可见框的大小</p>
+</li>
+<li><p>但是外边距会影响盒子的位置</p>
+</li>
+<li><p>一共有四个方向的外边距：</p>
+<ul>
+<li>margin-top<ul>
+<li>上外边距，设置一个正值，元素会向下移动</li>
+</ul>
+</li>
+<li>margin-right<ul>
+<li>默认情况下设置margin-right不会产生任何效果</li>
+</ul>
+</li>
+<li>margin-bottom<ul>
+<li>下外边距，设置一个正值，其下边的元素会向下移动</li>
+</ul>
+</li>
+<li>margin-left<ul>
+<li>左外边距，设置一个正值，元素会向右移动</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>margin也可以设置负值，如果是负值则元素会向相反的方向移动</p>
+</li>
+<li><p>元素在页面中是按照自左向右的顺序排列的，所以默认情况下如果我们设置的左和上外边距则会移动元素自身，而设置下和右外边距会移动其他元素</p>
+</li>
+<li><p>margin的简写属性</p>
+<ul>
+<li>margin 可以同时设置四个方向的外边距 ，用法和padding一样</li>
+</ul>
+</li>
+<li><p>margin会影响到盒子实际占用空间</p>
+<h1 id="盒子的水平布局"><a href="#盒子的水平布局" class="headerlink" title="盒子的水平布局"></a>盒子的水平布局</h1><p>元素在其父元素中水平方向的位置由以下几个属性共同决定</p>
+</li>
+<li><p>margin-left</p>
+</li>
+<li><p>border-left</p>
+</li>
+<li><p>padding-left</p>
+</li>
+<li><p>width</p>
+</li>
+<li><p>padding-right</p>
+</li>
+<li><p>border-right</p>
+</li>
+<li><p>margin-right</p>
+</li>
+</ul>
+<p>一个元素在其父元素中，水平布局必须要满足以下的等式<br>margin-left+border-left+padding-left+width+padding-right+border-right+margin-right = 其父元素内容区的宽度 （必须满足）</p>
+<p>以上等式必须满足，如果相加结果使等式不成立，则称为过度约束，则等式会自动调整</p>
+<ul>
+<li>如果这七个值中没有为 auto 的情况，则浏览器会自动调整margin-right值以使等式满足<br>例如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 + 0 + 0 + 200 + 0 + 0 + 0 &#x3D; 800</span><br></pre></td></tr></table></figure>
+则会调整为：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 + 0 + 0 + 200 + 0 + 0 + 600 &#x3D; 800</span><br></pre></td></tr></table></figure></li>
+<li>如果某个值为auto，则会自动调整为auto的那个值以使等式成立 <ul>
+<li>可以设为anto的有三个值：<ul>
+<li>width   （width的默认值是auto，即width不写的时候是auto）</li>
+<li>margin-left</li>
+<li>maring-right</li>
+</ul>
+</li>
+<li>只设置width为anto，其他的不设置<br>那此时 子元素的width 等于父元素的width， 效果就是子元素把父元素撑满</li>
+</ul>
+</li>
+<li>如果将一个宽度和一个外边距设置为auto，则宽度会调整到最大，设置为auto的外边距会自动为0</li>
+<li>如果将三个值都设置为auto，则外边距都是0，宽度最大</li>
+<li>如果将两个外边距设置为auto，宽度固定值，则会将外边距设置为相同的值<br>[此时一个元素在其父元素中水平居中]</li>
+</ul>
+<p>居中代码；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">width:xxxpx;</span><br><span class="line">margin:0 auto;   &#x2F;&#x2F;上下外边距为0，左右外边距为auto</span><br></pre></td></tr></table></figure>
+
+<h1 id="盒子的垂直布局"><a href="#盒子的垂直布局" class="headerlink" title="盒子的垂直布局"></a>盒子的垂直布局</h1><p>如果父元素不设置高度，默认情况下被内容撑开</p>
+<p>子元素是在父元素的内容区中排列的</p>
+<p>如果子元素的大小超过了父元素，则子元素会从父元素中溢出<br>                    使用 overflow 属性来设置父元素如何处理溢出的子元素</p>
+<p>可选值：</p>
+<ul>
+<li>visible，默认值 子元素会从父元素中溢出，在父元素外部的位置显示</li>
+<li>hidden 溢出内容将会被裁剪不会显示</li>
+<li>scroll 生成两个滚动条，通过滚动条来查看完整的内容</li>
+<li>auto 根据需要生成滚动条</li>
+</ul>
+<p>也可以分别对x轴方向，y轴方向进行overflow处理</p>
+<ul>
+<li>overflow-x</li>
+<li>overflow-y</li>
+</ul>
+<h1 id="外边距的折叠"><a href="#外边距的折叠" class="headerlink" title="外边距的折叠"></a>外边距的折叠</h1><ul>
+<li><p>相邻的垂直方向外边距会发生重叠现象</p>
+<ul>
+<li><p>兄弟元素</p>
+<ul>
+<li><p>兄弟元素间的相邻垂直外边距会取两者之间的较大值（两者都是正值）</p>
+</li>
+<li><p>特殊情况：</p>
+<ul>
+<li>如果相邻的外边距一正一负，则取两者的和</li>
+<li>如果相邻的外边距都是负值，则取两者中绝对值较大的</li>
+</ul>
+</li>
+<li><p>兄弟元素之间的外边距的重叠，对于开发是有利的，所以我们不需要进行处理</p>
+</li>
+</ul>
+</li>
+<li><p>父子元素</p>
+</li>
+<li><p>父子元素间相邻外边距，子元素的会传递给父元素（上外边距）</p>
+</li>
+<li><p>父子外边距的折叠会影响到页面的布局，必须要进行处理</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>先说两种不怎么好的方法：</p>
+<p>想达到这个效果：<br><img src="https://img-blog.csdnimg.cn/20200624113806454.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 通过上内边距处理（不用外边距）<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> &lt;style&gt;</span><br><span class="line">     .box3&#123;</span><br><span class="line">        width: 200px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: #bfa;</span><br><span class="line">        padding-top: 100px;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .box4&#123;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: orange;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;box3&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;box4&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>也可以通过设置边框 （不让他们相邻）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    .box3&#123;</span><br><span class="line">        width: 200px;</span><br><span class="line">        height: 200px;</span><br><span class="line">        background-color: #bfa;</span><br><span class="line">        &#x2F;* padding-top: 100px; *&#x2F;</span><br><span class="line">        border-top: 1px #bfa solid;  &#x2F;&#x2F;看这里！！！</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .box4&#123;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: orange;</span><br><span class="line">        margin-top: 99px;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;box3&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;box4&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/06/24/css-%E6%B5%8F%E8%A7%88%E5%99%A8%E9%BB%98%E8%AE%A4%E6%A0%B7%E5%BC%8F/">CSS浏览器的默认样式</a>
+            
+            
+            <a class="next" rel="next" href="/2020/06/23/css-%E6%96%87%E6%A1%A3%E6%B5%81/">CSS文档流</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

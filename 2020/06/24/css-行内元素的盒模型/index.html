@@ -12,7 +12,7 @@
 
 
 
-<title>隆重庆祝 | rmy&#39;s blog</title>
+<title>CSS行内元素的盒模型 | rmy&#39;s blog</title>
 
 
 
@@ -107,11 +107,73 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">隆重庆祝</h1>
+            <h1 class="post-title">CSS行内元素的盒模型</h1>
             
                 <div class="post-meta">
                     
@@ -120,16 +182,45 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">June 22, 2020&nbsp;&nbsp;21:04:01</a>
+                        Date: <a href="#">June 24, 2020&nbsp;&nbsp;14:53:00</a>
                         </span>
                     
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                            
+                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            <p>隆重庆祝，6月22日晚21时47分36秒<br>blog终于更了！！！</p>
+            <h1 id="行内元素的盒模型"><a href="#行内元素的盒模型" class="headerlink" title="行内元素的盒模型"></a>行内元素的盒模型</h1><ul>
+<li>行内元素不支持设置宽度(width)和高度(height)<ul>
+<li>行内元素内容区大小由内容本身决定</li>
+<li>比如说可以用font-size调整大小</li>
+</ul>
+</li>
+<li>行内元素可以设置padding，但是垂直方向padding不会影响页面的布局</li>
+<li>行内元素可以设置border，垂直方向的border不会影响页面的布局</li>
+<li>行内元素可以设置margin，垂直方向的margin不会影响布局</li>
+</ul>
+<h1 id="display-用来设置元素显示的类型"><a href="#display-用来设置元素显示的类型" class="headerlink" title="display 用来设置元素显示的类型"></a>display 用来设置元素显示的类型</h1><p>这个属性在选择器中设置<br>可选值：</p>
+<ul>
+<li>inline 将元素设置为行内元素</li>
+<li>block 将元素设置为块元素</li>
+<li>inline-block 将元素设置为行内块元素 <pre><code>行内块，既可以设置宽度和高度又不会独占一行</code></pre></li>
+<li>table 将元素设置为一个表格</li>
+<li>none 元素不在页面中显示</li>
+</ul>
+<h1 id="visibility-用来设置元素的显示状态"><a href="#visibility-用来设置元素的显示状态" class="headerlink" title="visibility 用来设置元素的显示状态"></a>visibility 用来设置元素的显示状态</h1><p>这个属性在选择器中设置<br>可选值：</p>
+<ul>
+<li>visible 默认值，元素在页面中正常显示</li>
+<li>hidden 元素在页面中隐藏 不显示，但是依然占据页面的位置</li>
+</ul>
 
         </div>
 
@@ -157,6 +248,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
                 </span>
             </div>
             <div>
@@ -167,10 +262,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/06/23/css-%E6%96%87%E6%A1%A3%E6%B5%81/">CSS文档流</a>
             
-            
-            <a class="next" rel="next" href="/2020/06/20/css-%E5%8D%95%E4%BD%8D_%E9%A2%9C%E8%89%B2/">CSS单位——颜色</a>
+            <a class="next" rel="next" href="/2020/06/24/css-%E6%B5%8F%E8%A7%88%E5%99%A8%E9%BB%98%E8%AE%A4%E6%A0%B7%E5%BC%8F/">CSS浏览器的默认样式</a>
             
         </section>
 

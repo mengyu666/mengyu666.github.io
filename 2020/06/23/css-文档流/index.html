@@ -12,7 +12,7 @@
 
 
 
-<title>隆重庆祝 | rmy&#39;s blog</title>
+<title>CSS文档流 | rmy&#39;s blog</title>
 
 
 
@@ -107,11 +107,73 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">隆重庆祝</h1>
+            <h1 class="post-title">CSS文档流</h1>
             
                 <div class="post-meta">
                     
@@ -120,16 +182,44 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">June 22, 2020&nbsp;&nbsp;21:04:01</a>
+                        Date: <a href="#">June 23, 2020&nbsp;&nbsp;16:31:00</a>
                         </span>
                     
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                            
+                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            <p>隆重庆祝，6月22日晚21时47分36秒<br>blog终于更了！！！</p>
+            <h1 id="文档流"><a href="#文档流" class="headerlink" title="文档流"></a>文档流</h1><ul>
+<li>网页是一个多层的结构，一层摞着一层<ul>
+<li>通过CSS可以分别为每一层来设置样式</li>
+<li>作为用户来讲只能看到最顶上一层</li>
+<li>这些层中，最底下的一层称为文档流，文档流是网页的基础，我们所创建的元素默认都是在文档流中进行排列</li>
+<li>对于我们来元素主要有两个状态<ul>
+<li>在文档流中</li>
+<li>不在文档流中（脱离文档流）<h2 id="元素在文档流中有什么特点"><a href="#元素在文档流中有什么特点" class="headerlink" title="元素在文档流中有什么特点"></a>元素在文档流中有什么特点</h2>块元素</li>
+</ul>
+</li>
+<li>块元素会在页面中独占一行(自上向下垂直排列)</li>
+<li>默认宽度是父元素的全部（会把父元素撑满）</li>
+<li>默认高度是被内容撑开（子元素）</li>
+</ul>
+</li>
+</ul>
+<p>行内元素</p>
+<ul>
+<li>行内元素不会独占页面的一行，只占自身的大小</li>
+<li>行内元素在页面中左向右水平排列，如果一行之中不能容纳下所有的行内元素，则元素会换到第二行继续自左向右排列（书写习惯一致）</li>
+<li>行内元素的默认宽度和高度都是被内容撑开（即如果没有内容，则什么也不会显示）</li>
+</ul>
 
         </div>
 
@@ -157,6 +247,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
                 </span>
             </div>
             <div>
@@ -167,10 +261,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/06/23/css-%E6%96%87%E6%A1%A3%E6%B5%81/">CSS文档流</a>
+                <a class="prev" rel="prev" href="/2020/06/23/css-%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/">CSS盒子模型</a>
             
             
-            <a class="next" rel="next" href="/2020/06/20/css-%E5%8D%95%E4%BD%8D_%E9%A2%9C%E8%89%B2/">CSS单位——颜色</a>
+            <a class="next" rel="next" href="/2020/06/22/hello-world/">隆重庆祝</a>
             
         </section>
 
