@@ -12,7 +12,7 @@
 
 
 
-<title>Java_data_structure_链表.md | rmy&#39;s blog</title>
+<title>Java_data_structure_链表 | rmy&#39;s blog</title>
 
 
 
@@ -173,7 +173,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Java_data_structure_链表.md</h1>
+            <h1 class="post-title">Java_data_structure_链表</h1>
             
                 <div class="post-meta">
                     
@@ -226,9 +226,11 @@
 <h2 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">public class DoubleLinkedListDemo &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		&#x2F;&#x2F; 测试</span><br><span class="line">		System.out.println(&quot;双向链表的测试&quot;);</span><br><span class="line">		&#x2F;&#x2F; 先创建节点</span><br><span class="line">		HeroNode2 hero1 &#x3D; new HeroNode2(1, &quot;宋江&quot;, &quot;及时雨&quot;);</span><br><span class="line">		HeroNode2 hero2 &#x3D; new HeroNode2(2, &quot;卢俊义&quot;, &quot;玉麒麟&quot;);</span><br><span class="line">		HeroNode2 hero3 &#x3D; new HeroNode2(4, &quot;吴用&quot;, &quot;智多星&quot;);</span><br><span class="line">		HeroNode2 hero4 &#x3D; new HeroNode2(5, &quot;林冲&quot;, &quot;豹子头&quot;);</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F; 创建一个双向链表</span><br><span class="line">		DoubleLinkedList doubleLinkedList &#x3D; new DoubleLinkedList();</span><br><span class="line">		doubleLinkedList.add(hero1);</span><br><span class="line">		doubleLinkedList.add(hero2);</span><br><span class="line">		doubleLinkedList.add(hero3);</span><br><span class="line">		doubleLinkedList.add(hero4);</span><br><span class="line">		</span><br><span class="line">		doubleLinkedList.list();</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F; 修改</span><br><span class="line">		HeroNode2 newHeroNode &#x3D; new HeroNode2(3, &quot;公孙胜&quot;, &quot;入云龙&quot;);</span><br><span class="line">		</span><br><span class="line">		doubleLinkedList.update(newHeroNode);</span><br><span class="line">		System.out.println(&quot;修改后的链表情况&quot;);</span><br><span class="line">		doubleLinkedList.list();</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;在链表的指定位置添加</span><br><span class="line">		doubleLinkedList.addByOrder(newHeroNode);</span><br><span class="line">		System.out.println(&quot;修改后的链表情况&quot;);</span><br><span class="line">		doubleLinkedList.list();</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F; 删除</span><br><span class="line">		doubleLinkedList.del(3);</span><br><span class="line">		System.out.println(&quot;删除后的链表情况~~&quot;);</span><br><span class="line">		doubleLinkedList.list();</span><br><span class="line">		</span><br><span class="line">			</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1></li>
 </ul>
-<p>单链表源码分析：&lt;a href=”/download/SingleLinkedListDemo.java” download=”SingleLinkedListDemo.java” color: orange;&gt;点击下载</a></p>
-<p>双向链表源码分析：&lt;a href=”/download/DoubleLinkedListDemo.java” download=”DoubleLinkedListDemo.java” color: orange;&gt;点击下载</a></p>
-
+<p><a href="/download/SingleLinkedListDemo.java" download="SingleLinkedListDemo.java">单链表源码分析</a></p>
+<p><a href="/download/reset.css" download="reset.css">reset.css文件 点击下载</a></p>
+<h3>
+双向链表源码分析：<a href="/download/DoubleLinkedListDemo.java" download="DoubleLinkedListDemo.java" color: orange;>点击下载</a>
+</h3>
         </div>
 
         
@@ -269,7 +271,7 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/07/01/java_algorithm_%E6%8E%92%E5%BA%8F/">Java_data_structure_链表.md</a>
+                <a class="prev" rel="prev" href="/2020/07/01/java_algorithm_%E6%8E%92%E5%BA%8F/">java_algorithm_排序</a>
             
             
             <a class="next" rel="next" href="/2020/06/26/css-%E9%98%B4%E5%BD%B1_%E8%BD%AE%E5%BB%93_%E5%9C%86%E8%A7%92/">CSS阴影_轮廓_圆角</a>
