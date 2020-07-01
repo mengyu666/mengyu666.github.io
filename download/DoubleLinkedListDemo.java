@@ -10,6 +10,7 @@ public class DoubleLinkedListDemo {
 		HeroNode2 hero2 = new HeroNode2(2, "卢俊义", "玉麒麟");
 		HeroNode2 hero3 = new HeroNode2(4, "吴用", "智多星");
 		HeroNode2 hero4 = new HeroNode2(5, "林冲", "豹子头");
+		
 		// 创建一个双向链表
 		DoubleLinkedList doubleLinkedList = new DoubleLinkedList();
 		doubleLinkedList.add(hero1);
