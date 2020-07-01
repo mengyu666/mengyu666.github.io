@@ -12,7 +12,7 @@
 
 
 
-<title>CSS阴影_轮廓_圆角 | rmy&#39;s blog</title>
+<title>Java_data_structure_链表.md | rmy&#39;s blog</title>
 
 
 
@@ -107,73 +107,11 @@
             <div class="container">
     
     
-        <div class="post-toc">
-    <div class="tocbot-list">
-    </div>
-    <div class="tocbot-list-menu">
-        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
-        <a onclick="go_top()">Back to top</a>
-        <a onclick="go_bottom()">Go to bottom</a>
-    </div>
-</div>
-
-<script>
-    document.ready(
-        function () {
-            tocbot.init({
-                tocSelector: '.tocbot-list',
-                contentSelector: '.post-content',
-                headingSelector: 'h1, h2, h3, h4, h5',
-                collapseDepth: 1,
-                orderedList: false,
-                scrollSmooth: true,
-            })
-        }
-    )
-
-    function expand_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 6,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "collapse_toc()");
-        b.innerHTML = "Collapse all"
-    }
-
-    function collapse_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 1,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "expand_toc()");
-        b.innerHTML = "Expand all"
-    }
-
-    function go_top() {
-        window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
-</script>
-    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">CSS阴影_轮廓_圆角</h1>
+            <h1 class="post-title">Java_data_structure_链表.md</h1>
             
                 <div class="post-meta">
                     
@@ -182,14 +120,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">June 26, 2020&nbsp;&nbsp;9:20:00</a>
+                        Date: <a href="#">July 1, 2020&nbsp;&nbsp;16:00:00</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                                <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
                             
                         </span>
                     
@@ -198,25 +136,7 @@
         </header>
 
         <div class="post-content">
-            <h1 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">box-shadow: 10px 10px  #225555;</span><br></pre></td></tr></table></figure>
-<p>box-shadow 用来设置元素的阴影效果，阴影不会影响页面布局 </p>
-<ul>
-<li>第一个值 水平偏移量 设置阴影的水平位置 正值向右移动 负值向左移动</li>
-<li>第二个值 垂直偏移量 设置阴影的水平位置 正值向下移动 负值向上移动</li>
-<li>第三个值 阴影的模糊半径</li>
-<li>第四个值 阴影的颜色</li>
-</ul>
-<p>不影响页面布局</p>
-<h1 id="轮廓"><a href="#轮廓" class="headerlink" title="轮廓"></a>轮廓</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">outline: orange 1px solid;</span><br></pre></td></tr></table></figure>
-<p>outline 用来设置元素的轮廓线，用法和border一模一样<br>轮廓和边框不同的点，就是轮廓不会影响到可见框的大小，不影响页面布局</p>
-<h1 id="圆角"><a href="#圆角" class="headerlink" title="圆角"></a>圆角</h1><p>border-radius: x   用来设置圆角 圆角设置的圆的半径大小<br>border-radius: x / y    用来设置（椭）圆角 圆角设置的圆的水平半径大小   垂直半径大小</p>
-<p>border-top-left-radius:<br>border-top-right-radius<br>border-bottom-left-radius:<br>border-bottom-right-radius:  </p>
-<p> border-radius: x  y    用来设置（椭）圆角 圆角设置的圆的水平半径大小   垂直半径大小<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;border-top-left-radius:50px 100px;</span><br></pre></td></tr></table></figure></p>
-<pre><code> border-radius 可以分别指定四个角的圆角
-四个值 左上 右上 右下 左下
-三个值 左上 右上/左下 右下 
-两个值 左上/右下 右上/左下  </code></pre><p>将元素设置为一个圆形</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border-radius: 50%;</span><br></pre></td></tr></table></figure>
+            
         </div>
 
         
@@ -244,7 +164,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/CSS/"># CSS</a>
+                        <a href="/tags/Java-%E7%AE%97%E6%B3%95/"># Java_算法</a>
                     
                         
                 </span>
@@ -257,10 +177,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/07/01/java_data_structure_%E9%93%BE%E8%A1%A8/">Java_data_structure_链表.md</a>
             
-            
-            <a class="next" rel="next" href="/2020/06/24/css-%E6%B5%8F%E8%A7%88%E5%99%A8%E9%BB%98%E8%AE%A4%E6%A0%B7%E5%BC%8F/">CSS浏览器的默认样式</a>
+            <a class="next" rel="next" href="/2020/07/01/java_data_structure_%E9%93%BE%E8%A1%A8/">Java_data_structure_链表.md</a>
             
         </section>
 
