@@ -82,7 +82,9 @@
     
 
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
+</head>
 <body>
     <div class="wrapper">
         <header>
@@ -237,7 +239,29 @@
         </header>
 
         <div class="post-content">
-            <h1 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h1><ul>
+            
+        <div id="aplayer-SwglWkUB" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-SwglWkUB"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "女孩",
+              author: "黄鲲",
+              url: "http://music.163.com/song/media/outer/url?id=1391638888.mp3",
+              pic: "/music/lrc/女孩-黄鲲.lrc",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+
+<h1 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h1><ul>
 <li><p>线性查找</p>
 </li>
 <li><p>二分查找</p>
@@ -324,7 +348,7 @@
         <section class="post-nav">
             
             
-            <a class="next" rel="next" href="/2020/07/02/test/">test</a>
+            <a class="next" rel="next" href="/2020/07/02/java_algorithm_%E6%8E%92%E5%BA%8F/">java_algorithm_排序</a>
             
         </section>
 
