@@ -150,7 +150,7 @@ template {
   font-display: swap;
 }
 html {
-  font-family: Lantinghei SC, 'lanting', PingFang SC, Seguo UI, Microsoft Yahei, Arial;
+  font-family: 'Microsoft Jhenghei', Lantinghei SC, 'lanting', PingFang SC, Seguo UI, Microsoft Yahei, Arial;
 }
 html::-webkit-scrollbar {
   width: 8px;
@@ -747,7 +747,7 @@ header label {
   padding-bottom: 0.3em;
 }
 .post-content h1::before {
-  content: "";
+  content: "#";
   margin-right: 5px;
   color: #2d96bd;
 }
