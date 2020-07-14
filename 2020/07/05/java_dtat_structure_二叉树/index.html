@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>Java_data_structure_二叉树 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Java_data_structure_二叉树</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 5, 2020&nbsp;&nbsp;16:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="概念与常用术语"><a href="#概念与常用术语" class="headerlink" title="概念与常用术语"></a>概念与常用术语</h1><h2 id="树的常用术语"><a href="#树的常用术语" class="headerlink" title="树的常用术语"></a>树的常用术语</h2><ul>
+<li>节点</li>
+<li>根节点:位于树中最顶端的节点就是整棵树的根节点</li>
+<li>父节点</li>
+<li>子节点</li>
+<li>叶子节点 (没有子节点的节点)</li>
+<li>节点的度:子树的个数</li>
+<li>树的度：所有节点度中的最大值</li>
+<li>节点的权(节点值)</li>
+<li>节点的深度：从根节点到当前节点的唯一路径上的节点总数</li>
+<li>节点的高度：从当前节点到最远叶子节点的路径上的节点总数</li>
+<li>树的深度：所有节点深度中的最大值</li>
+<li>树的高度：所有节点高度中的最大值</li>
+</ul>
+<p><strong>树的深度等于树的高度</strong></p>
+<ul>
+<li>路径(从root节点找到该节点的路线)</li>
+<li>层：根节点算为第一层</li>
+<li>子树</li>
+<li>树的高度(最大层数)</li>
+<li>森林 :多颗子树构成森林<h2 id="二叉树的概念"><a href="#二叉树的概念" class="headerlink" title="二叉树的概念"></a>二叉树的概念</h2></li>
+<li>树有很多种，每个节点最多只能有两个子节点的一种形式称为二叉树。</li>
+<li>二叉树的子节点分为左节点和右节点。</li>
+<li>如果该二叉树的所有叶子节点都在最后一层，并且结点总数 = $2^{n-1}$ , n 为层数，则我们称为满二叉树。</li>
+<li>如果该二叉树的所有叶子节点都在最后一层或者倒数第二层，而且最后一层的叶子节点在左边连续，倒数第二层的叶子节点在右边连续，我们称为完全二叉树。</li>
+</ul>
+<h1 id="创建二叉树-手动创建"><a href="#创建二叉树-手动创建" class="headerlink" title="创建二叉树(手动创建)"></a>创建二叉树(手动创建)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class BinaryTreeDemo &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;&#x2F;创建需要的结点</span><br><span class="line">		HeroNode root &#x3D; new HeroNode(1, &quot;宋江&quot;);</span><br><span class="line">		HeroNode node2 &#x3D; new HeroNode(2, &quot;吴用&quot;);</span><br><span class="line">		HeroNode node3 &#x3D; new HeroNode(3, &quot;卢俊义&quot;);</span><br><span class="line">		HeroNode node4 &#x3D; new HeroNode(4, &quot;林冲&quot;);</span><br><span class="line">		HeroNode node5 &#x3D; new HeroNode(5, &quot;关胜&quot;);</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;手动创建该二叉树</span><br><span class="line">		root.setLeft(node2);</span><br><span class="line">		root.setRight(node3);</span><br><span class="line">		node3.setRight(node4);</span><br><span class="line">		node3.setLeft(node5);</span><br><span class="line">		binaryTree.setRoot(root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;定义BinaryTree 二叉树</span><br><span class="line">class BinaryTree &#123;</span><br><span class="line">	private HeroNode root;</span><br><span class="line"></span><br><span class="line">	public void setRoot(HeroNode root) &#123;</span><br><span class="line">		this.root &#x3D; root;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#x2F;&#x2F;删除结点</span><br><span class="line">	public void delNode(int no) &#123;</span><br><span class="line">		if(root !&#x3D; null) &#123;</span><br><span class="line">			&#x2F;&#x2F;如果只有一个root结点, 这里立即判断root是不是就是要删除结点</span><br><span class="line">			if(root.getNo() &#x3D;&#x3D; no) &#123;</span><br><span class="line">				root &#x3D; null;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				&#x2F;&#x2F;递归删除</span><br><span class="line">				root.delNode(no);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			System.out.println(&quot;空树，不能删除~&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;前序遍历</span><br><span class="line">	public void preOrder() &#123;</span><br><span class="line">		if(this.root !&#x3D; null) &#123;</span><br><span class="line">			this.root.preOrder();</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			System.out.println(&quot;二叉树为空，无法遍历&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#x2F;&#x2F;中序遍历</span><br><span class="line">	public void infixOrder() &#123;</span><br><span class="line">		if(this.root !&#x3D; null) &#123;</span><br><span class="line">			this.root.infixOrder();</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			System.out.println(&quot;二叉树为空，无法遍历&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;后序遍历</span><br><span class="line">	public void postOrder() &#123;</span><br><span class="line">		if(this.root !&#x3D; null) &#123;</span><br><span class="line">			this.root.postOrder();</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			System.out.println(&quot;二叉树为空，无法遍历&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#x2F;&#x2F;前序遍历</span><br><span class="line">	public HeroNode preOrderSearch(int no) &#123;</span><br><span class="line">		if(root !&#x3D; null) &#123;</span><br><span class="line">			return root.preOrderSearch(no);</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;中序遍历</span><br><span class="line">	public HeroNode infixOrderSearch(int no) &#123;</span><br><span class="line">		if(root !&#x3D; null) &#123;</span><br><span class="line">			return root.infixOrderSearch(no);</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;后序遍历</span><br><span class="line">	public HeroNode postOrderSearch(int no) &#123;</span><br><span class="line">		if(root !&#x3D; null) &#123;</span><br><span class="line">			return this.root.postOrderSearch(no);</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line">class HeroNode &#123;</span><br><span class="line">	private int no;</span><br><span class="line">	private String name;</span><br><span class="line">	private HeroNode left; &#x2F;&#x2F;默认null</span><br><span class="line">	private HeroNode right; &#x2F;&#x2F;默认null</span><br><span class="line">	public HeroNode(int no, String name) &#123;</span><br><span class="line">		this.no &#x3D; no;</span><br><span class="line">		this.name &#x3D; name;</span><br><span class="line">	&#125;</span><br><span class="line">	public int getNo() &#123;</span><br><span class="line">		return no;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setNo(int no) &#123;</span><br><span class="line">		this.no &#x3D; no;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name &#x3D; name;</span><br><span class="line">	&#125;</span><br><span class="line">	public HeroNode getLeft() &#123;</span><br><span class="line">		return left;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setLeft(HeroNode left) &#123;</span><br><span class="line">		this.left &#x3D; left;</span><br><span class="line">	&#125;</span><br><span class="line">	public HeroNode getRight() &#123;</span><br><span class="line">		return right;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setRight(HeroNode right) &#123;</span><br><span class="line">		this.right &#x3D; right;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;HeroNode [no&#x3D;&quot; + no + &quot;, name&#x3D;&quot; + name + &quot;]&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#x2F;&#x2F;递归删除结点</span><br><span class="line">	&#x2F;&#x2F;1.如果删除的节点是叶子节点，则删除该节点</span><br><span class="line">	&#x2F;&#x2F;2.如果删除的节点是非叶子节点，则删除该子树</span><br><span class="line">	public void delNode(int no) &#123;</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;思路</span><br><span class="line">		&#x2F;*</span><br><span class="line">		 * 	1. 因为我们的二叉树是单向的，所以我们是判断当前结点的子结点是否需要删除结点，而不能去判断当前这个结点是不是需要删除结点.</span><br><span class="line">			2. 如果当前结点的左子结点不为空，并且左子结点 就是要删除结点，就将this.left &#x3D; null; 并且就返回(结束递归删除)</span><br><span class="line">			3. 如果当前结点的右子结点不为空，并且右子结点 就是要删除结点，就将this.right&#x3D; null ;并且就返回(结束递归删除)</span><br><span class="line">			4. 如果第2和第3步没有删除结点，那么我们就需要向左子树进行递归删除</span><br><span class="line">			5.  如果第4步也没有删除结点，则应当向右子树进行递归删除.</span><br><span class="line"></span><br><span class="line">		 *&#x2F;</span><br><span class="line">		&#x2F;&#x2F;2. 如果当前结点的左子结点不为空，并且左子结点 就是要删除结点，就将this.left &#x3D; null; 并且就返回(结束递归删除)</span><br><span class="line">		if(this.left !&#x3D; null &amp;&amp; this.left.no &#x3D;&#x3D; no) &#123;</span><br><span class="line">			this.left &#x3D; null;</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;3.如果当前结点的右子结点不为空，并且右子结点 就是要删除结点，就将this.right&#x3D; null ;并且就返回(结束递归删除)</span><br><span class="line">		if(this.right !&#x3D; null &amp;&amp; this.right.no &#x3D;&#x3D; no) &#123;</span><br><span class="line">			this.right &#x3D; null;</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;4.我们就需要向左子树进行递归删除</span><br><span class="line">		if(this.left !&#x3D; null) &#123;</span><br><span class="line">			this.left.delNode(no);</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;5.则应当向右子树进行递归删除</span><br><span class="line">		if(this.right !&#x3D; null) &#123;</span><br><span class="line">			this.right.delNode(no);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#x2F;&#x2F;编写前序遍历的方法</span><br><span class="line">	public void preOrder() &#123;</span><br><span class="line">		System.out.println(this); &#x2F;&#x2F;先输出父结点</span><br><span class="line">		&#x2F;&#x2F;递归向左子树前序遍历</span><br><span class="line">		if(this.left !&#x3D; null) &#123;</span><br><span class="line">			this.left.preOrder();</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;递归向右子树前序遍历</span><br><span class="line">		if(this.right !&#x3D; null) &#123;</span><br><span class="line">			this.right.preOrder();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;中序遍历</span><br><span class="line">	public void infixOrder() &#123;</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;递归向左子树中序遍历</span><br><span class="line">		if(this.left !&#x3D; null) &#123;</span><br><span class="line">			this.left.infixOrder();</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;输出父结点</span><br><span class="line">		System.out.println(this);</span><br><span class="line">		&#x2F;&#x2F;递归向右子树中序遍历</span><br><span class="line">		if(this.right !&#x3D; null) &#123;</span><br><span class="line">			this.right.infixOrder();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;后序遍历</span><br><span class="line">	public void postOrder() &#123;</span><br><span class="line">		if(this.left !&#x3D; null) &#123;</span><br><span class="line">			this.left.postOrder();</span><br><span class="line">		&#125;</span><br><span class="line">		if(this.right !&#x3D; null) &#123;</span><br><span class="line">			this.right.postOrder();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(this);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#x2F;&#x2F;前序遍历查找</span><br><span class="line">	&#x2F;**</span><br><span class="line">	 * </span><br><span class="line">	 * @param no 查找no</span><br><span class="line">	 * @return 如果找到就返回该Node ,如果没有找到返回 null</span><br><span class="line">	 *&#x2F;</span><br><span class="line">	public HeroNode preOrderSearch(int no) &#123;</span><br><span class="line">		System.out.println(&quot;进入前序遍历&quot;);</span><br><span class="line">		&#x2F;&#x2F;比较当前结点是不是</span><br><span class="line">		if(this.no &#x3D;&#x3D; no) &#123;</span><br><span class="line">			return this;</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;1.则判断当前结点的左子节点是否为空，如果不为空，则递归前序查找</span><br><span class="line">		&#x2F;&#x2F;2.如果左递归前序查找，找到结点，则返回</span><br><span class="line">		HeroNode resNode &#x3D; null;</span><br><span class="line">		if(this.left !&#x3D; null) &#123;</span><br><span class="line">			resNode &#x3D; this.left.preOrderSearch(no);</span><br><span class="line">		&#125;</span><br><span class="line">		if(resNode !&#x3D; null) &#123;&#x2F;&#x2F;说明我们左子树找到</span><br><span class="line">			return resNode;</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;1.左递归前序查找，找到结点，则返回，否继续判断，</span><br><span class="line">		&#x2F;&#x2F;2.当前的结点的右子节点是否为空，如果不空，则继续向右递归前序查找</span><br><span class="line">		if(this.right !&#x3D; null) &#123;</span><br><span class="line">			resNode &#x3D; this.right.preOrderSearch(no);</span><br><span class="line">		&#125;</span><br><span class="line">		return resNode;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#x2F;&#x2F;中序遍历查找</span><br><span class="line">	public HeroNode infixOrderSearch(int no) &#123;</span><br><span class="line">		&#x2F;&#x2F;判断当前结点的左子节点是否为空，如果不为空，则递归中序查找</span><br><span class="line">		HeroNode resNode &#x3D; null;</span><br><span class="line">		if(this.left !&#x3D; null) &#123;</span><br><span class="line">			resNode &#x3D; this.left.infixOrderSearch(no);</span><br><span class="line">		&#125;</span><br><span class="line">		if(resNode !&#x3D; null) &#123;</span><br><span class="line">			return resNode;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;进入中序查找&quot;);</span><br><span class="line">		&#x2F;&#x2F;如果找到，则返回，如果没有找到，就和当前结点比较，如果是则返回当前结点</span><br><span class="line">		if(this.no &#x3D;&#x3D; no) &#123;</span><br><span class="line">			return this;</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;否则继续进行右递归的中序查找</span><br><span class="line">		if(this.right !&#x3D; null) &#123;</span><br><span class="line">			resNode &#x3D; this.right.infixOrderSearch(no);</span><br><span class="line">		&#125;</span><br><span class="line">		return resNode;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#x2F;&#x2F;后序遍历查找</span><br><span class="line">	public HeroNode postOrderSearch(int no) &#123;</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;判断当前结点的左子节点是否为空，如果不为空，则递归后序查找</span><br><span class="line">		HeroNode resNode &#x3D; null;</span><br><span class="line">		if(this.left !&#x3D; null) &#123;</span><br><span class="line">			resNode &#x3D; this.left.postOrderSearch(no);</span><br><span class="line">		&#125;</span><br><span class="line">		if(resNode !&#x3D; null) &#123;&#x2F;&#x2F;说明在左子树找到</span><br><span class="line">			return resNode;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;如果左子树没有找到，则向右子树递归进行后序遍历查找</span><br><span class="line">		if(this.right !&#x3D; null) &#123;</span><br><span class="line">			resNode &#x3D; this.right.postOrderSearch(no);</span><br><span class="line">		&#125;</span><br><span class="line">		if(resNode !&#x3D; null) &#123;</span><br><span class="line">			return resNode;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;进入后序查找&quot;);</span><br><span class="line">		&#x2F;&#x2F;如果左右子树都没有找到，就比较当前结点是不是</span><br><span class="line">		if(this.no &#x3D;&#x3D; no) &#123;</span><br><span class="line">			return this;</span><br><span class="line">		&#125;</span><br><span class="line">		return resNode;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><h3 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h3><p>前序遍历: 先输出父节点，再遍历左子树和右子树</p>
+<h3 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h3><p>中序遍历: 先遍历左子树，再输出父节点，再遍历右子树</p>
+<h3 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h3><p>后序遍历: 先遍历左子树，再遍历右子树，最后输出父节点</p>
+<h2 id="查找结点"><a href="#查找结点" class="headerlink" title="查找结点"></a>查找结点</h2><h3 id="前序查找"><a href="#前序查找" class="headerlink" title="前序查找"></a>前序查找</h3><h3 id="中序查找"><a href="#中序查找" class="headerlink" title="中序查找"></a>中序查找</h3><h3 id="后续查找"><a href="#后续查找" class="headerlink" title="后续查找"></a>后续查找</h3><h2 id="删除结点"><a href="#删除结点" class="headerlink" title="删除结点"></a>删除结点</h2><h3 id="前序删除"><a href="#前序删除" class="headerlink" title="前序删除"></a>前序删除</h3><h3 id="中序删除"><a href="#中序删除" class="headerlink" title="中序删除"></a>中序删除</h3><h3 id="后续删除"><a href="#后续删除" class="headerlink" title="后续删除"></a>后续删除</h3><h1 id="顺序储存二叉树"><a href="#顺序储存二叉树" class="headerlink" title="顺序储存二叉树"></a>顺序储存二叉树</h1><h1 id="线索化二叉树"><a href="#线索化二叉树" class="headerlink" title="线索化二叉树"></a>线索化二叉树</h1><h2 id="遍历线索化二叉树"><a href="#遍历线索化二叉树" class="headerlink" title="遍历线索化二叉树"></a>遍历线索化二叉树</h2>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Java-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"># Java_数据结构</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/07/14/PAT_%E4%B9%99_1025%20%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/">PAT_乙_1025 反转链表</a>
+            
+            
+            <a class="next" rel="next" href="/2020/07/02/java_algorithm_%E6%9F%A5%E6%89%BE/">java_algorithm_查找</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+&nbsp;&nbsp;
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>
