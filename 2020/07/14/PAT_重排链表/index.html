@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>PAT_重组链表 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">PAT_重组链表</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 14, 2020&nbsp;&nbsp;20:06:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="https://img-blog.csdnimg.cn/20200720115414360.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="PAT_重组链表"></p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int front,sum,address;</span><br><span class="line">struct node &#123;</span><br><span class="line">	int add;</span><br><span class="line">	int data;</span><br><span class="line">	int next &#x3D; -1;</span><br><span class="line">&#125; a[100001],b[100001],c[100001];</span><br><span class="line">int main() &#123;</span><br><span class="line">	cin&gt;&gt;front&gt;&gt;sum;</span><br><span class="line">	for(int i &#x3D; 0; i &lt; sum; i++) &#123;</span><br><span class="line">		cin&gt;&gt;address;</span><br><span class="line">		a[address].add &#x3D; address;</span><br><span class="line">		cin&gt;&gt;a[address].data&gt;&gt;a[address].next;</span><br><span class="line">	&#125;	</span><br><span class="line">	address &#x3D; front;</span><br><span class="line">	int k &#x3D; 0;</span><br><span class="line">	while(address!&#x3D;-1)&#123;</span><br><span class="line">		b[k].add &#x3D; a[address].add;</span><br><span class="line">		b[k].data &#x3D; a[address].data;</span><br><span class="line">		b[k].next &#x3D; a[address].next;</span><br><span class="line">		address &#x3D; a[address].next;</span><br><span class="line">		k++;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	int s &#x3D; 0;</span><br><span class="line">	int j &#x3D; 0;</span><br><span class="line">	while(s&lt;k&#x2F;2) &#123;</span><br><span class="line">		c[j++] &#x3D; b[k- s-1];</span><br><span class="line">		c[j++] &#x3D; b[s];</span><br><span class="line">		s++;</span><br><span class="line">	&#125;</span><br><span class="line">	if(k%2!&#x3D;0) &#123;</span><br><span class="line">		int temp &#x3D; k&#x2F;2;</span><br><span class="line">		c[j]&#x3D; b[temp];</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i &#x3D; 0; i &lt; k-1; i++) &#123;</span><br><span class="line">		printf(&quot;%05d %d %05d\n&quot;,c[i].add,c[i].data,c[i+1].add);</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;%05d %d %d&quot;,c[k-1].add,c[k-1].data,-1);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="大佬的代码"><a href="#大佬的代码" class="headerlink" title="大佬的代码"></a>大佬的代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int MAXN&#x3D;1e6+10;</span><br><span class="line">int HeadAdd,N,Val[MAXN],Nxt[MAXN],Tmp[MAXN],Ans[MAXN];</span><br><span class="line">int main()&#123;</span><br><span class="line">    cin&gt;&gt;HeadAdd&gt;&gt;N;</span><br><span class="line">    for(int i&#x3D;1;i&lt;&#x3D;N;i++)&#123;</span><br><span class="line">        int A;</span><br><span class="line">        cin&gt;&gt;A;</span><br><span class="line">        cin&gt;&gt;Val[A]&gt;&gt;Nxt[A];</span><br><span class="line">    &#125;</span><br><span class="line">    int Head&#x3D;1,Tail&#x3D;0,Cnt&#x3D;0,Bit&#x3D;0;</span><br><span class="line">    for(int i&#x3D;HeadAdd;i!&#x3D;-1;i&#x3D;Nxt[i])</span><br><span class="line">        Tmp[++Tail]&#x3D;i;</span><br><span class="line">    while(Head&lt;&#x3D;Tail)&#123;</span><br><span class="line">        if(!Bit) Ans[++Cnt]&#x3D;Tmp[Tail--];</span><br><span class="line">        else Ans[++Cnt]&#x3D;Tmp[Head++];</span><br><span class="line">        Bit^&#x3D;1;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i&#x3D;1;i&lt;Cnt;i++)</span><br><span class="line">        cout&lt;&lt;setfill(&#39;0&#39;)&lt;&lt;setw(5)&lt;&lt;Ans[i]&lt;&lt;&quot; &quot;&lt;&lt;Val[ Ans[i] ]&lt;&lt;&quot; &quot;&lt;&lt;setfill(&#39;0&#39;)&lt;&lt;setw(5)&lt;&lt;Ans[i+1]&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;setfill(&#39;0&#39;)&lt;&lt;setw(5)&lt;&lt;Ans[Cnt]&lt;&lt;&quot; &quot;&lt;&lt;Val[ Ans[Cnt] ]&lt;&lt;&quot; &quot;&lt;&lt;-1&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ul>
+<li>注意散点，就是可能存在一些结点不是属于该条链表，而是单独形成一个链表<br>如：1-&gt;2-&gt;3-&gt;NULL,4-&gt;NULL,5-&gt;NULL<br>但实际上只需考虑1 2 3 而4 5 不需要考虑</li>
+</ul>
+<h1 id="学习区"><a href="#学习区" class="headerlink" title="学习区"></a>学习区</h1><h2 id="形成一个链表"><a href="#形成一个链表" class="headerlink" title="形成一个链表"></a>形成一个链表</h2><h3 id="我的办法"><a href="#我的办法" class="headerlink" title="我的办法"></a>我的办法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">address &#x3D; front;</span><br><span class="line">int k &#x3D; 0;</span><br><span class="line">while(address!&#x3D;-1)&#123;</span><br><span class="line">	b[k].add &#x3D; a[address].add;</span><br><span class="line">	b[k].data &#x3D; a[address].data;</span><br><span class="line">	b[k].next &#x3D; a[address].next;</span><br><span class="line">	address &#x3D; a[address].next;</span><br><span class="line">	k++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="简洁办法"><a href="#简洁办法" class="headerlink" title="简洁办法"></a>简洁办法</h3><p>注意：for循环遍历是以 $i==-1$ 结束的，这样前面所形成的就是一条完整的链表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int Head&#x3D;1,Tail&#x3D;0,Cnt&#x3D;0,Bit&#x3D;0;</span><br><span class="line">for(int i&#x3D;HeadAdd;i!&#x3D;-1;i&#x3D;Nxt[i])</span><br><span class="line">    Tmp[++Tail]&#x3D;i;</span><br></pre></td></tr></table></figure>
+
+<h2 id="遍历-后一个数，前一个数-依次进行"><a href="#遍历-后一个数，前一个数-依次进行" class="headerlink" title="遍历(后一个数，前一个数 依次进行)"></a>遍历(后一个数，前一个数 依次进行)</h2><h3 id="我的办法-1"><a href="#我的办法-1" class="headerlink" title="我的办法"></a>我的办法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int s &#x3D; 0;</span><br><span class="line">	int j &#x3D; 0;</span><br><span class="line">	while(s&lt;k&#x2F;2) &#123;</span><br><span class="line">		c[j++] &#x3D; b[k- s-1];</span><br><span class="line">		c[j++] &#x3D; b[s];</span><br><span class="line">		s++;</span><br><span class="line">	&#125;</span><br><span class="line">	if(k%2!&#x3D;0) &#123;</span><br><span class="line">		int temp &#x3D; k&#x2F;2;</span><br><span class="line">		c[j]&#x3D; b[temp];</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="简洁办法-1"><a href="#简洁办法-1" class="headerlink" title="简洁办法"></a>简洁办法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">while(Head&lt;&#x3D;Tail)&#123;</span><br><span class="line">    if(!Bit) Ans[++Cnt]&#x3D;Tmp[Tail--];</span><br><span class="line">    else Ans[++Cnt]&#x3D;Tmp[Head++];</span><br><span class="line">    Bit^&#x3D;1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/PAT/"># PAT</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/07/14/PAT_%E4%B9%99_1025%20%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/">PAT_乙_1025 反转链表</a>
+            
+            
+            <a class="next" rel="next" href="/2020/07/05/java_dtat_structure_%E4%BA%8C%E5%8F%89%E6%A0%91/">Java_data_structure_二叉树</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+&nbsp;&nbsp;
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>
