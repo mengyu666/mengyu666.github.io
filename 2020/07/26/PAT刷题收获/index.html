@@ -221,7 +221,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">July 14, 2020&nbsp;&nbsp;20:06:00</a>
+                        Date: <a href="#">July 26, 2020&nbsp;&nbsp;23:59:00</a>
                         </span>
                     
                     
@@ -230,7 +230,7 @@
         </header>
 
         <div class="post-content">
-            <h1 id="技巧总结"><a href="#技巧总结" class="headerlink" title="技巧总结"></a>技巧总结</h1><h2 id="C-11中的to-string的使用"><a href="#C-11中的to-string的使用" class="headerlink" title="C++11中的to_string的使用"></a>C++11中的to_string的使用</h2><h3 id="问题-C-程序时to-string-未声明等相关问题"><a href="#问题-C-程序时to-string-未声明等相关问题" class="headerlink" title="问题:C++程序时to_string()未声明等相关问题"></a>问题:C++程序时to_string()未声明等相关问题</h3><p>当用dev c++编译时会报 [Error] ‘to_string’ was not declared in this scope<br>对于dev-C++<br>tool-&gt;Compiler Options-&gt;Add the following commands when calling the comoiler<br>添加-std=c++11</p>
+            <h1 id="技巧总结"><a href="#技巧总结" class="headerlink" title="技巧总结"></a>技巧总结</h1><h2 id="C-11中的to-string的使用"><a href="#C-11中的to-string的使用" class="headerlink" title="C++11中的to_string的使用"></a>C++11中的to_string的使用</h2><h3 id="问题-C-程序时to-string-未声明等相关问题"><a href="#问题-C-程序时to-string-未声明等相关问题" class="headerlink" title="问题:C++程序时to_string()未声明等相关问题"></a>问题:C++程序时to_string()未声明等相关问题</h3><p>当用dev c++编译时会报 [Error] ‘to_string’ was not declared in this scope<br>对于dev-C++<br>解决方法：<br>tool-&gt;Compiler Options-&gt;Add the following commands when calling the comoiler<br>添加-std=c++11</p>
 <h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">string to_string (int val);</span><br><span class="line">string to_string (long val);</span><br><span class="line">string to_string (long long val);</span><br><span class="line">string to_string (unsigned val);</span><br><span class="line">string to_string (unsigned long val);</span><br><span class="line">string to_string (unsigned long long val);</span><br><span class="line">string to_string (float val);</span><br><span class="line">string to_string (double val);</span><br><span class="line">string to_string (long double val);</span><br></pre></td></tr></table></figure>
 <p>比如说想把一个integer变量num(num=2343)转化为字符串形式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int num &#x3D; 2343;</span><br><span class="line">string s&#x3D; to_string(num);</span><br></pre></td></tr></table></figure>
@@ -243,7 +243,22 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;isalpha(&#39;A&#39;)&lt;&lt;endl;  &#x2F;&#x2F;1</span><br><span class="line">cout&lt;&lt;isalpha(&#39;a&#39;)&lt;&lt;endl;  &#x2F;&#x2F;2</span><br></pre></td></tr></table></figure>
 <h4 id="isupper函数"><a href="#isupper函数" class="headerlink" title="isupper函数"></a>isupper函数</h4><p>判断一个字符c是否为大写英文字母<br><strong>返回值</strong>:判断字符c是否为大写英文字母。若为大写英文字母，返回非0(true)，否则返回0(false)</p>
 <h4 id="islower函数"><a href="#islower函数" class="headerlink" title="islower函数"></a>islower函数</h4><p>判断一个字符c是否为小写英文字母<br><strong>返回值</strong>:判断字符c是否为小写英文字母。若为小写英文字母，返回非0(true)，否则返回0(false)</p>
-<h3 id="应用-2"><a href="#应用-2" class="headerlink" title="应用"></a>应用</h3><p><em>*PAT_乙_1014</em><br><em>——本次更新:2020年7月23日——</em></p>
+<h3 id="应用-2"><a href="#应用-2" class="headerlink" title="应用"></a>应用</h3><p><strong>PAT_乙_1014</strong><br><em>——本次更新:2020年7月23日——</em></p>
+<h2 id="C-中stoi函数"><a href="#C-中stoi函数" class="headerlink" title="C++中stoi函数"></a>C++中stoi函数</h2><h3 id="方法-3"><a href="#方法-3" class="headerlink" title="方法"></a>方法</h3><p>将n进制的字符串转换为10进制的int类型的数字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stoi(str,idx，base);</span><br></pre></td></tr></table></figure>
+<p>base默认情况下为10</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;stoi(&quot;1111&quot;,0)&lt;&lt;endl;  &#x2F;&#x2F;1111</span><br><span class="line">cout&lt;&lt;stoi(&quot;1111&quot;,0，2)&lt;&lt;endl; &#x2F;&#x2F;15</span><br></pre></td></tr></table></figure>
+<p>与下述代码的效果应该一样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int to_int(string str)&#123;</span><br><span class="line">	int sum &#x3D; 0;</span><br><span class="line">	for(int i &#x3D; 0; i &lt; str.length(); i++)&#123;</span><br><span class="line">		sum +&#x3D; sum*10 +(s[i]-&#39;0&#39;);</span><br><span class="line">	&#125;</span><br><span class="line">	return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="应用-3"><a href="#应用-3" class="headerlink" title="应用"></a>应用</h3><p><strong>PAT_乙_1019</strong></p>
+<h2 id="C-中string中insert函数"><a href="#C-中string中insert函数" class="headerlink" title="C++中string中insert函数"></a>C++中string中insert函数</h2><h3 id="方法-4"><a href="#方法-4" class="headerlink" title="方法"></a>方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string s;</span><br><span class="line">s.insert()</span><br></pre></td></tr></table></figure>
+<h3 id="应用-4"><a href="#应用-4" class="headerlink" title="应用"></a>应用</h3><p><strong>PAT_乙_1019</strong><br><em>——本次更新:2020年7月25日——</em></p>
+<h2 id="algorithm中的reverse函数"><a href="#algorithm中的reverse函数" class="headerlink" title="algorithm中的reverse函数"></a>algorithm中的reverse函数</h2><h3 id="方法-5"><a href="#方法-5" class="headerlink" title="方法"></a>方法</h3><p>比如说有个数组 array[]={1,2,3,4,5,6,7,8};<br>想要让前五个数倒置<br>可这这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">	int array[]&#x3D; &#123;1,2,3,4,5,6,7,8&#125;;</span><br><span class="line">	reverse(begin(array),begin(array)+5);</span><br><span class="line">	for(int num: array) &#123;</span><br><span class="line">		cout&lt;&lt;num&lt;&lt;&quot; &quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输出：</span><br><span class="line">5 4 3 2 1 6 7 8</span><br></pre></td></tr></table></figure>
+<p><strong>reverse(iIterator first,Iterator last);</strong><br><strong>要用迭代器表示范围，且范围是左闭右开</strong></p>
+<h3 id="应用-5"><a href="#应用-5" class="headerlink" title="应用"></a>应用</h3><p><strong>PAT_乙_125</strong></p>
+<h2 id="字符串可以直接比较大小"><a href="#字符串可以直接比较大小" class="headerlink" title="字符串可以直接比较大小"></a>字符串可以直接比较大小</h2><h3 id="应用-6"><a href="#应用-6" class="headerlink" title="应用"></a>应用</h3><p><strong>PAT_乙_1028</strong><br><em>——本次更新:2020年7月26日——</em></p>
 
         </div>
 
@@ -285,10 +300,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/07/14/PAT_%E4%B9%99_1025%20%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/">PAT_乙_1025 反转链表</a>
             
-            
-            <a class="next" rel="next" href="/2020/07/05/java_dtat_structure_%E4%BA%8C%E5%8F%89%E6%A0%91/">Java_data_structure_二叉树</a>
+            <a class="next" rel="next" href="/2020/07/23/PAT_%E4%B9%99_1008%20%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB%E9%97%AE%E9%A2%98/">PAT_乙_1025 数组元素循环右移问题</a>
             
         </section>
 
