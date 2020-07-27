@@ -40,6 +40,45 @@
     
     
         
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
     
 
 
@@ -182,7 +221,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">July 23, 2020&nbsp;&nbsp;22:40:00</a>
+                        Date: <a href="#">July 27, 2020&nbsp;&nbsp;11:00:00</a>
                         </span>
                     
                     
@@ -198,17 +237,17 @@
         </header>
 
         <div class="post-content">
-            <h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h1><p>⼀个数组A中存有N（N&gt;0）个整数，在不允许使⽤另外数组的前提下，将每个整数循环向右移M（M&gt;=0）个位置，即将A中的数据由（A0 A1……AN-1）变换为（AN-M…… AN-1 A0 A1……AN-M-1）（最后M个数循环移⾄最前⾯的M个位置）。如果需要考虑程序移动数据的次数尽量少，要如何设计移动的⽅法？</p>
-<p><strong>输入格式</strong><br>每个输⼊包含⼀个测试⽤例，第1⾏输⼊N ( 1&lt;=N&lt;=100)、M（M&gt;=0）；第2⾏输⼊N个整数，之间⽤空格分隔。</p>
-<p><strong>输出格式：</strong><br>在⼀⾏中输出循环右移M位以后的整数序列，之间⽤空格分隔，序列结尾不能有多余空格。</p>
+            <h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h1><p>给定一个正整数数列，和正整数 p，设这个数列中的最大值是 M，最小值是 m，如果 M≤mp，则称这个数列是完美数列。<br>现在给定参数 p 和一些正整数，请你从中选择尽可能多的数构成一个完美数列。</p>
+<p><strong>输入格式：</strong></p>
+<p>输入第一行给出两个正整数 N 和 p，其中 N（$\le10​^5$）是输入的正整数的个数，p（$\le10^9$）是给定的参数。第二行给出 N 个正整数，每个数不超过 10​9。</p>
+<p><strong>输出格式：</strong><br>在一行中输出最多可以选择多少个数可以用它们组成一个完美数列。</p>
 <p><strong>输入样例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6 2</span><br><span class="line">1 2 3 4 5 6</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10 8</span><br><span class="line">2 3 20 4 5 1 6 7 8 9</span><br></pre></td></tr></table></figure>
 
 <p><strong>输出样例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5 6 1 2 3 4</span><br></pre></td></tr></table></figure>
-<h1 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h1><p>数组⻓度为n，要想把数组循环右移m位，只需要先将整个数组a倒置，再将数组前m位倒置，后将数组后n-m位倒置即可完成循环右移m位</p>
-<h2 id="完整代码："><a href="#完整代码：" class="headerlink" title="完整代码："></a>完整代码：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main() &#123;</span><br><span class="line"></span><br><span class="line">	int n, m;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	vector&lt;int&gt; a(n);</span><br><span class="line">	for (int i &#x3D; 0; i &lt; n; i++)</span><br><span class="line">		cin &gt;&gt; a[i];</span><br><span class="line">	m %&#x3D; n;</span><br><span class="line">	if (m !&#x3D; 0) &#123;</span><br><span class="line">		reverse(begin(a), begin(a) + n);</span><br><span class="line">		reverse(begin(a), begin(a) + m);</span><br><span class="line">		reverse(begin(a) + m, begin(a) + n);</span><br><span class="line">	&#125;</span><br><span class="line">	for (int i &#x3D; 0; i &lt; n; i++)&#123; </span><br><span class="line">	if(i!&#x3D;0) cout&lt;&lt;&quot; &quot;; </span><br><span class="line">		cout &lt;&lt; a[i];</span><br><span class="line">	&#125; </span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="小tips："><a href="#小tips：" class="headerlink" title="小tips："></a>小tips：</h2><p>可以把这道题的思路记下来，感觉比较有用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8</span><br></pre></td></tr></table></figure>
+<h2 id="完整代码："><a href="#完整代码：" class="headerlink" title="完整代码："></a>完整代码：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	int n;</span><br><span class="line">	long long p;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;p;</span><br><span class="line">	vector&lt;int&gt; v(n);</span><br><span class="line">	for(int i &#x3D; 0; i &lt; n; i++)&#123;</span><br><span class="line">		cin&gt;&gt;v[i];</span><br><span class="line">	&#125;</span><br><span class="line">	sort(v.begin(),v.end());</span><br><span class="line">	int result &#x3D; 0 , temp &#x3D; 0;</span><br><span class="line">	for(int i &#x3D; 0; i &lt; n; i++)&#123;</span><br><span class="line">        &#x2F;&#x2F;注意这里直接从i + result开始遍历</span><br><span class="line">        &#x2F;&#x2F;result是目前符合条件的数列的最长长度。</span><br><span class="line">        &#x2F;&#x2F;所以往后，一旦有符合条件的数列，一定会比result大</span><br><span class="line">		for(int j &#x3D; i + result; j &lt; n; j++)&#123;   </span><br><span class="line">			if(v[j] &lt;&#x3D; v[i]*p)&#123;</span><br><span class="line">				temp &#x3D; j - i + 1;</span><br><span class="line">				if(temp &gt; result)&#123;</span><br><span class="line">					result &#x3D; temp;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				break;  &#x2F;&#x2F;一旦当前的不符合，后面的v[j]会越来越大，就会更不符合</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;result&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="反思："><a href="#反思：" class="headerlink" title="反思："></a>反思：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for(int j &#x3D; i + result; j &lt; n; j++)&#123;   &#x2F;&#x2F;如果还是j &#x3D; i + 1，速度就会变慢，可能会超时</span><br><span class="line">	if(v[j] &lt;&#x3D; v[i]*p)&#123;</span><br><span class="line">		temp &#x3D; j - i + 1;</span><br><span class="line">		if(temp &gt; result)&#123;</span><br><span class="line">			result &#x3D; temp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		break;  </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -250,10 +289,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/07/27/PAT_%E4%B9%99_1030%E5%AE%8C%E7%BE%8E%E6%95%B0%E5%88%97/">PAT_乙_1025 数组元素循环右移问题</a>
+                <a class="prev" rel="prev" href="/2020/07/27/PAT_%E4%B9%99_1034%E6%9C%89%E7%90%86%E6%95%B0%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97/">PAT_乙_1025 反转链表</a>
             
             
-            <a class="next" rel="next" href="/2020/07/20/PAT_%E9%87%8D%E6%8E%92%E9%93%BE%E8%A1%A8/">PAT_重组链表</a>
+            <a class="next" rel="next" href="/2020/07/23/PAT_%E4%B9%99_1008%20%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB%E9%97%AE%E9%A2%98/">PAT_乙_1025 数组元素循环右移问题</a>
             
         </section>
 

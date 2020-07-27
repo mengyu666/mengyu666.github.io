@@ -221,7 +221,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">July 26, 2020&nbsp;&nbsp;23:59:00</a>
+                        Date: <a href="#">July 27, 2020&nbsp;&nbsp;23:59:00</a>
                         </span>
                     
                     
@@ -259,6 +259,12 @@
 <p><strong>reverse(iIterator first,Iterator last);</strong><br><strong>要用迭代器表示范围，且范围是左闭右开</strong></p>
 <h3 id="应用-5"><a href="#应用-5" class="headerlink" title="应用"></a>应用</h3><p><strong>PAT_乙_125</strong></p>
 <h2 id="字符串可以直接比较大小"><a href="#字符串可以直接比较大小" class="headerlink" title="字符串可以直接比较大小"></a>字符串可以直接比较大小</h2><h3 id="应用-6"><a href="#应用-6" class="headerlink" title="应用"></a>应用</h3><p><strong>PAT_乙_1028</strong><br><em>——本次更新:2020年7月26日——</em></p>
+<h2 id="string中的find函数"><a href="#string中的find函数" class="headerlink" title="string中的find函数"></a>string中的find函数</h2><p>查找第一次出现的目标字符或字符串</p>
+<h3 id="方法-6"><a href="#方法-6" class="headerlink" title="方法"></a>方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main() &#123;</span><br><span class="line">	char c &#x3D; &#39;a&#39;;</span><br><span class="line">	string s &#x3D; &quot;asdfgfd&quot;;</span><br><span class="line">	cout&lt;&lt;s.find(c)&lt;&lt;endl;</span><br><span class="line">	if(s.find(&quot;wefgh&quot;)&#x3D;&#x3D;string::npos)&#123;</span><br><span class="line">		cout&lt;&lt;-1&lt;&lt;endl; </span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		cout&lt;&lt;1&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;表示从pos位置开始查找</span><br><span class="line">s.find(str&#x2F;char,pos);</span><br></pre></td></tr></table></figure>
+<p><strong>string::npos表示没有找到</strong></p>
+<h3 id="应用-7"><a href="#应用-7" class="headerlink" title="应用"></a>应用</h3><p><strong>PAT_乙_1029</strong><br><em>——本次更新:2020年7月27日——</em></p>
 
         </div>
 
@@ -301,7 +307,7 @@
         <section class="post-nav">
             
             
-            <a class="next" rel="next" href="/2020/07/23/PAT_%E4%B9%99_1008%20%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB%E9%97%AE%E9%A2%98/">PAT_乙_1025 数组元素循环右移问题</a>
+            <a class="next" rel="next" href="/2020/07/27/%E5%88%86%E6%95%B0-%E6%95%B0%E5%AD%A6/">分数</a>
             
         </section>
 
