@@ -12,7 +12,7 @@
 
 
 
-<title>PAT_乙_1030 完美数列 | rmy&#39;s blog</title>
+<title>PAT_乙_1049 数列的片段和 | rmy&#39;s blog</title>
 
 
 
@@ -212,7 +212,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">PAT_乙_1030 完美数列</h1>
+            <h1 class="post-title">PAT_乙_1049 数列的片段和</h1>
             
                 <div class="post-meta">
                     
@@ -221,33 +221,25 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">July 27, 2020&nbsp;&nbsp;11:00:00</a>
+                        Date: <a href="#">July 29, 2020&nbsp;&nbsp;14:00:00</a>
                         </span>
                     
-                    
-                        <span class="post-category">
-                    Category:
-                            
-                                <a href="/categories/PAT-%E4%B9%99/">PAT_乙</a>
-                            
-                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            <h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>给定一个正整数数列，和正整数 p，设这个数列中的最大值是 M，最小值是 m，如果 M≤mp，则称这个数列是完美数列。<br>现在给定参数 p 和一些正整数，请你从中选择尽可能多的数构成一个完美数列。</p>
-<p><strong>输入格式：</strong></p>
-<p>输入第一行给出两个正整数 N 和 p，其中 N（$\le10​^5$）是输入的正整数的个数，p（$\le10^9$）是给定的参数。第二行给出 N 个正整数，每个数不超过 10​9。</p>
-<p><strong>输出格式：</strong><br>在一行中输出最多可以选择多少个数可以用它们组成一个完美数列。</p>
+            <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个正数数列，我们可以从中截取任意的连续的几个数，称为片段。例如，给定数列 { 0.1, 0.2, 0.3, 0.4 }，我们有 (0.1) (0.1, 0.2) (0.1, 0.2, 0.3) (0.1, 0.2, 0.3, 0.4) (0.2) (0.2, 0.3) (0.2, 0.3, 0.4) (0.3) (0.3, 0.4) (0.4) 这 10 个片段。</p>
+<p>给定正整数数列，求出全部片段包含的所有的数之和。如本例中 10 个片段总和是 0.1 + 0.3 + 0.6 + 1.0 + 0.2 + 0.5 + 0.9 + 0.3 + 0.7 + 0.4 = 5.0。</p>
+<p><strong>输入格式：</strong><br>输入第一行给出一个不超过 $10^5$的正整数 N，表示数列中数的个数，第二行给出 N 个不超过 1.0 的正数，是数列中的数，其间以空格分隔。</p>
+<p><strong>输出格式：</strong><br>在一行中输出该序列所有片段包含的数之和，精确到小数点后 2 位。</p>
 <p><strong>输入样例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10 8</span><br><span class="line">2 3 20 4 5 1 6 7 8 9</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">0.1 0.2 0.3 0.4</span><br></pre></td></tr></table></figure>
 <p><strong>输出样例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8</span><br></pre></td></tr></table></figure>
-<h2 id="完整代码："><a href="#完整代码：" class="headerlink" title="完整代码："></a>完整代码：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	int n;</span><br><span class="line">	long long p;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;p;</span><br><span class="line">	vector&lt;int&gt; v(n);</span><br><span class="line">	for(int i &#x3D; 0; i &lt; n; i++)&#123;</span><br><span class="line">		cin&gt;&gt;v[i];</span><br><span class="line">	&#125;</span><br><span class="line">	sort(v.begin(),v.end());</span><br><span class="line">	int result &#x3D; 0 , temp &#x3D; 0;</span><br><span class="line">	for(int i &#x3D; 0; i &lt; n; i++)&#123;</span><br><span class="line">        &#x2F;&#x2F;注意这里直接从i + result开始遍历</span><br><span class="line">        &#x2F;&#x2F;result是目前符合条件的数列的最长长度。</span><br><span class="line">        &#x2F;&#x2F;所以往后，一旦有符合条件的数列，一定会比result大</span><br><span class="line">		for(int j &#x3D; i + result; j &lt; n; j++)&#123;   </span><br><span class="line">			if(v[j] &lt;&#x3D; v[i]*p)&#123;</span><br><span class="line">				temp &#x3D; j - i + 1;</span><br><span class="line">				if(temp &gt; result)&#123;</span><br><span class="line">					result &#x3D; temp;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				break;  &#x2F;&#x2F;一旦当前的不符合，后面的v[j]会越来越大，就会更不符合</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;result&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="反思："><a href="#反思：" class="headerlink" title="反思："></a>反思：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for(int j &#x3D; i + result; j &lt; n; j++)&#123;   &#x2F;&#x2F;如果还是j &#x3D; i + 1，速度就会变慢，可能会超时</span><br><span class="line">	if(v[j] &lt;&#x3D; v[i]*p)&#123;</span><br><span class="line">		temp &#x3D; j - i + 1;</span><br><span class="line">		if(temp &gt; result)&#123;</span><br><span class="line">			result &#x3D; temp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		break;  </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5.00</span><br></pre></td></tr></table></figure>
+<h2 id="思路分析："><a href="#思路分析：" class="headerlink" title="思路分析："></a>思路分析：</h2><p>将数列中的每个数字读取到temp中，假设我们选取的⽚段中包括temp，且这个⽚段的⾸尾指针分别为p和q，那么对于p，有i种选择，即12…i，对于q，有n-i-1种选择，即i, i+1, … n，所以p和q组合<br>形成的⾸尾⽚段有i * (n-i+11)种，因为每个⾥⾯都会出现temp，所以temp引起的总和为temp * i * (n – i + 1)；遍历完所有数字，将每个temp引起的总和都累加到sum中，最后输出sum的值</p>
+<h2 id="完整代码："><a href="#完整代码：" class="headerlink" title="完整代码："></a>完整代码：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main() &#123;</span><br><span class="line">    int n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    double sum &#x3D; 0.0, temp;</span><br><span class="line">    for (int i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; temp;</span><br><span class="line">        sum &#x3D; sum + temp * i * (n - i + 1);</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%.2f&quot;, sum);</span><br><span class="line">    return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -289,10 +281,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/07/27/PAT_%E4%B9%99_1034%E6%9C%89%E7%90%86%E6%95%B0%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97/">PAT_乙_1034有理数四则运算</a>
+                <a class="prev" rel="prev" href="/2020/07/29/PAT%E5%88%B7%E9%A2%98%E6%94%B6%E8%8E%B7/">PAT刷题收获</a>
             
             
-            <a class="next" rel="next" href="/2020/07/23/PAT_%E4%B9%99_1008%20%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB%E9%97%AE%E9%A2%98/">PAT_乙_1025 数组元素循环右移问题</a>
+            <a class="next" rel="next" href="/2020/07/29/PAT_%E4%B9%99_1048%20%E6%95%B0%E5%AD%97%E5%8A%A0%E5%AF%86/">PAT_乙_1048 数字加密</a>
             
         </section>
 

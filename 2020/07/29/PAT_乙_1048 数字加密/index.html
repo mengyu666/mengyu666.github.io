@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>PAT_乙_1048 数字加密 | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">PAT_乙_1048 数字加密</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 29, 2020&nbsp;&nbsp;13:30:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>本题要求实现一种数字加密方法。首先固定一个加密用正整数 A，对任一正整数 B，将其每 1 位数字与 A 的对应位置上的数字进行以下运算：对奇数位，对应位的数字相加后对 13 取余——这里用 J 代表 10、Q 代表 11、K 代表 12；对偶数位，用 B 的数字减去 A 的数字，若结果为负数，则再加 10。这里令个位为第 1位。</p>
+<p><strong>输入格式：</strong><br>输入在一行中依次给出 A 和 B，均为不超过 100 位的正整数，其间以空格分隔。</p>
+<p><strong>输出格式：</strong><br>在一行中输出加密后的结果。</p>
+<p><strong>输入样例：</strong><br>1234567 368782971</p>
+<p><strong>输出样例：</strong><br>3695Q8118</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="我的错误代码"><a href="#我的错误代码" class="headerlink" title="我的错误代码"></a>我的错误代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">	string a, b, c;</span><br><span class="line">	cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">	int la &#x3D; a.length();</span><br><span class="line">	int lb &#x3D; b.length();</span><br><span class="line">	if(lb&gt;la) a.insert(0,lb-la,&#39;0&#39;);</span><br><span class="line">	if(la&gt;lb) b.insert(0,la-lb,&#39;0&#39;);</span><br><span class="line">	int len&#x3D;max(la,lb); </span><br><span class="line">	for(int i &#x3D; 0; i &lt; len; i++) &#123;</span><br><span class="line">		int num1 &#x3D; (a[i]-&#39;0&#39;);</span><br><span class="line">		int num2 &#x3D; (b[i]-&#39;0&#39;);</span><br><span class="line">		if(i%2&#x3D;&#x3D;0) &#123;</span><br><span class="line">			int temp &#x3D; (num1+num2)%13;</span><br><span class="line">			if(temp&gt;&#x3D;0&amp;&amp;temp&lt;&#x3D;9) &#123;</span><br><span class="line">				c+&#x3D;to_string(temp);</span><br><span class="line">			&#125; else if(temp &#x3D;&#x3D; 10) &#123;</span><br><span class="line">				c+&#x3D;&#39;J&#39;;</span><br><span class="line">			&#125; else if(temp&#x3D;&#x3D;11) &#123;</span><br><span class="line">				c+&#x3D;&#39;Q&#39;;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				c+&#x3D;&#39;K&#39;;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			int temp &#x3D; num2- num1;</span><br><span class="line">			if(temp&gt;&#x3D;0) &#123;</span><br><span class="line">				c+&#x3D;to_string(temp);</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				c+&#x3D;to_string(temp+10);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i &#x3D; c.length()-1;i&gt;&#x3D;0; i--)&#123;</span><br><span class="line">		cout&lt;&lt;c[i];</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>错误分析：</strong><br>我这是沿着字符串的位数从左往右来判断，而实际上要从右往左开始判断。因为数的第一位就是字符串的最后一位<br>如果从左往右判断，则不符合数字位数从右往左依次是第一位，第二位……的关系</p>
+<h3 id="错误代码改正确代码"><a href="#错误代码改正确代码" class="headerlink" title="错误代码改正确代码"></a>错误代码改正确代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">	string a, b, c;</span><br><span class="line">	cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">	int la &#x3D; a.length();</span><br><span class="line">	int lb &#x3D; b.length();</span><br><span class="line">	if(lb&gt;la) a.insert(0,lb-la,&#39;0&#39;);</span><br><span class="line">	if(la&gt;lb) b.insert(0,la-lb,&#39;0&#39;);</span><br><span class="line">	reverse(a.begin(),a.end());</span><br><span class="line">	reverse(b.begin(),b.end());</span><br><span class="line">	int len&#x3D;max(la,lb); </span><br><span class="line">	for(int i &#x3D; 0; i &lt; len; i++) &#123;</span><br><span class="line">		int num1 &#x3D; (a[i]-&#39;0&#39;);</span><br><span class="line">		int num2 &#x3D; (b[i]-&#39;0&#39;);</span><br><span class="line">		if(i%2&#x3D;&#x3D;0) &#123;</span><br><span class="line">			int temp &#x3D; (num1+num2)%13;</span><br><span class="line">			if(temp&gt;&#x3D;0&amp;&amp;temp&lt;&#x3D;9) &#123;</span><br><span class="line">				c+&#x3D;to_string(temp);</span><br><span class="line">			&#125; else if(temp &#x3D;&#x3D; 10) &#123;</span><br><span class="line">				c+&#x3D;&#39;J&#39;;</span><br><span class="line">			&#125; else if(temp&#x3D;&#x3D;11) &#123;</span><br><span class="line">				c+&#x3D;&#39;Q&#39;;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				c+&#x3D;&#39;K&#39;;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			int temp &#x3D; num2- num1;</span><br><span class="line">			if(temp&gt;&#x3D;0) &#123;</span><br><span class="line">				c+&#x3D;to_string(temp);</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				c+&#x3D;to_string(temp+10);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i &#x3D; c.length()-1;i&gt;&#x3D;0; i--)&#123;</span><br><span class="line">		cout&lt;&lt;c[i];</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="标准代码"><a href="#标准代码" class="headerlink" title="标准代码"></a>标准代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main() &#123;</span><br><span class="line">	string a, b, c;</span><br><span class="line">	cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">	int lena &#x3D; a.length(), lenb &#x3D; b.length();</span><br><span class="line">	reverse(a.begin(), a.end());</span><br><span class="line">	reverse(b.begin(), b.end());</span><br><span class="line">	if (lena &gt; lenb)</span><br><span class="line">		b.append(lena - lenb, &#39;0&#39;);</span><br><span class="line">	else</span><br><span class="line">		a.append(lenb - lena, &#39;0&#39;);</span><br><span class="line">	char str[14] &#x3D; &#123;&quot;0123456789JQK&quot;&#125;;</span><br><span class="line">	for (int i &#x3D; 0; i &lt; a.length(); i++) &#123;</span><br><span class="line">		if (i % 2 &#x3D;&#x3D; 0) &#123;</span><br><span class="line">			c +&#x3D; str[(a[i] - &#39;0&#39; + b[i] - &#39;0&#39;) % 13];</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			int temp &#x3D; b[i] - a[i];</span><br><span class="line">			if (temp &lt; 0) temp &#x3D; temp + 10;</span><br><span class="line">			c +&#x3D; str[temp];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	for (int i &#x3D; c.length() - 1; i &gt;&#x3D; 0; i--)</span><br><span class="line">		cout &lt;&lt; c[i];</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/PAT/"># PAT</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/07/29/PAT_%E4%B9%99_1049%20%E6%95%B0%E5%88%97%E7%9A%84%E7%89%87%E6%AE%B5%E5%92%8C/">PAT_乙_1049 数列的片段和</a>
+            
+            
+            <a class="next" rel="next" href="/2020/07/27/%E5%88%86%E6%95%B0-%E6%95%B0%E5%AD%A6/">分数-数学</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+&nbsp;&nbsp;
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>
