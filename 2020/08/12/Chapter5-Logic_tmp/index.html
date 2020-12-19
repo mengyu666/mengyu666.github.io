@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="master">
+
+
+
+
+
+<title>Chapter5-Logic_tmp | rmy&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">rmy&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">rmy&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Chapter5-Logic_tmp</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">master</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 12, 2020&nbsp;&nbsp;20:56:55</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <!DOCTYPE html>
+<html>
+<head>
+<title>Chapter5-Logic.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="functions">Functions</h1>
+<p><strong>Definition</strong>: A binary relation R is a function if whenever (a, b) ∈ R  and (a, c) ∈ R then we must have that b = c.
+In general, a relation of arity n is a function if whenever(a1, a2, . . . an 1, b) ∈ R and (a1, a2, . . . an 1, c) ∈ R then we must have that b = c.
+Notation: Since a function has this special property, we often use a special notation for being an element of a function.
+For example, if f is a binary relation that is a function, then instead of writing (a, b) ∈ f we usually write f (a) = b</p>
+<h2 id="functions-relations-and-sets-class-diagram">Functions, Relations and Sets (class diagram)</h2>
+<p>A relation is a special kind of set.
+A function is a special kind of relation.
+Thus all of the relational operators(inverse, composition) can work with functions.
+... and all of the set-theory operators(union, intersection etc.) can also workwith functions.
+<br>
+<strong>一个自变量只能对应一个应变量</strong>
+<br>比如说：
+is-a-parent-of = { (Henry VII, Henry VIII), (Henry VIII, Edward VI),(Henry VIII, Mary I), (Henry VIII, Elizabeth I) }
+就不能看作一个函数，因为Henry VIII is a parent ofthree different people.</p>
+<h2 id="defining-functions-lambda-notation">Defining functions: lambda notation</h2>
+<p>To define a function we can use enumeration (for finite functions) or comprehension, since every function is a set
+<br>
+For example, we defined the function S by comprehension as:
+<br>
+S=: {a ∈ Z, b ∈ Z | b = a + 1 • (a, b)}
+<br>
+We can define a function much more succinctly using the lambda notation:
+<br>
+T =: (λ a ∈ Z · a + 1)
+<br></p>
+<h2 id="domain-codomain-and-image-definition">Domain, codomain and image: definition</h2>
+<ul>
+<li>定义域：The set X is called the <strong>domain</strong> of the function f</li>
+<li>陪域：The set Y is called the <strong>codomain</strong> (or range) of the function f</li>
+<li>值域：The subset of the codomain Y containing elements mapped-to by f is called the <strong>image</strong> of the function f
+值域⊆陪域</li>
+</ul>
+<h2 id="injective-and-surjective-functions">Injective and Surjective Functions</h2>
+<ul>
+<li>injective
+(one-to-one) if each element in the <strong>image</strong> is mapped to by just one element in the domain; that is, if:(∀ x, y · (x ∈ X ∧ y ∈ X ∧ f (x) = f (y)) → x = y)
+Thus the inverse of an injective function is always a function (from theimage to the domain).
+单射：<em>定义域中所有的值都有值域中的值所对应，且一个定义域中的值只能对应一个值域中的值 值域中还有一些值没有定义域中的值所对应</em></li>
+<li>surjective
+(onto) if each element in the <strong>codomain</strong> is mapped to by at least one element in the domain; that is, if:(∀ z · z ∈ Y → (∃ x · x ∈ X ∧ f (x) = z))
+满射：<em>值域中的所有值都有一个定义域中的值与其对应 且某些值域中值有至少两个定义域中的值与其对应</em>
+<strong>For a surjective function the image is the whole codomain.</strong></li>
+<li>bijective
+if it is both injective and surjective.
+Thus if there is a bijection between two sets, then those sets have the same number of elements.
+双射（也称一一对应）：<em>值域中所有的值都有且只有一个定义域中的值与其对应</em></li>
+</ul>
+<h3 id="injective-hash-tables-example">Injective: Hash Tables Example</h3>
+<p>Hash tables are a data structureused to map keys to values.
+Like an array, except the index(key) can be of any type.
+Sometimes called an associativearray (or, if the keys are strings,a dictionary).
+To implement this, you need ahash function that maps the keytype to an integer.
+Ideally, the hash function would be injective.</p>
+<h2 id="total-vs-partial-functions">Total vs. Partial Functions</h2>
+<ul>
+<li>partial function(对函数进行限制，不是定义域中所有的值都取到)
+In certain cases we may want to allow some elements not to bemapped: this is known as a partial function. For example：
+reciprocal =: (λ a ∈ Z | a = 0 · 1/a)
+应用：递归中的递归终止条件</li>
+<li>total function(定义域中所有的值都可以取到)
+We can always make a partial function into a total function by restricting the domain to just those elements that are mapped from.
+(λ a ∈ (Z \ {0}) · 1/a)</li>
+</ul>
+<h3 id="classifying-functions">classifying functions</h3>
+<p><img src="https://img-blog.csdnimg.cn/2020081218424274.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">
+<img src="https://img-blog.csdnimg.cn/20200812184254876.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="sets-bags-and-sequences">Sets, bags, and sequences</h2>
+<p>A bag is like a set, but we also remember how many times an object occurs.
+A sequence is like a set, but we also remember where an object occurs.</p>
+<h3 id="bags">Bags</h3>
+<p>A bag (or multiset) is like a set except that members are allowed to
+occur many times.
+The number of times an element occurs in a bag is called the multiplicity of that element.
+For example:
+[a, a, b, b, b, c] is the bag where a occurs twice, b occurs thrice and c occurs once.
+Notes:
+The notation [· · ·]is not very standard.
+The order of elements in a bag doesn’t matter.</p>
+<p>A bag is really a special kind of function.
+For any set S, a “bag of S” is a function from S to N, giving the multiplicity of each element.
+Thus [a, a, b, b, b, c] is just a shorthand for {(a, 2),(b, 3),(c, 1)}
+For example, given some set F , {apple, orange, pear},given the bag
+myShopping , [apple, apple, pear, pear, pear]
+we can say
+myShopping = {(apple, 2),(orange, 0),(pear, 3)}</p>
+<h4 id="operations-on-bags">Operations on Bags</h4>
+<ul>
+<li>对于 ∪ / ∩ 来说，只是一种关系，而不是函数，所以不能把它合成一个bag：
+[ a, a, b, b, b, c ]] ∪ [[ a, b, b, c, c ]
+= {(a, 2),(b, 3),(c, 1)} ∪ {(a, 1),(b, 2),(c, 2)}
+= {(a, 2),(b, 3),(c, 1),(a, 1),(b, 2),(c, 2)}</li>
+<li>a special union operator
+[ a, a, b, b, b, c ]⊕ [ a, b, b, c, c ]
+= [ a, a, a, b, b, b, b, b, c, c, c ]
+Definition: for any two bags A and B
+A ⊕ B = (λ x · A(x) + B(x))</li>
+</ul>
+<h3 id="sequence-%E8%AE%B0%E5%BD%95%E5%85%83%E7%B4%A0%E6%89%80%E5%9C%A8%E7%9A%84%E4%BD%8D%E7%BD%AE">Sequence 记录元素所在的位置</h3>
+<p>A sequence is like a set except that we remember the order in which members occur
+The place where an element occurs in a sequence is called the position of that element.
+For example: &lt; a, b, c, b, a, a &gt;
+Notes:
+The notation &lt;· · ·&gt; is not very standard.
+We usually start counting position at 1 (unlike arrays)</p>
+<p>A sequence is really a special kind of function
+For any set S, a sequence of S is a (partial) function from N to S,giving the element at each position.
+Thus  &lt; a, b, c, b, a &gt; is just a shorthand for
+{(1, a),(2, b),(3, c),(4, b),(5, a)}
+For example, given some set F =: {apple, orange, pear},
+given the sequence
+myEating =:&lt; happle, pear, apple, pear, apple &gt;
+we can say
+myEating = {(1, apple),(2, pear),(3, apple),(4, pear),(5, apple)}</p>
+<ul>
+<li>对于 ∪ / ∩ 来说，只是一种关系，而不是函数:
+Example:
+&lt; a, a, b &gt; ∪ &lt; a, b &gt;
+= {(1, a),(2, a),(3, b)} ∪ {(1, a),(2, b)}
+= {(1, a),(2, a),(2, b),(3, b)}</li>
+<li>cardinality
+The cardinality of a finite set is the number of elements it contains.
+用#S 来表示
+Since a sequence is a set of tuples, the cardinality of a sequence is also its length.
+如：#&lt; a, b, c, b, a &gt; = 5
+The empty set ∅ is also a sequence; when we want to refer to it as a sequence we usually write &lt; &gt;    #&lt; &gt; = 0</li>
+<li>concatenation 就是按顺序排起来
+&lt;a, b, c&gt;⌒&lt;b,a&gt; = &lt;a,b,c,b,a&gt;
+&lt;a, b, c&gt;⌒&lt;b,a&gt;⌒&lt;b,a&gt; = &lt;a,b,c,b,a,b,a&gt;
+<img src="https://img-blog.csdnimg.cn/20200812204658219.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></li>
+</ul>
+
+</body>
+</html>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>master</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/08/12/Chapter5-Logic/">Chapter5</a>
+            
+            
+            <a class="next" rel="next" href="/2020/07/29/PAT%E5%88%B7%E9%A2%98%E6%94%B6%E8%8E%B7/">PAT刷题收获</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© master | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    总访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    总访问量:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+&nbsp;&nbsp;
+2019 - 2020
+</footer>
+
+    </div>
+</body>
+</html>

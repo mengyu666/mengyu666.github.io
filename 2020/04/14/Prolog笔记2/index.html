@@ -209,17 +209,16 @@
 <li>all their corresponding arguments unify, and </li>
 <li>the variable instantiations are compatible.<h2 id="some-example"><a href="#some-example" class="headerlink" title="some example"></a>some example</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?- X&#x3D;mia, X&#x3D;vincent.</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">no</span><br></pre></td></tr></table></figure>
-Because after working through the first goal, Prolog has instantiated X with mia, so that it cannot unify it with vincentanymore. Hence the second goal fails.</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?- loves(X,X) &#x3D; loves(marsellus,mia).</span><br></pre></td></tr></table></figure>
+Because after working through the first goal, Prolog has instantiated X with mia, so that it cannot unify it with vincentanymore. Hence the second goal fails.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?- loves(X,X) &#x3D; loves(marsellus,mia).</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">no</span><br></pre></td></tr></table></figure>
-<h1 id="Occurs-Check"><a href="#Occurs-Check" class="headerlink" title="Occurs Check"></a>Occurs Check</h1><ul>
+<h1 id="Occurs-Check"><a href="#Occurs-Check" class="headerlink" title="Occurs Check"></a>Occurs Check</h1></li>
+</ol>
+<ul>
 <li>A standard unification algorithm carries out an occurs check</li>
 <li>If it is asked to unify a variable with another term it checks whether the variable occurs in this term <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;In Prolog (ISO standard):</span><br><span class="line">?- unify_with_occurs_check(father(X), X).</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">no</span><br></pre></td></tr></table></figure>
-<h1 id="search-trees"><a href="#search-trees" class="headerlink" title="search trees"></a>search trees</h1></li>
+<h1 id="search-trees"><a href="#search-trees" class="headerlink" title="search trees"></a>search trees</h1><img src="https://img-blog.csdnimg.cn/20200414100908403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200414100930509.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/20200414100908403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200414100930509.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3JteWlzdGhlYmVzdA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 
         </div>
 
